@@ -40,13 +40,14 @@ export function isIntentPublishable(i: Intent): boolean {
 }
 
 /**
- * A department hub publishes once it carries real overview copy (intro + at least
- * two written sections) and its AEO answer no longer holds a placeholder.
+ * A department hub publishes once it carries real overview copy (an intro plus at
+ * least one written section) and its AEO answer no longer holds a placeholder.
  */
 export function isDepartmentPublishable(d: Department): boolean {
   return (
     !!d.overview &&
-    d.overview.sections.length >= 2 &&
+    d.overview.sections.length >= 1 &&
+    wordCount(d.overview.intro) >= 15 &&
     !hasPlaceholder(d.answer) &&
     !hasPlaceholder(d.overview.intro)
   );

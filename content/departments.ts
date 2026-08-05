@@ -62,6 +62,8 @@ export type Department = {
   services: string[];
   /** search opportunity note for the build queue */
   opportunity: string;
+  /** page FAQs — optional, per department. An FAQPage node is emitted only if present. */
+  faqs?: { q: string; a: string }[];
   /** long-form page copy — present only once the hub has shipped with real content */
   overview?: DeptOverview;
 };
@@ -82,6 +84,10 @@ export const DEPARTMENTS: Department[] = [
     services: ["mens-haircut", "kids-haircut", "fade", "buzz-cut", "beard-trim",
                "straight-razor-shave", "line-up", "senior-cut", "military-cut", "wash-and-style"],
     opportunity: "High volume, high competition. Wins on hours, price, and walk-in availability.",
+    faqs: [
+      { q: "Do I need an appointment for a haircut?", a: "No — walk-ins are welcome every day we're open, including Sunday. You can also book ahead if you'd rather lock in a time." },
+      { q: "Are haircuts really $12 on Tuesdays?", a: "Yes. Every Tuesday, haircuts are $12 for everyone, all day — no qualifying and no questions asked." },
+    ],
     overview: {
       intro:
         "At Barber Shack, getting a haircut isn't just an item on your to-do list — it's an " +
@@ -130,10 +136,36 @@ export const DEPARTMENTS: Department[] = [
     entity: "house",
     name: "Full Salon",
     schemaType: "HairSalon",
-    answer: "[DRAFT]",
+    answer:
+      "The salon at Barber Shack — Studio A, the Hair Hut — offers full hair design and custom " +
+      "styling: precision cuts, blowouts, and event styling; advanced color from balayage and " +
+      "highlights to gray coverage and corrective color; and hair-health treatments like deep " +
+      "conditioning and keratin smoothing. Open seven days in Bellingham.",
     rationale: "Barber Shack is not men-only. The salon side needs its own surface or half the market never learns it exists.",
     services: ["[PLACEHOLDER — salon service list from Jared]"],
     opportunity: "Currently invisible. Anyone searching salon terms has no reason to find this shop.",
+    faqs: [
+      { q: "What does the salon offer?", a: "Hair design and custom styling, advanced color, and hair-health treatments — from precision cuts and event styling to balayage, gray coverage, and keratin smoothing." },
+      { q: "Should I book ahead for color or treatments?", a: "For color and treatment services, booking ahead helps your stylist set aside enough time — book online or call the shop. For a cut or style, you're welcome to walk in any day we're open." },
+    ],
+    overview: {
+      intro:
+        "Step into Studio A, the Hair Hut — designed for relaxation, renewal, and transformation. " +
+        "The salon offers comprehensive services to help you look and feel your absolute best.",
+      sections: [
+        {
+          heading: "Hair Design & Custom Styling",
+          body:
+            "From everyday maintenance to complete transformations, our stylists deliver precision " +
+            "cuts, vibrant color, and healthy hair care tailored to your unique lifestyle and aesthetic.",
+          items: [
+            { name: "Custom Cuts & Styling", detail: "Precision cuts, layers, blowouts, special-occasion updos, and event styling." },
+            { name: "Advanced Color Services", detail: "Full and partial balayage, highlights, lowlights, gray coverage, vivid colors, and corrective color solutions." },
+            { name: "Hair Health & Restoration", detail: "Deep conditioning, keratin smoothing treatments, scalp detoxes, and moisture-locking therapies." },
+          ],
+        },
+      ],
+    },
   },
   {
     slug: "textured-hair",
@@ -142,7 +174,11 @@ export const DEPARTMENTS: Department[] = [
     ledBy: "shaquana",
     name: "Textured Hair, Braids & Locs",
     schemaType: "HairSalon",
-    answer: "[DRAFT — Shaquana's voice, first person]",
+    answer:
+      "Barber Shack's textured-hair studio specializes in coily, curly, and wavy hair: precision " +
+      "cuts and fades for textured hair, curl shaping, and deep-moisture scalp treatments; full " +
+      "loc care from starter locs to retwists, detoxes, and styling; plus box and knotless braids, " +
+      "cornrows, and twists — protective styles built to last, in Bellingham.",
     rationale:
       "A specialist trade with its own techniques, its own vocabulary, and its own customer. " +
       "Shaquana is a professional braider, loctician, and licensed instructor who teaches " +
@@ -156,6 +192,54 @@ export const DEPARTMENTS: Department[] = [
       "styles) that no local competitor targets. This also IS the inclusivity thesis in " +
       "practice — the shop that says everyone is welcome and can actually do everyone's hair. " +
       "Build in Phase 2 alongside the toupee studio.",
+    faqs: [
+      { q: "Do you do knotless braids and locs?", a: "Yes — the textured-hair studio does box and knotless braids, cornrows, and twists, plus full loc care from starter locs to retwists, detoxes, and styling." },
+      { q: "Do you cut curly and coily hair?", a: "Yes. Textured precision cuts and fades are shaped to your curl pattern, with curl consultation and deep-moisture scalp treatments to keep it healthy." },
+    ],
+    overview: {
+      intro:
+        "At Barber Shack, we specialize in textured, coiled, curly, and wavy hair care. Whether " +
+        "you're maintaining established locs, getting a fresh set of protective braids, or looking " +
+        "for precision cuts and moisture care tailored to your natural curl pattern, our services " +
+        "are designed to protect your hair's natural health while delivering clean, long-lasting style.",
+      sections: [
+        {
+          heading: "Textured Hair Precision Cuts & Care",
+          body:
+            "Curls and coils require specialized cutting and hydration techniques to maintain their " +
+            "natural bounce, definition, and structural integrity.",
+          items: [
+            { name: "Textured Precision Cuts & Fades", detail: "Custom cuts designed specifically for curly, coily, and kinky hair textures, keeping lines crisp and volume balanced." },
+            { name: "Curl Consultation & Shaping", detail: "Dry and wet cutting methods tailored to your unique curl pattern to enhance natural shape and prevent shrinkage distortion." },
+            { name: "Deep Moisture & Scalp Treatments", detail: "Intensive hydration masks, hot oil therapies, and scalp detoxes designed to lock in moisture, combat dryness, and promote healthy growth." },
+          ],
+        },
+        {
+          heading: "Loc Maintenance & Styling",
+          body:
+            "From starter locs to mature loc care, we offer complete maintenance to keep your locs " +
+            "healthy, neat, and strong from root to tip.",
+          items: [
+            { name: "Starter Locs", detail: "Professional palm rolling, comb coils, or two-strand twists to set a clean, solid foundation for your loc journey." },
+            { name: "Loc Retwist & Maintenance", detail: "Clean palm-rolling and scalp care to keep roots tidy and secure fresh growth without causing tension or breakage." },
+            { name: "Loc Detox & Deep Cleanse", detail: "An invigorating apple cider vinegar and essential oil soak to remove product buildup, lint, and deep-seated debris without stripping natural oils." },
+            { name: "Loc Styling", detail: "Creative updos, barrel twists, braided loc styles, and rope twists for special occasions or low-maintenance daily wear." },
+          ],
+        },
+        {
+          heading: "Braids & Protective Styles",
+          body:
+            "Clean parts, balanced tension, and protective designs that prioritize both longevity " +
+            "and edge protection.",
+          items: [
+            { name: "Box Braids & Knotless Braids", detail: "Traditional or knotless options designed for a lightweight feel and reduced tension on the scalp." },
+            { name: "Cornrows & Feed-In Braids", detail: "Precise freestyle designs, classic stitch braids, or clean feed-ins tailored to your style." },
+            { name: "Two-Strand Twists & Flat Twists", detail: "Low-manipulation styling that seals in moisture and keeps hair protected." },
+            { name: "Braid & Twist Removal + Prep", detail: "Safe, gentle takedowns paired with a thorough wash, deep condition, and trim to reset your natural hair between styles." },
+          ],
+        },
+      ],
+    },
   },
   {
     slug: "toupee-studio",
@@ -225,6 +309,25 @@ export const ACCESSIBILITY = {
     "[CONFIRM] Appointment outside busy hours to avoid the wait",
   ],
 } as const;
+
+/**
+ * A real photo to pair with a department hub, where an honest one exists (Rule 2 —
+ * kept beside the data). A department with no representative photo yet is simply
+ * omitted here rather than paired with a mismatched image.
+ */
+export const DEPARTMENT_IMAGE: Record<string, { src: string; alt: string; caption?: string }> = {
+  barbering: {
+    src: "/images/chair-scissor-bw.webp",
+    alt: "Owner and master barber Jared Jones-Valentine scissor-cutting a client at Barber Shack in Bellingham.",
+    caption: "Classic barbering, modern technique — seven days a week.",
+  },
+  "textured-hair": {
+    src: "/images/cut-braids.webp",
+    alt: "Medium knotless braids styled at Barber Shack in Bellingham.",
+    caption: "Textured cuts, loc care, and protective styles — natural-hair specialists.",
+  },
+  // salon: awaiting a representative salon/color photo from the shop — no honest image yet.
+};
 
 /** Resident studios get their own containedInPlace schema node. House departments do not. */
 export const RESIDENTS = DEPARTMENTS.filter((d) => d.entity === "resident");
