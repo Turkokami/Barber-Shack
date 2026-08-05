@@ -4,6 +4,7 @@
  */
 import type { Metadata } from "next";
 import { BUSINESS as B, NAP } from "@/content/business";
+import { getDepartment } from "@/content/departments";
 import { ROUTES, abs } from "@/lib/routes";
 import { pageGraph } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -25,6 +26,9 @@ const ANSWER =
   "specific barber? Book ahead on Vagaro. Either way the shop is at 2500 Cedarwood Ave in Bellingham.";
 
 export default function BookPage() {
+  const tattoo = getDepartment("tattoo-studio");
+  const tattooUrl =
+    tattoo?.participation.bookingLink ? tattoo.bookingUrl : undefined;
   const url = abs(ROUTES.book);
   const crumbs = [
     { name: "Home", item: abs(ROUTES.home) },
@@ -49,6 +53,19 @@ export default function BookPage() {
 
       <BookingEmbed />
       <HoursBlock />
+
+      {tattooUrl && (
+        <section className="my-10">
+          <p className="eyebrow mb-3">Getting a tattoo?</p>
+          <p className="text-lg">
+            Barber Shack is home to an independent tattoo studio. Book directly with the artist:{" "}
+            <a href={tattooUrl} target="_blank" rel="noopener noreferrer"
+               className="underline underline-offset-4 hover:text-signal">
+              Book a tattoo →
+            </a>
+          </p>
+        </section>
+      )}
 
       <section className="my-10">
         <p className="eyebrow mb-3">Rather call?</p>
