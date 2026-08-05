@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The Barber Shack — classic cuts, hot towel shaves, and beard grooming. Book your chair today." />
+  <title>The Barber Shack — Classic Cuts &amp; Clean Shaves</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <nav class="nav container">
+      <a class="brand" href="#top">
+        <span class="brand-mark">✂</span>
+        <span class="brand-name">The Barber Shack</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#hours">Hours</a></li>
+        <li><a class="nav-cta" href="#book">Book Now</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">Est. 2024 · Downtown</p>
+        <h1>Sharp cuts.<br />Clean shaves.<br />No fuss.</h1>
+        <p class="lead">A neighborhood barbershop where the craft still matters. Walk-ins welcome, appointments preferred.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#book">Book a Chair</a>
+          <a class="btn btn-ghost" href="#services">View Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="services">
+      <div class="container">
+        <header class="section-head">
+          <h2>Services</h2>
+          <p>Honest prices. No hidden fees. Just good work.</p>
+        </header>
+        <div class="cards" id="services-grid"><!-- rendered by script.js --></div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section section-alt" id="about">
+      <div class="container about-grid">
+        <div>
+          <h2>About the Shack</h2>
+          <p>We opened The Barber Shack with one idea: bring back the classic barbershop experience. That means real conversation, a hot towel, and a cut that looks as good on day fourteen as it does on day one.</p>
+          <p>Our barbers have a combined 40+ years behind the chair. Whether it's a skin fade, a beard sculpt, or a straight-razor shave, you're in steady hands.</p>
+          <ul class="ticks">
+            <li>Licensed, experienced barbers</li>
+            <li>Sanitized tools for every client</li>
+            <li>Complimentary hot towel with every shave</li>
+          </ul>
+        </div>
+        <div class="stats">
+          <div class="stat"><span class="stat-num">40+</span><span class="stat-label">Years of craft</span></div>
+          <div class="stat"><span class="stat-num">12k</span><span class="stat-label">Cuts &amp; counting</span></div>
+          <div class="stat"><span class="stat-num">4.9★</span><span class="stat-label">Average rating</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section" id="gallery">
+      <div class="container">
+        <header class="section-head">
+          <h2>The Work</h2>
+          <p>A look at what leaves our chairs.</p>
+        </header>
+        <div class="gallery" id="gallery-grid"><!-- rendered by script.js --></div>
+      </div>
+    </section>
+
+    <!-- Hours -->
+    <section class="section section-alt" id="hours">
+      <div class="container hours-grid">
+        <div>
+          <h2>Hours &amp; Location</h2>
+          <p>123 Main Street, Downtown<br />Corner of Main &amp; 3rd</p>
+          <p><a href="tel:+15551234567">(555) 123-4567</a></p>
+        </div>
+        <table class="hours-table">
+          <tbody>
+            <tr><th>Mon – Fri</th><td>9:00 AM – 7:00 PM</td></tr>
+            <tr><th>Saturday</th><td>8:00 AM – 6:00 PM</td></tr>
+            <tr><th>Sunday</th><td>Closed</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Booking -->
+    <section class="section" id="book">
+      <div class="container">
+        <header class="section-head">
+          <h2>Book Your Chair</h2>
+          <p>Tell us what you need — we'll confirm by text.</p>
+        </header>
+        <form class="booking" id="booking-form" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+          </div>
+          <div class="field">
+            <label for="service">Service</label>
+            <select id="service" name="service" required></select>
+          </div>
+          <div class="field">
+            <label for="date">Preferred date</label>
+            <input id="date" name="date" type="date" required />
+          </div>
+          <div class="field field-wide">
+            <label for="notes">Notes <span class="muted">(optional)</span></label>
+            <textarea id="notes" name="notes" rows="3"></textarea>
+          </div>
+          <div class="field field-wide">
+            <button class="btn btn-primary" type="submit">Request Appointment</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="brand"><span class="brand-mark">✂</span> The Barber Shack</p>
+      <p class="muted">© <span id="year"></span> The Barber Shack. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
