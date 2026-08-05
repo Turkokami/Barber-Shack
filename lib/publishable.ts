@@ -10,6 +10,7 @@
 import type { Neighborhood } from "@/content/neighborhoods";
 import type { CommunityProgram } from "@/content/community";
 import type { Intent } from "@/content/intents";
+import type { Department } from "@/content/departments";
 
 export const FLOOR = { neighborhood: 400, neighborhoodService: 300, intent: 400 } as const;
 
@@ -35,6 +36,19 @@ export function isIntentPublishable(i: Intent): boolean {
     wordCount(i.body) >= FLOOR.intent &&
     !hasPlaceholder(i.body) &&
     i.related.length >= 1
+  );
+}
+
+/**
+ * A department hub publishes once it carries real overview copy (intro + at least
+ * two written sections) and its AEO answer no longer holds a placeholder.
+ */
+export function isDepartmentPublishable(d: Department): boolean {
+  return (
+    !!d.overview &&
+    d.overview.sections.length >= 2 &&
+    !hasPlaceholder(d.answer) &&
+    !hasPlaceholder(d.overview.intro)
   );
 }
 

@@ -12,7 +12,7 @@ import { DEPARTMENTS } from "@/content/departments";
 import { FEATURED_REVIEWS } from "@/content/reviews";
 import { ROUTES, abs, BRAND } from "@/lib/routes";
 import { pageGraph } from "@/lib/schema";
-import { isProgramPublishable } from "@/lib/publishable";
+import { isProgramPublishable, isDepartmentPublishable } from "@/lib/publishable";
 import JsonLd from "@/components/JsonLd";
 import AnswerBox from "@/components/AnswerBox";
 import TrustStrip from "@/components/TrustStrip";
@@ -75,11 +75,17 @@ export default function Home() {
 
       <section className="my-12">
         <p className="eyebrow mb-3">Under one roof</p>
-        {/* Studio hubs are not built yet — listed as cards, linked as each ships. */}
+        {/* Studio hubs ship one at a time — a card links only once its page is built. */}
         <ul className="grid gap-3 sm:grid-cols-2">
           {DEPARTMENTS.map((d) => (
             <li key={d.slug} className="border border-chrome/40 p-4">
-              <span className="display text-lg">{d.name}</span>
+              {isDepartmentPublishable(d) ? (
+                <a href={ROUTES.department(d.slug)} className="display text-lg hover:text-signal">
+                  {d.name} →
+                </a>
+              ) : (
+                <span className="display text-lg">{d.name}</span>
+              )}
             </li>
           ))}
         </ul>

@@ -3,7 +3,8 @@ import { SERVICES } from "@/content/services";
 import { NEIGHBORHOODS } from "@/content/neighborhoods";
 import { PROGRAMS } from "@/content/community";
 import { INTENTS } from "@/content/intents";
-import { isPublishable, isProgramPublishable, isIntentPublishable } from "@/lib/publishable";
+import { DEPARTMENTS } from "@/content/departments";
+import { isPublishable, isProgramPublishable, isIntentPublishable, isDepartmentPublishable } from "@/lib/publishable";
 import { ROUTES, abs } from "@/lib/routes";
 
 /**
@@ -22,6 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...stat.map((p) => ({ url: abs(p), changeFrequency: "monthly" as const, priority: 0.8 })),
+    ...DEPARTMENTS.filter(isDepartmentPublishable)
+      .map((d) => ({ url: abs(ROUTES.department(d.slug)), priority: 0.8 })),
     ...SERVICES.map((s) => ({ url: abs(ROUTES.service(s.slug)), priority: 0.9 })),
     ...PROGRAMS.filter(isProgramPublishable)
       .map((p) => ({ url: abs(ROUTES.program(p.slug)), priority: 0.7 })),

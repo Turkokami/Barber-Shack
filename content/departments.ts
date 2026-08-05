@@ -17,6 +17,18 @@
  * or a person on their behalf without their agreement. See `participation`.
  */
 
+/** Long-form hub copy for a department page that has actually shipped. */
+export type DeptSection = {
+  heading: string;
+  body?: string;
+  /** named sub-offerings under the section, e.g. "Buzz Cut & Line-Up" */
+  items?: { name: string; detail: string }[];
+};
+export type DeptOverview = {
+  intro: string;
+  sections: DeptSection[];
+};
+
 export type Department = {
   slug: string;
   /** trading name — a spoke may trade under its own name while operating out of the hub */
@@ -50,6 +62,8 @@ export type Department = {
   services: string[];
   /** search opportunity note for the build queue */
   opportunity: string;
+  /** long-form page copy — present only once the hub has shipped with real content */
+  overview?: DeptOverview;
 };
 
 export const DEPARTMENTS: Department[] = [
@@ -59,11 +73,56 @@ export const DEPARTMENTS: Department[] = [
     entity: "house",
     name: "Barbering",
     schemaType: "HairSalon",
-    answer: "[DRAFT]",
+    answer:
+      "Barbering is the core trade at Barber Shack: precision haircuts, beard and facial-hair " +
+      "design, and traditional hot-towel straight-razor shaves. We pair classic barbering with " +
+      "modern technique — walk-in led, open seven days a week including Sunday, with $12 haircuts " +
+      "for everyone every Tuesday.",
     rationale: "The core trade. Ten service spokes, walk-in led, open seven days.",
     services: ["mens-haircut", "kids-haircut", "fade", "buzz-cut", "beard-trim",
                "straight-razor-shave", "line-up", "senior-cut", "military-cut", "wash-and-style"],
     opportunity: "High volume, high competition. Wins on hours, price, and walk-in availability.",
+    overview: {
+      intro:
+        "At Barber Shack, getting a haircut isn't just an item on your to-do list — it's an " +
+        "experience. We combine classic, time-honored barbering traditions with modern techniques " +
+        "to make sure you leave looking sharp, feeling refreshed, and ready to take on the week.",
+      sections: [
+        {
+          heading: "The Full Barber Experience",
+          body:
+            "Our hallmark service. Step into the chair for a complete top-to-bottom refresh. This " +
+            "package includes a custom precision haircut, a tailored beard trim or line-up, hot " +
+            "towel service, and a classic neck shave to finish strong.",
+        },
+        {
+          heading: "Precision Haircuts",
+          body:
+            "Tailored entirely to your style, head shape, and hair type. Every cut includes a " +
+            "detailed consultation, a clean neckline, a hot towel finish, and professional styling " +
+            "with premium product.",
+          items: [
+            { name: "Classic & Modern Cuts", detail: "Fades, side parts, pompadours, crop tops, and traditional scissor cuts." },
+            { name: "Buzz Cut & Line-Up", detail: "Clean, sharp, and low-maintenance." },
+          ],
+        },
+        {
+          heading: "Beard & Facial Hair Design",
+          body: "Keep your facial hair structured, healthy, and pristine.",
+          items: [
+            { name: "Beard Sculpting & Trim", detail: "Full beard shaping, bulk reduction, and precise lines using clippers and shears, finished with nourishing beard oil." },
+            { name: "Beard Detail & Edge-Up", detail: "Quick maintenance to clean up the cheeks, mustache, and neckline between full cuts." },
+          ],
+        },
+        {
+          heading: "Traditional Hot Towel Shaves",
+          body:
+            "The ultimate classic barbering service. Relax with warm steam towels, pre-shave oils, " +
+            "and rich lather, then a smooth straight-razor shave, followed by a cool towel finish " +
+            "and a soothing post-shave treatment.",
+        },
+      ],
+    },
   },
   {
     slug: "salon",
