@@ -394,7 +394,11 @@ export const DEPARTMENT_IMAGE: Record<string, { src: string; alt: string; captio
     alt: "The Barber Shack team in Bellingham holding a banner that reads Empowering everyone to shine, Home of the $12 Tuesday.",
     caption: "Learn the trade side-by-side with our barbers.",
   },
-  // salon: awaiting a representative salon/color photo from the shop — no honest image yet.
+  salon: {
+    src: "/images/interior-2.webp",
+    alt: "A styling room inside Barber Shack in Bellingham — vintage chairs, mirrors, a ring light, and a wood accent wall.",
+    caption: "Step into the studio.",
+  },
 };
 
 /** Resident studios get their own containedInPlace schema node. House departments do not. */

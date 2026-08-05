@@ -13,6 +13,7 @@ import AnswerBox from "@/components/AnswerBox";
 import HoursBlock from "@/components/HoursBlock";
 import CtaBar from "@/components/CtaBar";
 import Photo from "@/components/Photo";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: `Contact — ${B.name} in ${NAP.cityState}`,
@@ -88,6 +89,12 @@ export default function ContactPage() {
           </ul>
         </section>
       )}
+
+      <ContactForm
+        topic="Contact"
+        heading="Send us a message"
+        intro="Questions about a service, a booking, or the shop? Send a note and we'll get back to you."
+      />
 
       <HoursBlock />
       <CtaBar label={B.city} />

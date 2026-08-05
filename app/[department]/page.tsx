@@ -24,6 +24,7 @@ import HoursBlock from "@/components/HoursBlock";
 import FaqBlock from "@/components/FaqBlock";
 import CtaBar from "@/components/CtaBar";
 import Photo from "@/components/Photo";
+import ContactForm from "@/components/ContactForm";
 
 export const dynamicParams = false;
 
@@ -95,23 +96,24 @@ export default async function DepartmentPage(
       ))}
 
       {cta.kind === "coming-soon" ? (
-        // Pre-launch program: collect interest via the contact page, not a booking
-        // or a non-functional email form.
-        <section className="bg-ink text-shopwhite px-6 py-10 my-14 rounded-xl">
-          <p className="eyebrow mb-2">Ready to start?</p>
-          <h2 className="text-3xl mb-3">Ready to start your career in barbering?</h2>
-          <p className="mb-5 max-w-xl text-shopwhite/85">{cta.note}</p>
-          <div className="flex flex-wrap gap-3">
-            <a href={ROUTES.contact}
-               className="bg-signal text-white px-7 py-3.5 rounded-lg font-bold uppercase tracking-wide text-sm transition hover:brightness-110">
-              Contact us
-            </a>
+        // Pre-launch program: a real interest form (emails the shop) plus a call
+        // option — no booking, no non-functional email field.
+        <>
+          <section className="bg-ink text-shopwhite px-6 py-10 my-14 rounded-xl">
+            <p className="eyebrow mb-2">Ready to start?</p>
+            <h2 className="text-3xl mb-3">Ready to start your career in barbering?</h2>
+            <p className="mb-5 max-w-xl text-shopwhite/85">{cta.note}</p>
             <a href={`tel:${B.phoneTel}`}
-               className="border-2 border-shopwhite/70 text-white px-7 py-3.5 rounded-lg font-bold uppercase tracking-wide text-sm transition hover:bg-white/10">
+               className="inline-block border-2 border-shopwhite/70 text-white px-7 py-3.5 rounded-lg font-bold uppercase tracking-wide text-sm transition hover:bg-white/10">
               Call {B.phoneDisplay}
             </a>
-          </div>
-        </section>
+          </section>
+          <ContactForm
+            topic="Apprenticeship interest"
+            heading="Join the apprenticeship interest list"
+            intro="Leave your details and we'll send program updates, tuition information, and early application access."
+          />
+        </>
       ) : cta.kind === "studio" ? (
         // Independent operator: the shop can't publish their prices on their behalf
         // (participation flags, Registry #30). If they've shared a booking link
