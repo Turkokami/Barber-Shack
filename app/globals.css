@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+/**
+ * BARBER SHACK — design tokens.
+ *
+ * Direction: shop signage with a warm, welcoming edge — not barber-lounge luxury,
+ * and not cold either. The price board stays the sharp, mono signature; everything
+ * around it gets a little softness (rounded photos, buttons, and callouts) so the
+ * page reads friendly, the way the shop actually feels.
+ *
+ * IMPORTANT: base element styles live in @layer base and component classes in
+ * @layer components, so Tailwind utility classes (text-white, bg-signal, …) always
+ * win. Unlayered rules would beat utilities and silently break things like button
+ * text colour — that is what caused the "Book" button to render dark on red.
+ */
+@theme {
+  --color-ink:      #12161B;   /* near-black, cool cast */
+  --color-shopwhite:#ECEEEF;   /* mirror/tile off-white — deliberately not cream */
+  --color-signal:   #C8102E;   /* barber-pole red */
+  --color-steel:    #2E5C8A;   /* the second pole stripe */
+  --color-chrome:   #8C949C;   /* rules, captions, meta */
+  --color-paper:    #FFFFFF;
+
+  /* Wired to the next/font variables set on <html> so the optimized, self-hosted
+     Archivo / Karla / JetBrains Mono actually load (with graceful fallbacks). */
+  --font-display: var(--font-archivo), "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-body:    var(--font-karla), "Karla", ui-sans-serif, system-ui, sans-serif;
+  --font-data:    var(--font-jbm), "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--color-shopwhite);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Cleaner hierarchy: the H1 / display voice is the heavy signage weight;
+     sub-heads step down to 700 so pages read structured, not shouty. */
+  h1, .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+  h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  /* Sticky header offset so in-page anchors don't hide under the bar. */
+  h1, h2, h3, [id] { scroll-margin-top: 5rem; }
+
+  /* Default link colour; utility text-* classes still override (utilities > base). */
+  a { color: inherit; }
+
+  /* Soften the big callout surfaces so the page doesn't feel like a spec sheet.
+     :where() keeps specificity at 0 so any utility can still override. */
+  :where(aside) { border-radius: 0.6rem; }
+
+  :focus-visible { outline: 3px solid var(--color-signal); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  /* THE PRICE BOARD — the signature. Tabular figures, ruled rows, mono. Stays sharp. */
+  .board { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+  .board-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 1rem; padding: 0.7rem 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-chrome) 40%, transparent);
+  }
+  .board-row .dots { flex: 1; border-bottom: 1px dotted var(--color-chrome); translate: 0 -0.25rem; }
+
+  /* Eyebrow labels encode section type, not decoration. */
+  .eyebrow {
+    font-family: var(--font-data); font-size: 0.6875rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--color-chrome);
+  }
+}
