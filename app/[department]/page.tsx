@@ -113,14 +113,28 @@ export default async function DepartmentPage(
           </div>
         </section>
       ) : cta.kind === "studio" ? (
-        // Independent operator: the shop cannot publish their prices or booking on
-        // their behalf (participation flags, Registry #30). Point to the studio instead.
+        // Independent operator: the shop can't publish their prices on their behalf
+        // (participation flags, Registry #30). If they've shared a booking link
+        // (bookingLink consent), send clients straight to it; otherwise point them
+        // to the shop to reach the studio.
         <aside className="border border-steel/40 bg-paper p-6 my-12 max-w-2xl">
           <p className="eyebrow mb-2">Booking</p>
-          <p className="mb-0">
-            {d.name} is offered by an independent studio inside Barber Shack. Ask at the shop for
-            pricing and to book with the studio directly.
-          </p>
+          {d.bookingUrl && d.participation.bookingLink ? (
+            <>
+              <p className="mb-4">
+                {d.name} is an independent studio inside Barber Shack. Book directly with the artist.
+              </p>
+              <a href={d.bookingUrl} target="_blank" rel="noopener noreferrer"
+                 className="inline-block bg-signal text-white px-7 py-3.5 rounded-lg font-bold uppercase tracking-wide text-sm transition hover:brightness-110">
+                Book with the studio →
+              </a>
+            </>
+          ) : (
+            <p className="mb-0">
+              {d.name} is offered by an independent studio inside Barber Shack. Ask at the shop for
+              pricing and to book with the studio directly.
+            </p>
+          )}
         </aside>
       ) : (
         <aside className="border border-steel/40 bg-paper p-6 my-12 max-w-2xl">

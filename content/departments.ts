@@ -75,6 +75,8 @@ export type Department = {
   opportunity: string;
   /** page FAQs — optional, per department. An FAQPage node is emitted only if present. */
   faqs?: { q: string; a: string }[];
+  /** external booking URL for a resident operator — rendered only when participation.bookingLink is true */
+  bookingUrl?: string;
   /** conversion block behavior. Falls back to an entity default when unset. */
   cta?: DeptCta;
   /** long-form page copy — present only once the hub has shipped with real content */
@@ -276,7 +278,8 @@ export const DEPARTMENTS: Department[] = [
   },
   {
     slug: "tattoo-studio",
-    participation: { listPrices: false, tuesdayProgram: false, bioAndPhoto: false, licenseDisplay: false, bookingLink: false },
+    participation: { listPrices: false, tuesdayProgram: false, bioAndPhoto: false, licenseDisplay: false, bookingLink: true },
+    bookingUrl: "https://venue.ink/@tatt2girl",
     entity: "resident",
     name: "Tattoo Studio",
     schemaType: "TattooParlor",
