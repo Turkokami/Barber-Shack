@@ -54,6 +54,7 @@ export default async function DepartmentPage(
   const { intro, sections } = d.overview;
   const faqs = d.faqs ?? [];
   const photo = DEPARTMENT_IMAGE[d.slug];
+  const cta = d.cta ?? (d.entity === "resident" ? { kind: "studio" as const } : { kind: "services" as const });
   const url = abs(ROUTES.department(d.slug));
   const crumbs = [
     { name: "Home", item: abs(ROUTES.home) },
@@ -65,6 +66,7 @@ export default async function DepartmentPage(
       <JsonLd graph={pageGraph({ url, name: `${d.name} in ${NAP.cityState}`, description: d.answer, faqs, crumbs })} />
       <Breadcrumbs crumbs={crumbs} />
 
+      {cta.kind === "coming-soon" && <p className="eyebrow mb-2">Coming soon</p>}
       <h1 className="text-4xl md:text-5xl mt-2 mb-4">{d.name}</h1>
       <TrustStrip />
       <AnswerBox>{d.answer}</AnswerBox>
@@ -92,7 +94,25 @@ export default async function DepartmentPage(
         </section>
       ))}
 
-      {d.entity === "resident" ? (
+      {cta.kind === "coming-soon" ? (
+        // Pre-launch program: collect interest via the contact page, not a booking
+        // or a non-functional email form.
+        <section className="bg-ink text-shopwhite px-6 py-10 my-14 rounded-xl">
+          <p className="eyebrow mb-2">Ready to start?</p>
+          <h2 className="text-3xl mb-3">Ready to start your career in barbering?</h2>
+          <p className="mb-5 max-w-xl text-shopwhite/85">{cta.note}</p>
+          <div className="flex flex-wrap gap-3">
+            <a href={ROUTES.contact}
+               className="bg-signal text-white px-7 py-3.5 rounded-lg font-bold uppercase tracking-wide text-sm transition hover:brightness-110">
+              Contact us
+            </a>
+            <a href={`tel:${B.phoneTel}`}
+               className="border-2 border-shopwhite/70 text-white px-7 py-3.5 rounded-lg font-bold uppercase tracking-wide text-sm transition hover:bg-white/10">
+              Call {B.phoneDisplay}
+            </a>
+          </div>
+        </section>
+      ) : cta.kind === "studio" ? (
         // Independent operator: the shop cannot publish their prices or booking on
         // their behalf (participation flags, Registry #30). Point to the studio instead.
         <aside className="border border-steel/40 bg-paper p-6 my-12 max-w-2xl">
@@ -116,7 +136,7 @@ export default async function DepartmentPage(
 
       <HoursBlock />
       <FaqBlock faqs={faqs} />
-      <CtaBar label={B.city} />
+      {cta.kind !== "coming-soon" && <CtaBar label={B.city} />}
     </>
   );
 }

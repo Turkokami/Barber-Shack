@@ -29,6 +29,17 @@ export type DeptOverview = {
   sections: DeptSection[];
 };
 
+/**
+ * How a department's conversion block behaves. Defaults by entity when unset:
+ * house → "services" (shop price board + booking), resident → "studio"
+ * (booked with the independent operator). "coming-soon" is for a pre-launch
+ * program that collects interest via the contact page rather than a booking.
+ */
+export type DeptCta =
+  | { kind: "services" }
+  | { kind: "studio" }
+  | { kind: "coming-soon"; note: string };
+
 export type Department = {
   slug: string;
   /** trading name — a spoke may trade under its own name while operating out of the hub */
@@ -64,6 +75,8 @@ export type Department = {
   opportunity: string;
   /** page FAQs — optional, per department. An FAQPage node is emitted only if present. */
   faqs?: { q: string; a: string }[];
+  /** conversion block behavior. Falls back to an entity default when unset. */
+  cta?: DeptCta;
   /** long-form page copy — present only once the hub has shipped with real content */
   overview?: DeptOverview;
 };
@@ -279,9 +292,13 @@ export const DEPARTMENTS: Department[] = [
     participation: { listPrices: false, tuesdayProgram: false, bioAndPhoto: false, licenseDisplay: false, bookingLink: false },
     entity: "resident",
     ledBy: "shaquana",
-    name: "Apprentice Program",
+    name: "Apprenticeship Program",
     schemaType: "EducationalOrganization",
-    answer: "[DRAFT]",
+    answer:
+      "Barber Shack's Apprenticeship Program is a hands-on barbering apprenticeship in Bellingham, " +
+      "taking aspiring barbers from fundamental theory to shop-floor mastery — precision cutting, " +
+      "straight-razor shaves, textured hair, and shop operations — with guidance toward state " +
+      "licensing. Applications for the first cohort open soon.",
     rationale:
       "The shop trains barbers. That is a genuine E-E-A-T signal — a business that teaches its " +
       "trade is treated as an authority in it — and it doubles as the recruiting funnel. " +
@@ -291,6 +308,49 @@ export const DEPARTMENTS: Department[] = [
     opportunity:
       "Two audiences on one page set: prospective apprentices (recruiting) and customers " +
       "(credibility). Split them. Confirm WA licensing and apprenticeship-hour requirements.",
+    cta: {
+      kind: "coming-soon",
+      note:
+        "Applications for our inaugural cohort open soon. Contact us for program updates, tuition " +
+        "information, and early application access.",
+    },
+    overview: {
+      intro:
+        "Master the craft from the inside out. Barber Shack's Apprenticeship Program is a hands-on, " +
+        "immersive career path designed to take aspiring barbers from fundamental theory to " +
+        "shop-floor mastery. Built on classic barbering principles, modern cutting techniques, and " +
+        "real-world shop operations, our program prepares you to build a thriving, sustainable " +
+        "career in the trade.",
+      sections: [
+        {
+          heading: "Why Train at Barber Shack?",
+          items: [
+            { name: "Hands-On Floor Experience", detail: "Learn side-by-side with seasoned master barbers and licensed educators in an active shop environment." },
+            { name: "Comprehensive Curriculum", detail: "Master everything from precision fades and straight-razor hot towel shaves to textured hair, beard sculpting, and client retention." },
+            { name: "Business & Shop Operations", detail: "Go beyond the shears with practical training on shop management, chair leasing, client communication, and building a loyal clientele." },
+            { name: "State Licensure Preparation", detail: "Gain the practical hours, technical expertise, and theory confidence to prepare for your state licensing exams." },
+          ],
+        },
+        {
+          heading: "What You'll Learn",
+          items: [
+            { name: "Precision Cutting & Styling", detail: "Clipper over comb, shear work, faded transitions, razor detailing, and custom hair designs." },
+            { name: "Shaving & Facial Hair Specialty", detail: "Traditional straight-razor work, hot towel treatments, beard sculpting, and scalp care." },
+            { name: "Chemical & Textured Hair Care", detail: "Curl pattern analysis, color blending, texturizing, and protective style fundamentals." },
+            { name: "Sanitation, Safety & Tool Maintenance", detail: "Infection control, tool care, ergonomic discipline, and state board compliance." },
+          ],
+        },
+        {
+          heading: "How It Works",
+          items: [
+            { name: "Application & Interview", detail: "A direct conversation to discuss your goals, dedication, and alignment with our shop culture." },
+            { name: "Mentorship & Theory", detail: "One-on-one instruction paired with foundational textbook and safety modules." },
+            { name: "Hands-On Floor Training", detail: "Transition to live models and shop clients under direct supervision as your skills advance." },
+            { name: "Licensing & Placement", detail: "Graduation guidance through state licensing and career-placement opportunities." },
+          ],
+        },
+      ],
+    },
   },
 ];
 
@@ -325,6 +385,11 @@ export const DEPARTMENT_IMAGE: Record<string, { src: string; alt: string; captio
     src: "/images/cut-braids.webp",
     alt: "Medium knotless braids styled at Barber Shack in Bellingham.",
     caption: "Textured cuts, loc care, and protective styles — natural-hair specialists.",
+  },
+  apprenticeship: {
+    src: "/images/team.webp",
+    alt: "The Barber Shack team in Bellingham holding a banner that reads Empowering everyone to shine, Home of the $12 Tuesday.",
+    caption: "Learn the trade side-by-side with our barbers.",
   },
   // salon: awaiting a representative salon/color photo from the shop — no honest image yet.
 };
