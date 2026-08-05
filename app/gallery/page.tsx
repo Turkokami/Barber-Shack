@@ -32,7 +32,7 @@ const CHAIR: Shot[] = [
   { src: "/images/chair-fade.webp", alt: "A barber working a clean fade on a client at Barber Shack in Bellingham." },
   { src: "/images/cut-kids.webp", alt: "A young client smiling through a kids' cut at Barber Shack." },
   { src: "/images/chair-clipper.webp", alt: "A barber lining up a client's cut with clippers at Barber Shack." },
-  { src: "/images/chair-scissor-bw.webp", alt: "Black-and-white photo of a barber scissor-cutting a client at Barber Shack." },
+  { src: "/images/chair-scissor-bw.webp", alt: "Owner and master barber Jared Jones-Valentine scissor-cutting a client at Barber Shack, in black and white." },
   { src: "/images/cut-fresh-fade.webp", alt: "A crisp, freshly finished fade at Barber Shack." },
   { src: "/images/shave-bw.webp", alt: "A traditional hot-towel straight-razor shave at Barber Shack, in black and white." },
   { src: "/images/cut-locs.webp", alt: "Healthy, maintained locs — textured hair care at Barber Shack." },

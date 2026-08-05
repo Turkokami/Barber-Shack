@@ -12,7 +12,7 @@ export const OWNER = {
   name: "Jared Jones-Valentine",
   role: "Owner, Master Barber & Licensed Washington State Instructor",
   headline: "From Community Advocate to Master Barber & Educator",
-  photo: "/images/jared.webp",
+  photo: "/images/chair-scissor-bw.webp",
   /** WA Dept. of Licensing numbers — publicly verifiable. */
   cosmetologistLicense: "89237",   // Cosmetologist, licensed since 2011
   instructorLicense: "25031433",   // Instructor, Cosmetology
