@@ -263,7 +263,10 @@ export const DEPARTMENTS: Department[] = [
     ledBy: "shaquana",
     name: "Toupee Studio",
     schemaType: "HealthAndBeautyBusiness",
-    answer: "[DRAFT]",
+    answer:
+      "The toupee studio at Barber Shack fits non-surgical hair systems and hairpieces, customized " +
+      "for all hair types. It runs as an independent specialty studio inside the shop — a discreet, " +
+      "in-person alternative to surgical hair replacement, in Bellingham.",
     rationale:
       "Non-surgical hair systems, customized for all hair types. Co-founded by Shaquana with a " +
       "fellow industry professional, operating out of Barber Shack. ENTITY GATE RESOLVED: " +
@@ -275,6 +278,21 @@ export const DEPARTMENTS: Department[] = [
       "HIGHEST-VALUE UNBUILT CLUSTER. High ticket, high intent, long consideration cycle, and " +
       "almost no local competition. Searchers use very specific language (hair system, hairpiece, " +
       "non-surgical replacement, topper) and are underserved everywhere. Prioritise in Phase 2.",
+    overview: {
+      intro:
+        "Barber Shack is home to an independent toupee studio offering non-surgical hair systems " +
+        "and hairpieces, customized for all hair types. It operates as its own specialty studio " +
+        "inside the shop, so you're fitted in a familiar, low-key setting rather than a clinic.",
+      sections: [
+        {
+          heading: "Non-Surgical Hair Systems",
+          body:
+            "Custom, non-surgical hair systems and hairpieces, matched and fitted to your hair type " +
+            "and goals. Because everyone's needs are different, the studio works with each client " +
+            "one-on-one — ask at the shop to arrange a consultation.",
+        },
+      ],
+    },
   },
   {
     slug: "tattoo-studio",
@@ -283,12 +301,29 @@ export const DEPARTMENTS: Department[] = [
     entity: "resident",
     name: "Tattoo Studio",
     schemaType: "TattooParlor",
-    answer: "[DRAFT]",
+    answer:
+      "Barber Shack is home to an independent tattoo studio in Bellingham. The artist tattoos out " +
+      "of the shop and books appointments directly online, so you can get tattooed and freshly cut " +
+      "under one roof.",
     rationale: "A separate trade under the same roof. Needs artist pages, not just a service page.",
     services: ["[PLACEHOLDER — tattoo services and artists from Jared]"],
     opportunity:
       "Tattoo search is artist-led, not shop-led. Build per-artist pages with portfolio and " +
       "booking, or the cluster will not rank. Confirm licensing display requirements for WA.",
+    overview: {
+      intro:
+        "Barber Shack is home to an independent tattoo studio. The artist tattoos out of the shop " +
+        "and books appointments directly, so you can get inked and cleaned up under the same roof.",
+      sections: [
+        {
+          heading: "Tattoos at Barber Shack",
+          body:
+            "The tattoo studio operates as its own business inside the shop, so you can line up a " +
+            "tattoo and a fresh cut in the same visit. Appointments are booked directly with the " +
+            "artist — use the button below to see availability and request a time.",
+        },
+      ],
+    },
   },
   {
     slug: "apprenticeship",
