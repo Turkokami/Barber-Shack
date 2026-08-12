@@ -41,16 +41,28 @@ export function isIntentPublishable(i: Intent): boolean {
 
 /**
  * A department hub publishes once it carries real overview copy (an intro plus at
- * least one written section) and its AEO answer no longer holds a placeholder.
+ * least one written section) with no unresolved placeholder in any rendered field,
+ * and its AEO answer is clean too.
+ *
+ * NOTE on consent: the operator's `participation` flags gate specific ITEMS
+ * (prices, bio/photo, license, booking) — those are render-gated in the template
+ * (e.g. the booking button only shows when participation.bookingLink is true), and
+ * the template never renders prices/bio/photo/license at all. This gate governs
+ * copy-readiness; it does not, and should not, publish any of those gated items.
  */
 export function isDepartmentPublishable(d: Department): boolean {
-  return (
-    !!d.overview &&
-    d.overview.sections.length >= 1 &&
-    wordCount(d.overview.intro) >= 15 &&
-    !hasPlaceholder(d.answer) &&
-    !hasPlaceholder(d.overview.intro)
-  );
+  const o = d.overview;
+  if (!o || o.sections.length < 1) return false;
+  if (wordCount(o.intro) < 15 || hasPlaceholder(o.intro)) return false;
+  if (hasPlaceholder(d.answer)) return false;
+  for (const s of o.sections) {
+    if (hasPlaceholder(s.heading)) return false;
+    if (s.body && hasPlaceholder(s.body)) return false;
+    for (const it of s.items ?? []) {
+      if (hasPlaceholder(it.name) || hasPlaceholder(it.detail)) return false;
+    }
+  }
+  return true;
 }
 
 export function isPublishable(n: Neighborhood): boolean {

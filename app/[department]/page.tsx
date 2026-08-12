@@ -12,7 +12,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DEPARTMENTS, getDepartment, DEPARTMENT_IMAGE } from "@/content/departments";
-import { isDepartmentPublishable } from "@/lib/publishable";
+import { isDepartmentPublishable, cleanFaqs } from "@/lib/publishable";
 import { BUSINESS as B, NAP } from "@/content/business";
 import { ROUTES, abs } from "@/lib/routes";
 import { pageGraph } from "@/lib/schema";
@@ -53,7 +53,7 @@ export default async function DepartmentPage(
   if (!d || !d.overview || !isDepartmentPublishable(d)) notFound();
 
   const { intro, sections } = d.overview;
-  const faqs = d.faqs ?? [];
+  const faqs = cleanFaqs(d.faqs ?? []);
   const photo = DEPARTMENT_IMAGE[d.slug];
   const cta = d.cta ?? (d.entity === "resident" ? { kind: "studio" as const } : { kind: "services" as const });
   const url = abs(ROUTES.department(d.slug));
