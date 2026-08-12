@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body { @apply bg-paper text-ink font-body antialiased; }
+  h1, h2, h3 { @apply font-display; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-copper; }
+}
+
+@layer components {
+  /* SIGNATURE: credential and scope data rendered as a spec sheet, not marketing.
+     Monospace, uppercase labels, hairline rules. This is the visual argument
+     that the license is a verifiable fact rather than a claim. */
+  .spec-row {
+    @apply flex items-baseline justify-between gap-4 border-b border-ink/10 py-2
+           font-mono text-spec uppercase;
+  }
+  .spec-label { @apply text-steel; }
+  .spec-value { @apply text-ink font-medium tracking-normal normal-case; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
