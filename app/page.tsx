@@ -9,10 +9,11 @@ import { BUSINESS as B, NAP } from "@/content/business";
 import { SERVICES } from "@/content/services";
 import { PROGRAMS } from "@/content/community";
 import { DEPARTMENTS } from "@/content/departments";
+import { INTENTS } from "@/content/intents";
 import { FEATURED_REVIEWS } from "@/content/reviews";
 import { ROUTES, abs, BRAND } from "@/lib/routes";
 import { pageGraph } from "@/lib/schema";
-import { isProgramPublishable, isDepartmentPublishable } from "@/lib/publishable";
+import { isProgramPublishable, isDepartmentPublishable, isIntentPublishable } from "@/lib/publishable";
 import JsonLd from "@/components/JsonLd";
 import AnswerBox from "@/components/AnswerBox";
 import TrustStrip from "@/components/TrustStrip";
@@ -35,6 +36,9 @@ const ANSWER =
 
 export default function Home() {
   const crumbs = [{ name: "Home", item: abs(ROUTES.home) }];
+  // Gated like the studio and program cards: a page that fails its publish gate
+  // renders no route, so it must never be linked from here either.
+  const intents = INTENTS.filter(isIntentPublishable);
   return (
     <>
       <JsonLd graph={pageGraph({
@@ -133,6 +137,21 @@ export default function Home() {
 
       {/* Renders only when real, verbatim Google reviews are in content/reviews.ts */}
       <ReviewPull reviews={FEATURED_REVIEWS} />
+
+      {intents.length > 0 && (
+        <section className="my-12">
+          <p className="eyebrow mb-3">Coming in</p>
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {intents.map((i) => (
+              <li key={i.slug} className="border-l-2 border-steel pl-4 py-1">
+                <a href={ROUTES.intent(i.slug)} className="display text-lg underline underline-offset-4">
+                  {i.h1}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <HoursBlock />
       <FaqBlock faqs={[]} />

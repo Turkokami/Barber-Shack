@@ -13,6 +13,8 @@ export const ROUTES = {
   bellingham: "/locations/bellingham",
   neighborhood: (slug: string) => `/locations/bellingham/${slug}`,
   city: (slug: string) => `/locations/${slug}`,
+  /** Intent pages sit at the root — they target a query, not a section. */
+  intent: (slug: string) => `/${slug}`,
   barbers: "/barbers",
   barber: (slug: string) => `/barbers/${slug}`,
   accessibility: "/accessibility",

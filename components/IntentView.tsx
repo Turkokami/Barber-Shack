@@ -19,7 +19,7 @@ import FaqBlock from "@/components/FaqBlock";
 import CtaBar from "@/components/CtaBar";
 
 export default function IntentView({ intent }: { intent: Intent }) {
-  const url = abs(`/${intent.slug}`);
+  const url = abs(ROUTES.intent(intent.slug));
   const crumbs = [
     { name: "Home", item: abs(ROUTES.home) },
     { name: intent.h1, item: url },

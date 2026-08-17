@@ -50,6 +50,11 @@ export const INTENTS: Intent[] = [
       "not. A clipper cut, a skin fade, a long scissor cut, a beard trim, a straight-razor shave, " +
       "a kids' cut — walk-in gets the same work as an appointment, at the same price on the board. " +
       "Nothing about walking in puts you at the back of the line for the real service.\n\n" +
+      "The shop is in the Birchwood neighborhood of northwest Bellingham, which puts it a short " +
+      "drive from Cordata, Columbia, Sunnyland, Barkley, Fairhaven and most of the rest of town. " +
+      "We have cut hair on this street since 2011, and walking in has been the point of the place " +
+      "from the beginning — no membership, no app, no minimum spend, and no sense that you need an " +
+      "appointment to deserve a good haircut.\n\n" +
       "Every Tuesday, haircuts are $12. That is not a loss-leader or a coupon — it is an access " +
       "program that exists for single parents, people on Social Security or state assistance, and " +
       "anyone getting ready to go back to work. It runs all day, for everyone, and nobody is asked " +
@@ -87,6 +92,10 @@ export const INTENTS: Intent[] = [
       "kept Sunday open on purpose. A haircut before the work week starts, before school photos, " +
       "before a Monday interview, or just because Sunday is when the family has time — that is " +
       "exactly when people want a chair, and it should be there.\n\n" +
+      "Sunday is not an outlier here — it is part of a genuine seven-day week. Monday through " +
+      "Friday the shop is open nine in the morning to six in the evening, Saturday nine to five, " +
+      "and Sunday ten to four. Those hours are posted, they hold every week, and Sunday is staffed " +
+      "like any other day rather than run as a short reduced shift.\n\n" +
       "A Sunday cut is the full menu, not a stripped-down version. Clipper cuts, skin fades, long " +
       "scissor cuts, flat tops, beard trims, straight-razor shaves, and kids' cuts are all " +
       "available, at the prices posted on the board. Any of the barbers on that day can take you, " +
@@ -96,6 +105,11 @@ export const INTENTS: Intent[] = [
       "actually get a good haircut on the day you have time for it. If a $12 cut is what you are " +
       "after, come back on a Tuesday, when every haircut is $12 for everyone, all day, with no " +
       "qualifying and no separate line.\n\n" +
+      "There is more going on here than haircuts, and Sunday is no exception. Local art hangs on " +
+      "the wall, the shop keeps a booth at the Autism Walk every year, and Barber Shack was the " +
+      "driving force behind the Rainbow Bridge on Northwest Avenue. Come in for a cut on a Sunday " +
+      "afternoon and you are walking into a shop that has been trying to be useful to this town " +
+      "since 2011.\n\n" +
       "The shop is at 2500 Cedarwood Avenue in Bellingham, wheelchair accessible, and set up to " +
       "take kids and families without a fuss. If you want to gauge the Sunday wait before driving " +
       "over, call the shop and someone will let you know how the afternoon is running. Otherwise, " +

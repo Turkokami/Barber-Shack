@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...PROGRAMS.filter(isProgramPublishable)
       .map((p) => ({ url: abs(ROUTES.program(p.slug)), priority: 0.7 })),
     ...INTENTS.filter(isIntentPublishable)
-      .map((i) => ({ url: abs(`/${i.slug}`), priority: 0.7 })),
+      .map((i) => ({ url: abs(ROUTES.intent(i.slug)), priority: 0.7 })),
     ...NEIGHBORHOODS.filter(isPublishable)
       .map((n) => ({ url: abs(ROUTES.neighborhood(n.slug)), priority: 0.6 })),
   ];

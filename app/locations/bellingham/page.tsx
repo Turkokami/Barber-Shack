@@ -6,8 +6,9 @@
 import type { Metadata } from "next";
 import { NEIGHBORHOODS } from "@/content/neighborhoods";
 import { SERVICES } from "@/content/services";
+import { INTENTS } from "@/content/intents";
 import { BUSINESS as B, NAP } from "@/content/business";
-import { isPublishable } from "@/lib/publishable";
+import { isPublishable, isIntentPublishable } from "@/lib/publishable";
 import { ROUTES, abs } from "@/lib/routes";
 import { pageGraph } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -43,6 +44,8 @@ export default function BellinghamCity() {
     { name: B.city, item: url },
   ];
   const hoods = NEIGHBORHOODS.filter(isPublishable);
+  // Same gate as the neighborhood grid — never link a page that failed to publish.
+  const intents = INTENTS.filter(isIntentPublishable);
 
   return (
     <>
@@ -100,6 +103,21 @@ export default function BellinghamCity() {
           ))}
         </ul>
       </section>
+
+      {intents.length > 0 && (
+        <section className="my-10">
+          <p className="eyebrow mb-3">Coming in</p>
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {intents.map((i) => (
+              <li key={i.slug} className="border-l-2 border-steel pl-4 py-1">
+                <a href={ROUTES.intent(i.slug)} className="display text-lg underline underline-offset-4">
+                  {i.h1}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <HoursBlock />
       <FaqBlock faqs={FAQS} />
