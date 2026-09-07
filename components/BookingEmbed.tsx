@@ -54,19 +54,39 @@ export default function BookingEmbed() {
       <p className="eyebrow mb-2">Booking</p>
       <p className="mb-4">
         Walk in any day we are open, including Sunday — no appointment needed.
-        Prefer a set time or a specific barber? Book below.
+        Prefer a set time or a specific barber? Book ahead here.
       </p>
 
-      {/* Rendered on the server so the loader runs at parse time. See the note above. */}
-      <div dangerouslySetInnerHTML={{ __html: VAGARO_SNIPPET }} />
-
-      {/* Always-available fallback so booking works even if the widget can't load. */}
-      <p className="mt-4 text-sm text-chrome">
-        Widget not loading?{" "}
-        <a href={B.bookingUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-signal">
-          Open booking on Vagaro →
+      {/*
+        The booking CTA does NOT depend on the Vagaro widget rendering.
+        P2-01's acceptance criterion is "booking reachable in one tap", and for a
+        while that was only true if a third-party script we cannot test from the
+        build environment happened to work. It did not, and booking on the live
+        site fell back to a line of grey text. These two buttons always work.
+      */}
+      <div className="flex flex-col sm:flex-row gap-3">
+        <a
+          href={B.bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 bg-signal text-white text-center px-5 py-3.5 rounded-lg font-bold tracking-wide transition hover:brightness-110"
+        >
+          Book on Vagaro
         </a>
-      </p>
+        <a
+          href={`tel:${B.phoneTel}`}
+          className="flex-1 border-2 border-ink text-center px-5 py-3.5 rounded-lg font-bold tracking-wide transition hover:text-signal hover:border-signal"
+        >
+          Call {B.phoneDisplay}
+        </a>
+      </div>
+
+      {/*
+        The embedded widget is a bonus on top of the buttons above, never the only
+        route. Rendered on the server so the loader runs at parse time — see the
+        note at the top of this file before changing how it is injected.
+      */}
+      <div className="mt-6" dangerouslySetInnerHTML={{ __html: VAGARO_SNIPPET }} />
     </div>
   );
 }
