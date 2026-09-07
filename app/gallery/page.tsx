@@ -45,6 +45,21 @@ const CHAIR: Shot[] = [
   { src: "/images/cut-beard2.webp", alt: "A full beard trimmed and shaped at Barber Shack." },
   { src: "/images/cut-locs2.webp", alt: "Long, healthy locs cared for at Barber Shack." },
   { src: "/images/cut-kids-chair.webp", alt: "A young client getting a cut in the chair at Barber Shack." },
+  { src: "/images/cut-fade-nape.webp", alt: "A tapered fade blended down to the nape, finished at Barber Shack." },
+  { src: "/images/cut-fade-top.webp", alt: "A short fade seen from above, edges cleaned up at Barber Shack." },
+  { src: "/images/shave-cream.webp", alt: "A client lathered up for a straight-razor shave at Barber Shack." },
+  { src: "/images/cut-fade-back.webp", alt: "A finished fade seen from behind at Barber Shack." },
+  { src: "/images/shave-hot-towel.webp", alt: "A hot towel wrapped and steaming before a straight-razor shave, in black and white." },
+  { src: "/images/shave-towel-hands.webp", alt: "Hands settling a hot towel over a client's face, in black and white." },
+  { src: "/images/shave-lather-razor.webp", alt: "A straight razor working through the lather along a client's jaw, in black and white." },
+  { src: "/images/shave-razor-jaw.webp", alt: "A steady hand drawing a straight razor down a lathered jawline, in black and white." },
+  { src: "/images/shave-razor-highkey.webp", alt: "A straight razor taken over the scalp in high-key black and white." },
+  { src: "/images/shave-neck-razor.webp", alt: "A close razor shave along the neckline, in black and white." },
+  { src: "/images/shave-razor-lather.webp", alt: "A client reclined and lathered, razor in hand, in black and white." },
+  { src: "/images/shave-reclined.webp", alt: "A client reclined in the chair mid-shave, in black and white." },
+  { src: "/images/shave-filmstrip.webp", alt: "A shave in progress, framed like a strip of film, in black and white." },
+  { src: "/images/shave-shop-bw.webp", alt: "A shave underway on the shop floor at Barber Shack, in black and white." },
+  { src: "/images/client-portrait-bw.webp", alt: "A client caped up in the chair, beard freshly shaped, in black and white." },
 ];
 
 const INSIDE: Shot[] = [
@@ -52,12 +67,32 @@ const INSIDE: Shot[] = [
   { src: "/images/interior-2.webp", alt: "Another look inside Barber Shack — chairs and stations along the shop floor." },
   { src: "/images/barber-pole.webp", ratio: "aspect-[11/13]", alt: "A classic red, white, and blue barber pole beside the Barber Shack BS logo wall." },
   { src: "/images/shop-sign.webp", alt: "The Barber Shack sign: seven days a week, family friendly prices, walk-ins welcome, 2500 Cedarwood Ave, Bellingham WA." },
+  { src: "/images/tools-flatlay.webp", alt: "Barbering tools laid out on the towel — shears, clippers, and a straight razor." },
+  { src: "/images/interior-chair.webp", alt: "A vintage barber chair standing ready on the shop floor." },
 ];
 
 const TOONS: Shot[] = [
   { src: "/images/toon-tales.webp", ratio: "aspect-[4/5]", alt: "Illustrated Barber Shop Tales comic: the warm-up, prep work, precision cut, and the grand finale." },
+  { src: "/images/toon-chair-tales.webp", ratio: "aspect-[3/4]", alt: "Illustrated Tales of the Chair comic: a curly cut being blow-dried, a beard trim, a kid waiting his turn, and a barber working the chair." },
+  { src: "/images/toon-shop-panels.webp", ratio: "aspect-[3/4]", alt: "Illustrated comic panels around the shop — clipper work, a wash, a cut in progress, and the last touches." },
+  { src: "/images/toon-art-of-the-cut.webp", ratio: "aspect-[3/4]", alt: "Illustrated The Art of the Cut comic: clippers on a fade, a barber finishing a client, and tattooed hands working scissors and comb." },
+  { src: "/images/toon-before-after.webp", ratio: "aspect-[3/4]", alt: "Illustrated before-and-after comic: a client ready for a change, then the finished cut." },
+  { src: "/images/toon-chair-client.webp", ratio: "aspect-[3/4]", alt: "Illustrated scene of a client being cut in the chair at Barber Shack." },
+  { src: "/images/toon-fade-back.webp", ratio: "aspect-[3/4]", alt: "Illustrated back view of a finished fade in the shop." },
+  { src: "/images/toon-lineup.webp", ratio: "aspect-[3/4]", alt: "Illustrated line-up in progress, razor working a clean edge." },
+  { src: "/images/toon-kids-clippers.webp", ratio: "aspect-[3/4]", alt: "Illustrated kids' cut — clippers over a young client in the chair." },
+  { src: "/images/toon-kids-chair2.webp", ratio: "aspect-[3/4]", alt: "Illustrated kids' cut in progress at the station." },
+  { src: "/images/toon-mirror.webp", ratio: "aspect-[3/4]", alt: "Illustrated view through the station mirror as a cut is finished." },
   { src: "/images/toon-storefront.webp", ratio: "aspect-[4/3]", alt: "Illustrated Barber Shack storefront with the pride flag and BS sign." },
   { src: "/images/toon-interior.webp", ratio: "aspect-[4/3]", alt: "Illustrated interior of Barber Shack — chairs, mirrors, and the shop floor." },
+  { src: "/images/logo-all-welcome.webp", ratio: "aspect-[4/5]", alt: "Barber Shack badge: Bellingham Barber Shack, everyone welcome, everyone respected, all welcome." },
+  { src: "/images/toon-panels-a.webp", ratio: "aspect-[3/4]", alt: "Illustrated panels of the shop at work — cuts, colour, and conversation across four chairs." },
+  { src: "/images/toon-panels-b.webp", ratio: "aspect-[3/4]", alt: "Illustrated panels of a busy day at Barber Shack, from the first cut to the finish." },
+  { src: "/images/toon-buzz.webp", ratio: "aspect-[3/4]", alt: "Illustrated buzz cut in progress under the ring light." },
+  { src: "/images/toon-chairs.webp", ratio: "aspect-[3/4]", alt: "Illustrated barber chairs and stations lined up along the shop floor." },
+  { src: "/images/toon-interior2.webp", ratio: "aspect-[4/3]", alt: "Illustrated wide view inside Barber Shack — chairs, mirrors, and the wood floor." },
+  { src: "/images/toon-street.webp", ratio: "aspect-[4/3]", alt: "Illustrated view of Barber Shack from the street." },
+  { src: "/images/logo-bs-mark.webp", ratio: "aspect-[4/5]", alt: "The Barber Shack BS monogram mark." },
 ];
 
 function ShotFigure({ s }: { s: Shot }) {

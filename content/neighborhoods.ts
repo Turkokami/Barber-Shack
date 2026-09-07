@@ -401,4 +401,23 @@ export const NEIGHBORHOODS: Neighborhood[] = [
   },
 ];
 
+/**
+ * One image per neighbourhood page, indexed by row order. All ten pages used to
+ * share a single shop-floor photo; a distinct image per page is better for
+ * readers and stops ten routes looking like one duplicated template.
+ * Every entry is compliant with the photography rule in CLAUDE.md.
+ */
+export const NEIGHBORHOOD_IMAGES: { src: string; alt: string }[] = [
+  { src: "/images/interior-shop-floor.webp", alt: "Inside Barber Shack on Cedarwood Avenue — the shop floor and chairs." },
+  { src: "/images/cut-fade-nape.webp", alt: "A tapered fade blended down to the nape at Barber Shack." },
+  { src: "/images/interior-chair.webp", alt: "A vintage barber chair on the shop floor at Barber Shack." },
+  { src: "/images/cut-fade-back.webp", alt: "A finished fade seen from behind at Barber Shack." },
+  { src: "/images/tools-flatlay.webp", alt: "Barbering tools laid out — shears, clippers, and a straight razor." },
+  { src: "/images/interior-2.webp", alt: "A styling room inside Barber Shack — chairs, mirrors, and a ring light." },
+  { src: "/images/cut-fade-top.webp", alt: "A short fade seen from above, edges cleaned up at Barber Shack." },
+  { src: "/images/shave-hot-towel.webp", alt: "A hot towel wrapped for a straight-razor shave at Barber Shack." },
+  { src: "/images/cut-clipper-closeup.webp", alt: "Clippers detailing the side of a client's cut at Barber Shack." },
+  { src: "/images/barber-pole.webp", alt: "A classic barber pole beside the Barber Shack BS logo wall." },
+];
+
 export const getNeighborhood = (slug: string) => NEIGHBORHOODS.find((n) => n.slug === slug);

@@ -15,6 +15,7 @@ import AnswerBox from "@/components/AnswerBox";
 import TrustStrip from "@/components/TrustStrip";
 import CommunityNote from "@/components/CommunityNote";
 import BookingEmbed from "@/components/BookingEmbed";
+import Photo from "@/components/Photo";
 import FaqBlock from "@/components/FaqBlock";
 import CtaBar from "@/components/CtaBar";
 
@@ -35,6 +36,15 @@ export default function IntentView({ intent }: { intent: Intent }) {
       <TrustStrip />
       <AnswerBox>{intent.answer}</AnswerBox>
 
+      {intent.image && (
+        <Photo
+          className="my-8"
+          ratio="aspect-[16/10]"
+          src={intent.image.src}
+          alt={intent.image.alt}
+        />
+      )}
+
       <section className="my-10 max-w-2xl">
         {intent.body.split("\n\n").map((p, i) => (
           <p key={i} className="mb-4">{p}</p>
@@ -42,9 +52,9 @@ export default function IntentView({ intent }: { intent: Intent }) {
       </section>
 
       <CommunityNote>
-        Tuesdays are $12 for everybody, all day. The program exists for single parents, people on
-        Social Security or state assistance, and anyone getting ready to go back to work — but
-        nobody is asked to qualify, and there is no separate line.
+        Our standard haircuts are $12 on Tuesdays, all day. The program exists for single parents,
+        people on Social Security or state assistance, and anyone getting ready to go back to work —
+        but nobody is asked to qualify, and there is no separate line.
       </CommunityNote>
 
       <BookingEmbed />

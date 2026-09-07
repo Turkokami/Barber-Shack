@@ -19,6 +19,8 @@ export type Intent = {
   answer: string;
   /** the T3 payload — 400+ genuinely-unique words, split on blank lines */
   body: string;
+  /** page image — intent pages carried none until now */
+  image?: { src: string; alt: string };
   /** downward links — service slugs */
   related: string[];
   faqs: { q: string; a: string }[];
@@ -66,6 +68,7 @@ export const INTENTS: Intent[] = [
       "of an app-only queue. The shop is at 2500 Cedarwood Avenue in Bellingham, it is wheelchair " +
       "accessible, and kids are welcome any day. If you want to check the wait before you head over, " +
       "give the shop a call and someone will tell you how the chairs are looking.",
+    image: { src: "/images/interior-shop-floor.webp", alt: "The Barber Shack shop floor in Bellingham — chairs open and waiting for walk-ins." },
     related: ["clipper-cut", "skin-fade", "kids-cut"],
     faqs: [
       { q: "Do I need an appointment?", a: "No. Walk in during opening hours any day of the week, including Sunday. Booking ahead is optional." },
@@ -115,6 +118,7 @@ export const INTENTS: Intent[] = [
       "take kids and families without a fuss. If you want to gauge the Sunday wait before driving " +
       "over, call the shop and someone will let you know how the afternoon is running. Otherwise, " +
       "just walk in — that is the whole idea.",
+    image: { src: "/images/toon-street.webp", alt: "Illustrated view of Barber Shack from the street, open for business." },
     related: ["clipper-cut", "long-haircut", "skin-fade"],
     faqs: [
       { q: "Is Barber Shack open on Sunday?", a: "Yes. Sunday hours are ten in the morning to four in the afternoon, walk-ins welcome." },

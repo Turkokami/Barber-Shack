@@ -5,7 +5,7 @@
  */
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { NEIGHBORHOODS, getNeighborhood } from "@/content/neighborhoods";
+import { NEIGHBORHOODS, NEIGHBORHOOD_IMAGES, getNeighborhood } from "@/content/neighborhoods";
 import { getService } from "@/content/services";
 import { isPublishable } from "@/lib/publishable";
 import { BUSINESS as B } from "@/content/business";
@@ -44,6 +44,7 @@ export default async function NeighborhoodPage(
   if (!n || !isPublishable(n)) notFound();
 
   const url = abs(ROUTES.neighborhood(n.slug));
+  const shot = NEIGHBORHOOD_IMAGES[NEIGHBORHOODS.findIndex((x) => x.slug === n.slug) % NEIGHBORHOOD_IMAGES.length];
   const crumbs = [
     { name: "Home", item: abs(ROUTES.home) },
     { name: B.city, item: abs(ROUTES.bellingham) },
@@ -74,8 +75,8 @@ export default async function NeighborhoodPage(
       <Photo
         className="my-8"
         ratio="aspect-[16/10]"
-        src="/images/interior-shop-floor.webp"
-        alt="Inside Barber Shack on Cedarwood Avenue — the shop floor and chairs."
+        src={shot.src}
+        alt={shot.alt}
       />
 
       {/* The Rule 5 payload — 400+ words genuinely unique to this neighbourhood */}
