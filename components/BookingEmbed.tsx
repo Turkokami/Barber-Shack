@@ -3,50 +3,48 @@
  * Must accept walk-in AND appointment. Walk-ins are part of the wedge; a
  * booking flow that hides the walk-in option undercuts the positioning.
  *
- * WHY THIS IS A SERVER COMPONENT, AND WHY THE SNIPPET IS RENDERED AS RAW HTML
+ * THREE RULES FOR THIS FILE. All of them were learned the hard way, live.
  *
- * Vagaro's WidgetEmbeddedLoader is a parse-time widget script: it expects to run
- * while the browser is still parsing the document, as an inline <script> sitting
- * inside its own `.vagaro` container. Loaders of this generation build their
- * iframe with document.write().
+ * 1. THE SNIPPET IS VERBATIM. DO NOT EDIT IT.
  *
- * That is the whole bug this replaces. The previous version appended the loader
- * in a useEffect — i.e. after the document had finished loading — on the premise
- * that "a script set via dangerouslySetInnerHTML never executes". That premise is
- * only half true: it holds for innerHTML assigned in the BROWSER, but NOT for
- * markup rendered on the SERVER. Server-rendered HTML is part of the initial
- * document, so the browser parses it and runs the script normally.
+ * VAGARO_SNIPPET below is Vagaro's supplied embed code, character for
+ * character. An earlier version "tidied" it — widened the container from
+ * Vagaro's 250px to 100%, dropped the trailing "#" from the script src,
+ * dropped the frameTitle element, and reflowed the markup across lines. The
+ * widget then rendered nothing on the live site. The widget id was never the
+ * problem; it is byte-identical to what Vagaro issued.
  *
- * Appending the loader post-load meant its document.write() calls were no-ops —
- * browsers discard document.write after load — so the widget silently never
- * appeared. No error, no crash, just nothing, with the fallback link still fine.
+ * If it needs to be wider, style the WRAPPER around it. Do not touch the
+ * snippet. To replace it, paste a fresh block from the Vagaro dashboard whole.
  *
- * Rendering the exact snippet through dangerouslySetInnerHTML from the server
- * fixes it and is safer besides: React never reconciles inside a
- * dangerouslySetInnerHTML subtree, so the iframe Vagaro injects cannot be torn
- * out by a later re-render. It also keeps the widget a direct child of the top
- * document, so Vagaro's postMessage auto-resize still works.
+ * 2. IT MUST BE SERVER-RENDERED SO IT RUNS AT PARSE TIME.
  *
- * DO NOT "modernise" this back into a useEffect that appends the script.
+ * Vagaro's WidgetEmbeddedLoader is a parse-time script: it expects to run while
+ * the browser is parsing the document, as an inline <script> inside its own
+ * .vagaro container, and loaders of this generation build their iframe with
+ * document.write(). An even earlier version appended it in a useEffect — after
+ * load — where document.write is a no-op, so it silently did nothing.
+ *
+ * That was done on the premise that "a script set via dangerouslySetInnerHTML
+ * never executes". Only half true: it holds for innerHTML assigned in the
+ * BROWSER, not for markup rendered on the SERVER, which the browser parses as
+ * part of the initial document and runs normally. Rendering it from the server
+ * also means React never reconciles inside the subtree, so the injected iframe
+ * cannot be torn out by a re-render.
+ *
+ * DO NOT "modernise" this into a useEffect that appends the script.
+ *
+ * 3. THE BUTTONS ARE NOT DECORATION.
+ *
+ * Booking must be reachable in one tap even if Vagaro never loads. For a while
+ * it was not: when the widget failed, the only route was a line of grey text.
+ * Keep a working booking path that does not depend on a third-party script.
  */
 import { BUSINESS as B } from "@/content/business";
 
-const VAGARO_LOADER =
-  "https://www.vagaro.com//resources/WidgetEmbeddedLoader/OZqnDJOnCpWcT3qmV35y6RuSdBuOc1WJD1wOc1WO61Ctdg4tjxMG9pUxapkUcvCu7gevEhAJDXwOapcUbfY?v=KKmVqJkETGTQWFS6yvAToDLfx0pElIJ90odLGDtSGnA";
-
-/**
- * Vagaro's snippet, reproduced verbatim. The attribution links and the <style>
- * rule are part of what Vagaro supplies; the loader replaces them once it runs.
- */
-const VAGARO_SNIPPET = `
-<div class="vagaro" style="width:100%;padding:0;border:0;margin:0 auto;text-align:center;">
-<style type="text/css">.vagaro a{font-size:14px;color:#AAA;text-decoration:none;}</style>
-<a href="https://www.vagaro.com/pro/">Powered by Vagaro</a>&nbsp;
-<a href="https://www.vagaro.com/pro/salon-software">Salon Software</a>,&nbsp;
-<a href="https://www.vagaro.com/pro/spa-software">Spa Software</a>&nbsp;&amp;&nbsp;
-<a href="https://www.vagaro.com/pro/fitness-software">Fitness Software</a>
-<script type="text/javascript" src="${VAGARO_LOADER}"></script>
-</div>`;
+/** Vagaro's supplied embed code, verbatim. See rule 1 above. */
+const VAGARO_SNIPPET = `<div id='frameTitle' class='embedded-widget-title' style='font-size: 23px; color: #333;font-family:Arial, Helvetica, sans-serif; line-height:24px; padding: 18px 10px 8px; text-align: center; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;'>Book Now</div>
+<div class="vagaro" style="width:250px; padding:0; border:0; margin:0 auto; text-align:center;"><style>.vagaro a {font-size:14px; color:#AAA; text-decoration:none;}</style><a href="https://www.vagaro.com/pro/">Powered by Vagaro</a>&nbsp;<a href="https://www.vagaro.com/pro/salon-software">Salon Software</a>,&nbsp;<a href="https://www.vagaro.com/pro/spa-software">Spa Software</a>&nbsp;&amp;&nbsp;<a href="https://www.vagaro.com/pro/fitness-software">Fitness Software</a><script type="text/javascript" src="https://www.vagaro.com//resources/WidgetEmbeddedLoader/OZqnDJOnCpWcT3qmV35y6RuSdBuOc1WJD1wOc1WO61Ctdg4tjxMG9pUxapkUcvCu7gevEhAJDXwOapcUbfY?v=KKmVqJkETGTQWFS6yvAToDLfx0pElIJ90odLGDtSGnA#"></script></div>`;
 
 export default function BookingEmbed() {
   return (
@@ -57,13 +55,7 @@ export default function BookingEmbed() {
         Prefer a set time or a specific barber? Book ahead here.
       </p>
 
-      {/*
-        The booking CTA does NOT depend on the Vagaro widget rendering.
-        P2-01's acceptance criterion is "booking reachable in one tap", and for a
-        while that was only true if a third-party script we cannot test from the
-        build environment happened to work. It did not, and booking on the live
-        site fell back to a line of grey text. These two buttons always work.
-      */}
+      {/* Always works, with or without Vagaro. See rule 3 above. */}
       <div className="flex flex-col sm:flex-row gap-3">
         <a
           href={B.bookingUrl}
@@ -81,12 +73,8 @@ export default function BookingEmbed() {
         </a>
       </div>
 
-      {/*
-        The embedded widget is a bonus on top of the buttons above, never the only
-        route. Rendered on the server so the loader runs at parse time — see the
-        note at the top of this file before changing how it is injected.
-      */}
-      <div className="mt-6" dangerouslySetInnerHTML={{ __html: VAGARO_SNIPPET }} />
+      {/* Vagaro's own block, untouched. Width is set by Vagaro at 250px. */}
+      <div className="mt-4 border-t border-chrome/25" dangerouslySetInnerHTML={{ __html: VAGARO_SNIPPET }} />
     </div>
   );
 }
