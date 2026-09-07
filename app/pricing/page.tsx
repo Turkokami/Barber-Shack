@@ -19,13 +19,14 @@ import Photo from "@/components/Photo";
 export const metadata: Metadata = {
   title: `Haircut Prices in ${NAP.cityState}`,
   description:
-    "Barber Shack's full, posted price list. Walk in any day, including Sunday. Every Tuesday, haircuts are $12 for everyone — all day, no qualifying required.",
+    "Barber Shack's full, posted price list. Walk in any day, including Sunday. Every Tuesday, our standard haircuts are $12 for everyone — all day, no qualifying required.",
   alternates: { canonical: abs(ROUTES.pricing) },
 };
 
 const ANSWER =
   "Barber Shack keeps an honest, posted price list at 2500 Cedarwood Ave in Bellingham. Walk in " +
-  "any day, including Sunday. Every Tuesday, haircuts are $12 for everyone — all day, no " +
+  "any day, including Sunday. Every Tuesday, our standard haircuts are $12 for everyone — all " +
+  "day, no " +
   "qualifying required.";
 
 export default function PricingHub() {
@@ -73,7 +74,7 @@ export default function PricingHub() {
       <section className="my-10">
         <p className="eyebrow mb-3">The Tuesday rate</p>
         <p className="max-w-2xl">
-          Every Tuesday, haircuts are <strong>$12</strong> — for everyone, all day, with no
+          Every Tuesday, our standard haircuts are <strong>$12</strong> — for everyone, all day, with no
           qualifying and no separate line.{" "}
           <a href={ROUTES.program("12-dollar-tuesdays")} className="underline underline-offset-4">
             More about $12 Tuesdays →

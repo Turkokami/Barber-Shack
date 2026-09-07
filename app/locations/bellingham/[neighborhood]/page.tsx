@@ -52,7 +52,7 @@ export default async function NeighborhoodPage(
 
   const answer =
     `Barber Shack is about ${n.driveTimeMin} minutes from ${n.name}. Walk in any day of the ` +
-    `week, including Sunday — no appointment needed. Tuesdays are $12 for everyone.`;
+    `week, including Sunday — no appointment needed. On Tuesdays our standard haircuts are $12.`;
 
   const graph = pageGraph({
     url,

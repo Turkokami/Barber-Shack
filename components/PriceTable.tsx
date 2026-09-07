@@ -27,7 +27,7 @@ export default function PriceTable({ rows, caption }: { rows: Row[]; caption?: s
           </div>
         ))}
       </div>
-      <p className="mt-3 text-sm text-chrome">
+      <p className="mt-3 text-sm text-meta">
         $12 Tuesdays applies to everyone, all day, no qualifying required.
       </p>
     </section>

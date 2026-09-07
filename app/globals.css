@@ -18,7 +18,10 @@
   --color-shopwhite:#ECEEEF;   /* mirror/tile off-white — deliberately not cream */
   --color-signal:   #C8102E;   /* barber-pole red */
   --color-steel:    #2E5C8A;   /* the second pole stripe */
-  --color-chrome:   #8C949C;   /* rules, captions, meta */
+  --color-chrome:   #8C949C;   /* RULES AND BORDERS ONLY — 2.64:1 on shopwhite, fails WCAG AA as text */
+  /* Meta/caption TEXT. Same cool cast as chrome, dark enough to read:
+     4.72:1 on shopwhite, 5.49:1 on paper. Use this for text, never chrome. */
+  --color-meta:     #626A72;
   --color-paper:    #FFFFFF;
 
   /* Wired to the next/font variables set on <html> so the optimized, self-hosted
@@ -88,6 +91,6 @@
   /* Eyebrow labels encode section type, not decoration. */
   .eyebrow {
     font-family: var(--font-data); font-size: 0.6875rem; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--color-chrome);
+    text-transform: uppercase; color: var(--color-meta);
   }
 }

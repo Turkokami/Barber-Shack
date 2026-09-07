@@ -34,7 +34,7 @@ export const INTENTS: Intent[] = [
     answer:
       "Barber Shack is a walk-in barbershop at 2500 Cedarwood Ave in Bellingham. No appointment " +
       "and no account needed — walk in during opening hours any day of the week, including Sunday, " +
-      "put your name down, and take a seat. On Tuesdays every haircut is $12.",
+      "put your name down, and take a seat. On Tuesdays our standard haircuts are $12.",
     body:
       "Barber Shack is a walk-in barbershop first. You do not need an appointment, an account, or " +
       "a phone call ahead. Walk in during opening hours, give your name at the front, and take a " +
@@ -55,8 +55,9 @@ export const INTENTS: Intent[] = [
       "Barber Shack started out in Lake Stevens in 2011 and opened here in June 2014. Walking in " +
       "has been the point of the place from the beginning — no membership, no app, no minimum " +
       "spend, and no sense that you need an appointment to deserve a good haircut.\n\n" +
-      "Every Tuesday, haircuts are $12. That is not a loss-leader or a coupon — it is an access " +
-      "program that exists for single parents, people on Social Security or state assistance, and " +
+      "Every Tuesday, our standard haircuts are $12. That is not a loss-leader or a coupon — it " +
+      "is an access program that exists for single parents, people on Social Security or state " +
+      "assistance, and " +
       "anyone getting ready to go back to work. It runs all day, for everyone, and nobody is asked " +
       "to prove they qualify. There is no separate line and no paperwork. You walk in on a Tuesday, " +
       "you pay $12, you leave with a sharp cut.\n\n" +
@@ -103,8 +104,8 @@ export const INTENTS: Intent[] = [
       "One honest note on price: the $12 rate is a Tuesday program, not a Sunday one, so a Sunday " +
       "cut is at the regular posted price. What Sunday gives you is availability — the ability to " +
       "actually get a good haircut on the day you have time for it. If a $12 cut is what you are " +
-      "after, come back on a Tuesday, when every haircut is $12 for everyone, all day, with no " +
-      "qualifying and no separate line.\n\n" +
+      "after, come back on a Tuesday, when our standard haircuts are $12 for everyone, all day, " +
+      "with no qualifying and no separate line.\n\n" +
       "There is more going on here than haircuts, and Sunday is no exception. Local art hangs on " +
       "the wall, the shop keeps a booth at the Autism Walk every year, and Barber Shack was the " +
       "driving force behind the Rainbow Bridge on Northwest Avenue. Come in for a cut on a Sunday " +

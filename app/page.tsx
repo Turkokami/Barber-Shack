@@ -31,8 +31,8 @@ export const metadata: Metadata = {
 
 const ANSWER =
   "Barber Shack is a community barbershop at 2500 Cedarwood Ave in Bellingham. Open seven days " +
-  "a week, walk-ins welcome, wheelchair accessible. Every Tuesday, haircuts are $12 — for " +
-  "everyone, all day, no qualifying required.";
+  "a week, walk-ins welcome, wheelchair accessible. Every Tuesday, our standard haircuts are " +
+  "$12 — for everyone, all day, no qualifying required.";
 
 export default function Home() {
   const crumbs = [{ name: "Home", item: abs(ROUTES.home) }];
@@ -61,6 +61,7 @@ export default function Home() {
       <Photo
         className="mb-8 max-w-lg"
         ratio="aspect-[4/5]"
+        sizes="(min-width: 768px) 32rem, 100vw"
         priority
         src="/images/chair-scissor-bw.webp"
         alt="Owner and master barber Jared Jones-Valentine scissor-cutting a client at Barber Shack, in black and white."
@@ -102,7 +103,7 @@ export default function Home() {
           Here&apos;s the honest version: the haircut is almost the excuse. What we&apos;re really
           after is a place in this town where anybody can walk in, take a seat, and leave feeling a
           little better than they came in — whoever you are, whatever your week looks like. That&apos;s
-          why Tuesdays are $12 for everyone, why the door&apos;s open on Sundays, why there&apos;s
+          why a Tuesday haircut is $12 for everyone, why the door&apos;s open on Sundays, why there&apos;s
           local art on the wall and a booth at the Autism Walk every year. Look good, feel good, leave
           confident — that&apos;s the whole idea.
         </p>
@@ -113,6 +114,7 @@ export default function Home() {
         <Photo
           className="mb-6 max-w-lg"
           ratio="aspect-[3/4]"
+          sizes="(min-width: 768px) 32rem, 100vw"
           src="/images/toon-art-of-the-cut.webp"
           alt="A comic-style illustration titled The Art of the Cut: clippers taking down a fade, a barber in glasses finishing a client's cut, a barber combing and cutting a smiling client in the chair, tattooed hands working scissors and comb, with a barber pole and pomade bottles around the panels."
           caption="The art of the cut."

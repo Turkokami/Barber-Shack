@@ -105,7 +105,7 @@ export default function ContactForm({
           <input name="email" type="email" autoComplete="email" required className={field} />
         </label>
         <label className="flex flex-col gap-1.5 sm:col-span-2">
-          <span className="board text-sm font-semibold">Phone <span className="text-chrome font-normal">(optional)</span></span>
+          <span className="board text-sm font-semibold">Phone <span className="text-meta font-normal">(optional)</span></span>
           <input name="phone" type="tel" autoComplete="tel" className={field} />
         </label>
         <label className="flex flex-col gap-1.5 sm:col-span-2">

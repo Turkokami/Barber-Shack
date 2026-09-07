@@ -13,7 +13,7 @@ export default function ReviewPull({ reviews }: { reviews: Review[] }) {
         {reviews.map((r) => (
           <blockquote key={r.author} className="border-l-2 border-steel pl-5">
             <p className="mb-2">{r.text}</p>
-            <cite className="board text-xs not-italic text-chrome">
+            <cite className="board text-xs not-italic text-meta">
               {r.author} · {r.rating}★
             </cite>
           </blockquote>

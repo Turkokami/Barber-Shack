@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 const ANSWER =
   "Barber Shack is a community barbershop at 2500 Cedarwood Ave in Bellingham, in the Birchwood " +
   "neighborhood. It serves the whole city — walk in any day of the week, including Sunday, and " +
-  "every Tuesday haircuts are $12 for everyone.";
+  "every Tuesday our standard haircuts are $12 for everyone.";
 
 const FAQS = [
   { q: "Where in Bellingham is Barber Shack?", a: "At 2500 Cedarwood Ave, in the Birchwood neighborhood of northwest Bellingham." },
@@ -73,8 +73,8 @@ export default function BellinghamCity() {
         </p>
         <p className="mb-4">
           Whatever part of town you are coming from, the deal is the same: no appointment needed,
-          honest prices posted on the board, and $12 for everyone every Tuesday, all day, with no
-          qualifying and no separate line.
+          honest prices posted on the board, and $12 standard haircuts for everyone every Tuesday,
+          all day, with no qualifying and no separate line.
         </p>
       </section>
 

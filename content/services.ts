@@ -86,9 +86,8 @@ export const SERVICES: Service[] = [
     serviceType: "Fade haircut",
     answer:
       "A skin fade blends from bare skin up through the sides and back into the length on top. " +
-      "About 30 minutes, walk in any day including Sunday, and $12 on Tuesdays.",
+      "About 30 minutes, walk in any day including Sunday.",
     price: "33",
-    tuesdayPrice: "12",
     durationMin: 30,
     includes: ["Skin fade through sides and back", "Top blended and cut", "Edge line-up"],
     whoItsFor: "Anyone who wants a sharp, high-contrast fade.",
@@ -101,9 +100,8 @@ export const SERVICES: Service[] = [
     serviceType: "Flat top haircut",
     answer:
       "A flat top is a precision cut squared off level across the top — one of the harder cuts to " +
-      "do well, and one this shop is set up for. Walk in any day; $12 on Tuesdays.",
+      "do well, and one this shop is set up for. Walk in any day, including Sunday.",
     price: "38",
-    tuesdayPrice: "12",
     durationMin: 30,
     includes: ["Squared, level flat-top cut", "Clean tapered sides", "Edge line-up"],
     whoItsFor: "Anyone who wears a flat top and wants it cut properly.",

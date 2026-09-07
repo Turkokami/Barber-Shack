@@ -16,8 +16,8 @@ export default function ExpertBlock({ cluster }: { cluster: string }) {
     <aside className="border-l-4 border-steel bg-paper px-5 py-5 my-10">
       <p className="eyebrow mb-2">From {sp.firstName}</p>
       <p className="display text-xl">{sp.name}</p>
-      <p className="board text-xs text-chrome mt-1">{sp.role}</p>
-      <ul className="board text-xs text-chrome mt-2 space-y-0.5">
+      <p className="board text-xs text-meta mt-1">{sp.role}</p>
+      <ul className="board text-xs text-meta mt-2 space-y-0.5">
         {sp.credentials.map((c) => (
           <li key={c.name}>{c.name} · WA #{c.licenseNumber}</li>
         ))}

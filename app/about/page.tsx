@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const ANSWER =
   "Barber Shack is a community barbershop on Cedarwood Ave in Bellingham, owned by master barber " +
   "Jared Jones-Valentine. It is a community hub first and a barbershop second — open seven days a " +
-  "week, walk-ins welcome, and $12 for everyone on Tuesdays.";
+  "week, walk-ins welcome, and $12 standard haircuts for everyone on Tuesdays.";
 
 export default function AboutPage() {
   const url = abs(ROUTES.about);
@@ -65,7 +65,7 @@ export default function AboutPage() {
         </p>
         <p className="mb-4">
           In practice that means the door is open seven days a week, including Sunday, and walk-ins
-          are always welcome. It means that every Tuesday, haircuts are $12 for everyone, all day,
+          are always welcome. It means that every Tuesday, our standard haircuts are $12 for everyone, all day,
           with no qualifying and no separate line — an access program for single parents, people on
           Social Security or state assistance, and anyone getting ready to go back to work. A sharp
           haircut changes how you walk into a room, and money should not stand between anyone and
@@ -101,7 +101,7 @@ export default function AboutPage() {
                 className="object-cover"
               />
             </div>
-            <figcaption className="board text-xs text-chrome mt-2">
+            <figcaption className="board text-xs text-meta mt-2">
               {OWNER.name} · {OWNER.role}
             </figcaption>
           </figure>

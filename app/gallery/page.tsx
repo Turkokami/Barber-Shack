@@ -66,7 +66,7 @@ function ShotFigure({ s }: { s: Shot }) {
       <div className={`relative ${s.ratio ?? "aspect-[3/4]"} w-full bg-paper border border-chrome/30`}>
         <Image src={s.src} alt={s.alt} fill sizes="(min-width: 640px) 33vw, 100vw" className="object-cover" />
       </div>
-      <figcaption className="board text-xs text-chrome mt-2">{s.alt}</figcaption>
+      <figcaption className="board text-xs text-meta mt-2">{s.alt}</figcaption>
     </figure>
   );
 }

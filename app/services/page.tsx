@@ -27,11 +27,11 @@ export const metadata: Metadata = {
 const ANSWER =
   "Barber Shack offers clipper cuts, long cuts, skin fades, flat tops, kids' cuts, beard trims, " +
   "and hot-towel straight-razor shaves at 2500 Cedarwood Ave in Bellingham. Walk in any day, " +
-  "including Sunday. Every Tuesday, haircuts are $12 for everyone.";
+  "including Sunday. Every Tuesday, our standard haircuts are $12 for everyone.";
 
 const FAQS = [
   { q: "Do I need an appointment?", a: "No. Walk-ins are welcome every day we are open, including Sunday. You can also book ahead on Vagaro." },
-  { q: "Which services are $12 on Tuesdays?", a: "Haircuts are $12 on Tuesdays for everyone, all day. Ask at the shop which cuts the rate covers." },
+  { q: "Which services are $12 on Tuesdays?", a: "Our standard haircuts — the price board marks the Tuesday rate on every service it covers. Skin fades and flat tops are not included; those stay at their regular price." },
 ];
 
 export default function ServicesHub() {

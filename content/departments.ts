@@ -101,7 +101,7 @@ export const DEPARTMENTS: Department[] = [
     opportunity: "High volume, high competition. Wins on hours, price, and walk-in availability.",
     faqs: [
       { q: "Do I need an appointment for a haircut?", a: "No — walk-ins are welcome every day we're open, including Sunday. You can also book ahead if you'd rather lock in a time." },
-      { q: "Are haircuts really $12 on Tuesdays?", a: "Yes. Every Tuesday, haircuts are $12 for everyone, all day — no qualifying and no questions asked." },
+      { q: "Are haircuts really $12 on Tuesdays?", a: "Yes. Every Tuesday our standard haircuts are $12 for everyone, all day — no qualifying and no questions asked. Skin fades and flat tops are not included; those stay at their regular price." },
     ],
     overview: {
       intro:

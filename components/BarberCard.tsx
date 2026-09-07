@@ -6,7 +6,7 @@ export default function BarberCard({ barber }: { barber: Barber }) {
   return (
     <a href={ROUTES.barber(barber.slug)} className="block border border-chrome/40 p-5">
       <p className="display text-xl">{barber.name}</p>
-      <p className="board text-xs text-chrome mt-1">
+      <p className="board text-xs text-meta mt-1">
         {barber.yearsBehindChair} yrs behind the chair
       </p>
       <p className="mt-3 text-sm">{barber.specialties.join(" · ")}</p>

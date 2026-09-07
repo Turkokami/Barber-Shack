@@ -8,7 +8,7 @@
  * or `employee`. See Amendment C: modelling them as departments or staff would be
  * inaccurate structured data, and for licensed trades would misstate liability.
  */
-import { BUSINESS as B, NAP } from "@/content/business";
+import { BUSINESS as B, NAP, isResolved } from "@/content/business";
 import { SPECIALISTS } from "@/content/specialists";
 import { RESIDENTS, mayPublish } from "@/content/departments";
 import type { Department } from "@/content/departments";
@@ -71,7 +71,11 @@ export function rootNodes() {
       ],
       url: `${B.url}/`,
       telephone: B.phoneTel,
-      email: B.email,
+      // Registry #2 is still open, and an unresolved placeholder must never reach
+      // structured data — "[PLACEHOLDER]" was being published to Google as the
+      // business email on every page. Omit the key until a real mailbox exists;
+      // a missing optional property is fine, an invalid one is not.
+      ...(isResolved(B.email) ? { email: B.email } : {}),
       priceRange: B.priceRange,
       foundingDate: B.founded,
       address,

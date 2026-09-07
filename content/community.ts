@@ -25,7 +25,8 @@ export const PROGRAMS: CommunityProgram[] = [
     slug: "12-dollar-tuesdays",
     name: "$12 Tuesdays",
     answer:
-      "Every Tuesday, haircuts at Barber Shack are $12. The program exists for people who need " +
+      "Every Tuesday, standard haircuts at Barber Shack are $12. The program exists for people who " +
+      "need " +
       "the break — single parents, folks on Social Security or state assistance, and job seekers " +
       "getting ready to go back to work. No proof required, no questions asked. Walk in.",
     who:
@@ -39,7 +40,7 @@ export const PROGRAMS: CommunityProgram[] = [
     partners: [],
     faqs: [
       { q: "Do I need to prove I qualify?", a: "No. $12 Tuesdays is open to everyone, all day, every Tuesday. Nobody is asked to explain themselves." },
-      { q: "Which haircuts are $12 on Tuesday?", a: "[PLACEHOLDER — confirm with Jared which services the Tuesday rate covers]" },
+      { q: "Which haircuts are $12 on Tuesday?", a: "Our standard haircuts — the price board marks the Tuesday rate on every service it covers. Skin fades and flat tops are not included; those stay at their regular price." },
     ],
   },
   {

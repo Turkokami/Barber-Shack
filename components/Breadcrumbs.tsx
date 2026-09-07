@@ -1,7 +1,7 @@
 /** Rendered on every route, matching the URL path exactly and the BreadcrumbList node. */
 export default function Breadcrumbs({ crumbs }: { crumbs: { name: string; item: string }[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="board text-xs text-chrome py-4">
+    <nav aria-label="Breadcrumb" className="board text-xs text-meta py-4">
       {crumbs.map((c, i) => (
         <span key={c.item}>
           {i > 0 && <span aria-hidden className="mx-2">/</span>}

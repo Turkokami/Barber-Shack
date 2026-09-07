@@ -88,7 +88,7 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
             <span>{svc.name}</span>
             <span className="dots" aria-hidden />
             <span className="font-semibold">
-              {svc.priceNote && <span className="text-chrome font-normal mr-1">{svc.priceNote}</span>}
+              {svc.priceNote && <span className="text-meta font-normal mr-1">{svc.priceNote}</span>}
               ${svc.price}
             </span>
           </div>
@@ -128,7 +128,8 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
       {/* Block 6 — the community frame. Not decoration; it is the reason for the price. */}
       {svc.tuesdayPrice && (
         <CommunityNote>
-          Tuesdays are $12 for everybody, all day. The program exists for single parents, people on
+          This cut is $12 on Tuesdays, for everybody, all day. The program exists for single
+          parents, people on
           Social Security or state assistance, and anyone getting ready to go back to work — but
           nobody is asked to qualify, and there is no separate line.
         </CommunityNote>
