@@ -221,14 +221,14 @@ export const TUESDAY_SERVICES = SERVICES.filter((s) => s.tuesdayPrice);
 
 /** A real photo to pair with a service page. Kept beside the data (Rule 2). */
 export const SERVICE_IMAGE: Record<string, { src: string; alt: string }> = {
-  "clipper-cut": { src: "/images/chair-clipper.webp", alt: "A barber lining up a clipper cut at Barber Shack in Bellingham." },
+  "clipper-cut": { src: "/images/cut-clipper-closeup.webp", alt: "Clippers lining up a clipper cut at Barber Shack in Bellingham." },
   "long-haircut": { src: "/images/cut-pompadour.webp", alt: "A longer scissor cut, shaped and styled at Barber Shack." },
-  "skin-fade": { src: "/images/chair-fade.webp", alt: "A clean skin fade taking shape at Barber Shack." },
+  "skin-fade": { src: "/images/cut-fade-comb.webp", alt: "A clean skin fade taking shape under clipper and comb at Barber Shack." },
   "flat-top": { src: "/images/cut-fresh-fade.webp", alt: "A crisp, freshly finished cut at Barber Shack." },
   "straight-razor-face-shave": { src: "/images/shave-bw.webp", alt: "A traditional hot-towel straight-razor shave at Barber Shack, in black and white." },
   "straight-razor-head-shave": { src: "/images/chair-scissor-bw.webp", alt: "Traditional straight-razor barbering at Barber Shack, in black and white." },
-  "kids-cut": { src: "/images/cut-kids.webp", alt: "A young client smiling through a kids' cut at Barber Shack." },
-  "senior-military-cut": { src: "/images/chair-clipper.webp", alt: "A clean, regulation-ready clipper cut at Barber Shack." },
+  "kids-cut": { src: "/images/cut-kids2.webp", alt: "A young client's finished cut with a razored side design at Barber Shack." },
+  "senior-military-cut": { src: "/images/cut-fade-comb2.webp", alt: "A clean, regulation-ready clipper cut taking shape at Barber Shack." },
   "beard-trim": { src: "/images/cut-beard.webp", alt: "A beard shaped and detailed at Barber Shack." },
   "beard-removal": { src: "/images/shave-bw.webp", alt: "A close razor shave at Barber Shack, in black and white." },
   "clean-up": { src: "/images/cut-lineup.webp", alt: "A sharp neckline and edge line-up at Barber Shack." },

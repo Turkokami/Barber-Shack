@@ -122,9 +122,9 @@ export default function AboutPage() {
       <Photo
         className="my-10 max-w-2xl"
         ratio="aspect-[6/5]"
-        src="/images/team.webp"
-        alt="The Barber Shack team holding a banner that reads Empowering everyone to shine, Home of the $12 Tuesday."
-        caption="The people who make the place."
+        src="/images/interior-shop-floor.webp"
+        alt="The Barber Shack shop floor in Bellingham — vintage barber chairs, station mirrors, and a coat rack built from engine pistons."
+        caption="The room where it happens, on Cedarwood Ave."
       />
 
       <CtaBar label={B.city} />

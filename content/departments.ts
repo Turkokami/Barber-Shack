@@ -425,8 +425,8 @@ export const DEPARTMENT_IMAGE: Record<string, { src: string; alt: string; captio
     caption: "Textured cuts, loc care, and protective styles — natural-hair specialists.",
   },
   apprenticeship: {
-    src: "/images/team.webp",
-    alt: "The Barber Shack team in Bellingham holding a banner that reads Empowering everyone to shine, Home of the $12 Tuesday.",
+    src: "/images/toon-tales.webp",
+    alt: "An illustrated four-step barbering sequence: the warm-up, prep work, the precision cut, and the grand finale.",
     caption: "Learn the trade side-by-side with our barbers.",
   },
   salon: {

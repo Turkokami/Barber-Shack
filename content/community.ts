@@ -153,6 +153,6 @@ export const PROGRAM_IMAGE: Record<string, { src: string; alt: string }> = {
   "12-dollar-tuesdays": { src: "/images/tuesday-neon.webp", alt: "A neon Barber Shack sign reading Changes happen here on Tuesdays." },
   "autism-walk": { src: "/images/community-autism.webp", alt: "Barber Shack at the local Autism Walk with a banner reading Empowering everyone to shine, Home of the $12 Tuesday." },
   "rainbow-bridge": { src: "/images/community-rainbow-bridge.webp", alt: "The Rainbow Bridge on Northwest Avenue in Bellingham, its railings painted in rainbow colors and decorated with children's handprints." },
-  "back-to-school": { src: "/images/cut-kids.webp", alt: "A young client getting a back-to-school cut at Barber Shack." },
+  "back-to-school": { src: "/images/cut-kids2.webp", alt: "A young client's finished back-to-school cut at Barber Shack." },
   "community-art-wall": { src: "/images/family-artwall.webp", alt: "A client and his son in front of the Barber Shack community art wall." },
 };

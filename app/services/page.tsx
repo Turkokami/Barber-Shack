@@ -53,8 +53,8 @@ export default function ServicesHub() {
       <Photo
         className="my-8"
         ratio="aspect-[16/10]"
-        src="/images/chair-clipper.webp"
-        alt="A barber lining up a client's cut with clippers at Barber Shack in Bellingham."
+        src="/images/cut-clipper-closeup.webp"
+        alt="Clippers detailing the side of a client's cut at Barber Shack in Bellingham."
         caption="Every service on the board, walk-in or booked."
       />
 
