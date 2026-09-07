@@ -52,9 +52,9 @@ export const INTENTS: Intent[] = [
       "Nothing about walking in puts you at the back of the line for the real service.\n\n" +
       "The shop is in the Birchwood neighborhood of northwest Bellingham, which puts it a short " +
       "drive from Cordata, Columbia, Sunnyland, Barkley, Fairhaven and most of the rest of town. " +
-      "We have cut hair on this street since 2011, and walking in has been the point of the place " +
-      "from the beginning — no membership, no app, no minimum spend, and no sense that you need an " +
-      "appointment to deserve a good haircut.\n\n" +
+      "Barber Shack started out in Lake Stevens in 2011 and opened here in June 2014. Walking in " +
+      "has been the point of the place from the beginning — no membership, no app, no minimum " +
+      "spend, and no sense that you need an appointment to deserve a good haircut.\n\n" +
       "Every Tuesday, haircuts are $12. That is not a loss-leader or a coupon — it is an access " +
       "program that exists for single parents, people on Social Security or state assistance, and " +
       "anyone getting ready to go back to work. It runs all day, for everyone, and nobody is asked " +
@@ -109,7 +109,7 @@ export const INTENTS: Intent[] = [
       "the wall, the shop keeps a booth at the Autism Walk every year, and Barber Shack was the " +
       "driving force behind the Rainbow Bridge on Northwest Avenue. Come in for a cut on a Sunday " +
       "afternoon and you are walking into a shop that has been trying to be useful to this town " +
-      "since 2011.\n\n" +
+      "since it opened here in June 2014.\n\n" +
       "The shop is at 2500 Cedarwood Avenue in Bellingham, wheelchair accessible, and set up to " +
       "take kids and families without a fuss. If you want to gauge the Sunday wait before driving " +
       "over, call the shop and someone will let you know how the afternoon is running. Otherwise, " +

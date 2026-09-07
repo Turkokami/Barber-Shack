@@ -65,8 +65,9 @@ export default function BellinghamCity() {
 
       <section className="my-10 max-w-2xl">
         <p className="mb-4">
-          Barber Shack has cut hair on Cedarwood Avenue since 2011, in the Birchwood neighborhood of
-          northwest Bellingham. From there it is a short trip to just about anywhere in the city —
+          Barber Shack was founded in Lake Stevens in 2011 and has cut hair in the Birchwood
+          neighborhood of northwest Bellingham since June 2014. From there it is a short trip to
+          just about anywhere in the city —
           and because the shop runs on walk-ins and stays open seven days a week, it is easy to fit a
           haircut around wherever your day already takes you.
         </p>

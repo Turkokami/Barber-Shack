@@ -51,19 +51,20 @@ export default function Home() {
           A community hub<br />that happens to<br />cut hair.
         </h1>
         <p className="text-xl max-w-xl text-ink/80">
-          We opened on Cedarwood Ave in 2011 to be the shop this neighborhood actually needed —
-          everyone welcome, honest prices, and a chair open all seven days. Come as you are, and
-          walk in any day of the week.
+          Barber Shack started in Lake Stevens in 2011, and we opened here in the Birchwood
+          neighborhood in June 2014 — to be the shop this part of town actually needed. Everyone
+          welcome, honest prices, and a chair open all seven days. Come as you are, and walk in
+          any day of the week.
         </p>
       </section>
 
       <Photo
-        className="mb-8"
-        ratio="aspect-[16/10]"
+        className="mb-8 max-w-lg"
+        ratio="aspect-[4/5]"
         priority
-        src="/images/chair-fade.webp"
-        alt="A barber working a clean fade on a client at Barber Shack in Bellingham."
-        caption="A fresh fade in progress — no appointment needed."
+        src="/images/chair-scissor-bw.webp"
+        alt="Owner and master barber Jared Jones-Valentine scissor-cutting a client at Barber Shack, in black and white."
+        caption="Jared Jones-Valentine, owner, behind the chair."
       />
 
       <TrustStrip />
@@ -110,11 +111,11 @@ export default function Home() {
       <section className="my-12">
         <p className="eyebrow mb-3">In the neighborhood</p>
         <Photo
-          className="mb-6 max-w-2xl"
-          ratio="aspect-[6/5]"
-          src="/images/team.webp"
-          alt="The Barber Shack team holding a banner that reads Empowering everyone to shine, Home of the $12 Tuesday."
-          caption="The team out at a community event."
+          className="mb-6 max-w-lg"
+          ratio="aspect-[3/4]"
+          src="/images/toon-art-of-the-cut.webp"
+          alt="A comic-style illustration titled The Art of the Cut: clippers taking down a fade, a barber in glasses finishing a client's cut, a barber combing and cutting a smiling client in the chair, tattooed hands working scissors and comb, with a barber pole and pomade bottles around the panels."
+          caption="The art of the cut."
         />
         <ul className="grid gap-3 sm:grid-cols-2">
           {PROGRAMS.map((p) => (

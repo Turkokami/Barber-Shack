@@ -35,7 +35,13 @@ export const BUSINESS = {
   // target. Set up e.g. jared@bellinghambarbershack.com → forwards to the gmail,
   // then resolve this. Do NOT publish the gmail as the business email.
   email: PLACEHOLDER,              // registry #2 — @bellinghambarbershack.com, NOT gmail
-  founded: "2011",                 // registry #4 — owner-confirmed (Jared)
+  // registry #4 — owner-confirmed (Jared). The BUSINESS was founded in Lake
+  // Stevens in 2011; the Bellingham shop opened later. Keep the two distinct —
+  // "on Cedarwood since 2011" was wrong and is what these fields exist to prevent.
+  founded: "2011",
+  foundedCity: "Lake Stevens",
+  /** When the Bellingham (Birchwood) shop opened — owner-confirmed. */
+  bellinghamSince: "June 2014",
   // registry #5 — owner-confirmed. Professional form used for the About byline;
   // full legal name is "Jared Rame Jones Valentine" if the byline should carry it.
   owner: "Jared Jones-Valentine",
