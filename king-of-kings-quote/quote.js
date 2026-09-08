@@ -91,16 +91,21 @@
     track.appendChild(fill);
     frag.appendChild(track);
 
-    var count = el("div", "step-count");
-    count.textContent = state.done
+    var plain = state.done
       ? "Your estimate"
       : "Step " + (state.index + 1) + " of " + TOTAL;
+
+    var count = el("div", "step-count");
+    // The step number is the part that changes, so it carries the accent.
+    count.innerHTML = state.done
+      ? plain
+      : "Step <b>" + (state.index + 1) + "</b> of " + TOTAL;
     frag.appendChild(count);
 
     // Announce step changes to screen readers without stealing focus.
     var live = el("p", "sr-only");
     live.setAttribute("role", "status");
-    live.textContent = count.textContent;
+    live.textContent = plain;
     frag.appendChild(live);
   }
 

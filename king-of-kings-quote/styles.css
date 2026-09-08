@@ -14,8 +14,9 @@
   --deep:         #0b0a09;  /* page ground */
   --deep-2:       #131110;  /* trust panel ground */
   --surface:      #1a1715;  /* option card fill */
+  --gold-glow:    rgba(240, 168, 72, 0.35);
   --surface-hi:   #262220;  /* option card hover */
-  --line:         rgba(240, 168, 72, 0.14);
+  --line:         rgba(240, 168, 72, 0.24);
   --line-hi:      rgba(240, 168, 72, 0.62);
 
   /* Sampled from the logo itself: the crown's amber and the wordmark yellow. */
@@ -57,11 +58,11 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M12 70 L20 30 L35 50 L50 20 L65 50 L80 30 L88 70' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M12 70 L20 30 L35 50 L50 20 L65 50 L80 30 L88 70' fill='none' stroke='%23f0a848' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/></svg>");
   background-repeat: no-repeat;
   background-position: center 62%;
   background-size: min(115vw, 620px);
-  opacity: 0.03;
+  opacity: 0.055;
   pointer-events: none;
   z-index: 0;
 }
@@ -81,6 +82,8 @@ body::before {
 .masthead {
   text-align: center;
   padding-bottom: 20px;
+  border-bottom: 1px solid rgba(240, 168, 72, 0.20);
+  margin-bottom: 20px;
 }
 .logo {
   width: auto;
@@ -109,8 +112,9 @@ body::before {
 .progress-fill {
   height: 100%;
   width: 0;
-  background: var(--gold);
+  background: linear-gradient(90deg, #c8873a 0%, var(--gold) 70%, var(--gold-hi) 100%);
   border-radius: 999px;
+  box-shadow: 0 0 12px var(--gold-glow);
   transition: width 260ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .step-count {
@@ -119,9 +123,20 @@ body::before {
   font-size: 15px;
   margin-top: 10px;
 }
+.step-count b { color: var(--gold); font-weight: 700; }
 
 /* --- question ------------------------------------------------------------ */
 
+h1::before {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 10px var(--gold-glow);
+}
 h1 {
   font-size: clamp(27px, 7vw, 36px);
   line-height: 1.22;
@@ -171,8 +186,14 @@ h1 {
   border-radius: 8px;
   background: var(--badge-bg);
   color: var(--badge-ink);
+  border: 1.5px solid rgba(240, 168, 72, 0.45);
   font-size: 16px;
   font-weight: 700;
+}
+.opt-row:hover .letter {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--gold-ink);
 }
 
 /* --- illustrated cards --------------------------------------------------- */
@@ -206,6 +227,8 @@ h1 {
   display: block;
   border-radius: 9px;
   background: var(--deep-2);
+  outline: 1px solid rgba(240, 168, 72, 0.22);
+  outline-offset: -1px;
 }
 .opt-card span {
   font-size: clamp(15px, 4vw, 17px);
@@ -300,7 +323,7 @@ h1 {
   position: relative;
   z-index: 1;
   background: var(--deep-2);
-  border-top: 1px solid var(--line);
+  border-top: 2px solid rgba(240, 168, 72, 0.32);
   text-align: center;
   padding: 44px 24px 52px;
   margin-top: auto;
@@ -338,6 +361,9 @@ h1 {
   letter-spacing: -0.02em;
   margin: 12px 0 0;
   line-height: 1.05;
+  color: var(--gold);
+  text-shadow: 0 0 28px rgba(240, 168, 72, 0.28);
+  font-variant-numeric: tabular-nums;
 }
 .result-note {
   color: var(--ink-muted);
