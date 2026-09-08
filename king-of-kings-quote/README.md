@@ -12,20 +12,30 @@ king-of-kings-quote/
 ├── styles.css          all styling; every colour is a token on :root
 ├── config.js           business facts, pricing model, and the 9 questions
 ├── illustrations.js    inline SVG art for the picture-card steps
-└── quote.js            flow engine, pricing, result screen
+├── quote.js            flow engine, pricing, result screen
+├── logo.webp           the real King of Kings logo (transparent)
+├── logo-mark.webp      crown only, cropped from the logo
+└── favicon.png         64px crown, for the browser tab
 ```
+
+Palette is black and gold, sampled from the logo itself: crown amber
+`#f0a848` for buttons, progress and field labels; wordmark yellow `#f5f56e`
+for emphasis text. All defined as tokens on `:root` in `styles.css`.
 
 ---
 
 ## ⚠️ Before you publish
 
-Three things are **not** owner-confirmed. Fix them before this quotes a real customer.
+Two things are **not** owner-confirmed. Fix them before this quotes a real customer.
 
 | # | What | Where | Why it matters |
 |---|------|-------|----------------|
 | 1 | **Every pricing number is a draft.** `RATE_PER_SQFT`, `MIN_JOB`, and all six multiplier tables are placeholders calibrated to typical PNW roof-cleaning rates — they are *not* King of Kings' rates. | `config.js` → `PRICING` | The tool quotes dollar figures to customers. Wrong rates mean either lost margin or a quote you can't honour. |
 | 2 | **Phone number and trust claims** come from public directory listings (Yelp, Nextdoor, BBB), not from the owner. | `config.js` → `BUSINESS`, `TRUST` | Publishing a wrong number silently kills every lead. |
-| 3 | **Brand palette is an interpretation.** Royal blue + gold with a crown mark, chosen to fit the name. I could not reach `kingofkingswindowcleaning.com` from the build sandbox to match their real colours or logo. | `styles.css` → `:root`, and the crown SVGs in `index.html` / `quote.js` | Should match their existing site and van livery. |
+
+Item 1 is what `PRICING-QUESTIONNAIRE.md` in this folder is for — hand it to the
+owner, and his answers drop straight into `config.js` → `PRICING`.
+| 3 | ~~Brand palette~~ — **resolved.** Using the real logo, with black and gold sampled directly from it. | — | — |
 
 There is no warranty claim anywhere in this tool. Hydra Clean's version leans on
 a "Forever Moss-Free Warranty"; King of Kings has no published equivalent, so the

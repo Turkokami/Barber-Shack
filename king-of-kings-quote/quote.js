@@ -152,7 +152,9 @@
       var btn = el("button", "opt-card");
       btn.type = "button";
       btn.innerHTML = ART[opt.art]();
-      btn.appendChild(el("span", null, opt.label));
+      // A slash is a valid break point, and "Asphalt/Composition" is otherwise
+      // one unbreakable token that overflows the card at every width.
+      btn.appendChild(el("span", null, esc(opt.label).replace(/\//g, "/<wbr>")));
       btn.addEventListener("click", function () { answer(step.id, opt.value); });
       grid.appendChild(btn);
     });
@@ -297,13 +299,20 @@
       '<svg class="trust-badge" viewBox="0 0 120 140" role="img" aria-label="' +
       esc(TRUST.badgeTitle + " " + TRUST.badgeSubtitle) +
       '">' +
-      '<path d="M60 4 L114 24 V74 C114 106 88 126 60 136 C32 126 6 106 6 74 V24 Z" fill="#0a2540" stroke="#e8b647" stroke-width="5"/>' +
-      '<path d="M32 74 L39 46 L50 60 L60 38 L70 60 L81 46 L88 74 Z" fill="none" stroke="#6ec9f5" stroke-width="4" stroke-linejoin="round"/>' +
-      '<rect x="32" y="78" width="56" height="8" rx="3" fill="none" stroke="#6ec9f5" stroke-width="4"/>' +
-      '<text x="60" y="27" text-anchor="middle" fill="#e8b647" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="0.5">' +
+      '<path d="M60 4 L114 24 V74 C114 106 88 126 60 136 C32 126 6 106 6 74 V24 Z" fill="#131110" stroke="#f0a848" stroke-width="5"/>' +
+      // Five ball-tipped points over a curved band — the logo's crown silhouette,
+      // not a generic zigzag.
+      '<path d="M33 66 L40 84 L46 55 L53 82 L60 46 L67 82 L74 55 L80 84 L87 66" fill="none" stroke="#f0a848" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<circle cx="33" cy="66" r="4.4" fill="#f0a848"/>' +
+      '<circle cx="46" cy="55" r="4.8" fill="#f0a848"/>' +
+      '<circle cx="60" cy="46" r="5.6" fill="#f0a848"/>' +
+      '<circle cx="74" cy="55" r="4.8" fill="#f0a848"/>' +
+      '<circle cx="87" cy="66" r="4.4" fill="#f0a848"/>' +
+      '<path d="M34 84 Q60 92 86 84" fill="none" stroke="#f0a848" stroke-width="6" stroke-linecap="round"/>' +
+      '<text x="60" y="27" text-anchor="middle" fill="#f0a848" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="0.5">' +
       esc(TRUST.badgeTitle) +
       "</text>" +
-      '<text x="60" y="99" text-anchor="middle" fill="#e8b647" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="7.6" font-weight="700" letter-spacing="0.2">' +
+      '<text x="60" y="99" text-anchor="middle" fill="#f0a848" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="7.6" font-weight="700" letter-spacing="0.2">' +
       esc(TRUST.badgeSubtitle) +
       "</text>" +
       "</svg>" +

@@ -28,7 +28,7 @@ const ART = (() => {
       for (let col = 0; col < 5; col++) {
         const x = col * 52 + offset;
         s += `<rect x="${x}" y="${y}" width="50" height="22" rx="2" fill="#3c4249"/>
-              <rect x="${x}" y="${y}" width="50" height="3" fill="#4a5057"/>
+              <rect x="${x}" y="${y}" width="50" height="3" fill="#4f4a42"/>
               <rect x="${x + 16}" y="${y + 6}" width="2" height="16" fill="#2c3137"/>
               <rect x="${x + 33}" y="${y + 6}" width="2" height="16" fill="#2c3137"/>`;
       }
@@ -106,26 +106,26 @@ const ART = (() => {
     const ROOF = "M100 22 L182 96 L18 96 Z";
     const DORMER = "M62 62 L92 88 L32 88 Z";
     const clip = nextId("roof");
-    const roofL = `<path d="${ROOF}" fill="#41474e"/>`;
-    const shade = `<path d="M100 22 L182 96 L100 96 Z" fill="#363c42"/>`;
-    const dormer = `<path d="${DORMER}" fill="#4a5057"/>`;
+    const roofL = `<path d="${ROOF}" fill="#454039"/>`;
+    const shade = `<path d="M100 22 L182 96 L100 96 Z" fill="#38332d"/>`;
+    const dormer = `<path d="${DORMER}" fill="#4f4a42"/>`;
     // Moss grows ON the roof. Unclipped blobs float past the ridge and eaves.
     const clipped = blotches
       ? `<defs><clipPath id="${clip}"><path d="${ROOF}"/><path d="${DORMER}"/></clipPath></defs>
          <g clip-path="url(#${clip})">${blotches}</g>`
       : "";
-    const body = `<rect x="26" y="96" width="148" height="44" fill="#e8ebee"/>
-                  <rect x="44" y="106" width="22" height="26" fill="#9fb4c6"/>
-                  <rect x="90" y="106" width="22" height="26" fill="#9fb4c6"/>
-                  <rect x="136" y="106" width="22" height="26" fill="#9fb4c6"/>
-                  <rect x="26" y="94" width="148" height="4" fill="#ffffff"/>`;
+    const body = `<rect x="26" y="96" width="148" height="44" fill="#ded6c8"/>
+                  <rect x="44" y="106" width="22" height="26" fill="#6d665c"/>
+                  <rect x="90" y="106" width="22" height="26" fill="#6d665c"/>
+                  <rect x="136" y="106" width="22" height="26" fill="#6d665c"/>
+                  <rect x="26" y="94" width="148" height="4" fill="#f2ece0"/>`;
     const chimney = `<rect x="132" y="40" width="14" height="26" fill="#8a6f61"/>`;
     return box(
-      `<rect width="200" height="160" fill="#93b4cf"/>
-       <ellipse cx="40" cy="150" rx="60" ry="22" fill="#6f9a6a"/>
-       <ellipse cx="170" cy="152" rx="50" ry="20" fill="#628c5e"/>
+      `<rect width="200" height="160" fill="#3b3733"/>
+       <ellipse cx="40" cy="150" rx="60" ry="22" fill="#4a5340"/>
+       <ellipse cx="170" cy="152" rx="50" ry="20" fill="#414a39"/>
        ${chimney}${roofL}${shade}${dormer}${clipped}${body}`,
-      "#93b4cf"
+      "#3b3733"
     );
   };
 
