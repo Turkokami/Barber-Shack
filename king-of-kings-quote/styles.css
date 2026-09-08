@@ -1,0 +1,401 @@
+/* ===========================================================================
+   KING OF KINGS — INSTANT ROOF QUOTE
+   Layout mirrors the reference tool; the palette is ours. Hydra Clean runs
+   deep green + gold behind a dragon mark. King of Kings runs deep royal blue
+   + gold behind a crown.
+
+   Every colour is a token on :root. To rebrand, edit this block only.
+   ========================================================================= */
+
+:root {
+  --deep:         #0a2540;  /* page ground */
+  --deep-2:       #0d2c4c;  /* trust panel ground */
+  --surface:      #10314f;  /* option card fill */
+  --surface-hi:   #16405f;  /* option card hover */
+  --line:         rgba(255, 255, 255, 0.10);
+  --line-hi:      rgba(232, 182, 71, 0.55);
+
+  --gold:         #e8b647;
+  --gold-hi:      #f2c75c;
+  --gold-ink:     #2a1c00;
+
+  --badge-bg:     rgba(79, 158, 225, 0.16);
+  --badge-ink:    #7fbff2;
+
+  --ink:          #ffffff;
+  --ink-muted:    #a9c0d6;
+  --ink-faint:    #7e99b3;
+  --danger:       #ff9a8b;
+
+  --radius:       12px;
+  --radius-lg:    16px;
+  --wrap:         640px;
+
+  --font: "Segoe UI", Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--deep);
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Faint crown watermark behind the flow, echoing the reference's dragon.
+   Outline only — the crown's solid base bar reads as a stray UI card when it
+   lands behind a panel edge, so it is deliberately omitted here. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M12 70 L20 30 L35 50 L50 20 L65 50 L80 30 L88 70' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center 62%;
+  background-size: min(115vw, 620px);
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 20px 20px 0;
+}
+
+/* --- masthead ------------------------------------------------------------ */
+
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 18px;
+}
+.masthead svg { width: 30px; height: 30px; flex: none; }
+.masthead-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.masthead-sub {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-top: 1px;
+}
+
+/* --- progress ------------------------------------------------------------ */
+
+.progress-track {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--gold);
+  border-radius: 999px;
+  transition: width 260ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.step-count {
+  text-align: right;
+  color: var(--ink-faint);
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+/* --- question ------------------------------------------------------------ */
+
+h1 {
+  font-size: clamp(27px, 7vw, 36px);
+  line-height: 1.22;
+  font-weight: 700;
+  margin: 18px 0 0;
+  letter-spacing: -0.01em;
+}
+.subtitle {
+  color: var(--ink-muted);
+  font-size: clamp(16px, 4.4vw, 19px);
+  line-height: 1.5;
+  margin: 14px 0 0;
+}
+
+.options { margin-top: 26px; }
+
+/* --- lettered rows ------------------------------------------------------- */
+
+.opt-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: clamp(16px, 4.3vw, 19px);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, transform 100ms ease;
+}
+.opt-row:hover { background: var(--surface-hi); border-color: var(--line-hi); }
+.opt-row:active { transform: scale(0.994); }
+
+.letter {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--badge-bg);
+  color: var(--badge-ink);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* --- illustrated cards --------------------------------------------------- */
+
+.opt-grid {
+  display: grid;
+  /* minmax(0, 1fr), not 1fr: a long label like "Asphalt/Composition" sets a
+     min-content floor on its column and squeezes the other one otherwise. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.opt-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 8px;
+  color: var(--ink);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, transform 100ms ease;
+}
+.opt-card:hover { background: var(--surface-hi); border-color: var(--line-hi); }
+.opt-card:active { transform: scale(0.994); }
+.opt-card svg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 4;
+  display: block;
+  border-radius: 9px;
+  background: var(--deep-2);
+}
+.opt-card span {
+  font-size: clamp(15px, 4vw, 17px);
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 12px 6px 8px;
+}
+
+/* --- text input ---------------------------------------------------------- */
+
+.field { margin-top: 30px; }
+.field label {
+  display: block;
+  color: var(--gold);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.field input {
+  width: 100%;
+  background: transparent;
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 19px;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--gold-hi);
+  box-shadow: 0 0 0 4px rgba(232, 182, 71, 0.16);
+}
+
+.field-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 14px;
+}
+.hint { color: var(--ink-muted); font-size: 16px; }
+.hint b { color: var(--ink); }
+
+.btn-ok {
+  background: var(--gold);
+  color: var(--gold-ink);
+  border: none;
+  border-radius: 8px;
+  padding: 13px 26px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 22px rgba(232, 182, 71, 0.30);
+  transition: background 140ms ease;
+}
+.btn-ok:hover { background: var(--gold-hi); }
+
+.error {
+  color: var(--danger);
+  font-size: 15px;
+  margin-top: 12px;
+  min-height: 20px;
+}
+
+/* --- nav ----------------------------------------------------------------- */
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 34px 0 40px;
+  min-height: 24px;
+}
+.nav button {
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  font-family: inherit;
+  font-size: 17px;
+  padding: 6px 2px;
+  cursor: pointer;
+}
+.nav button:hover { color: var(--ink); }
+.nav button[hidden] { display: none; }
+
+/* --- trust panel --------------------------------------------------------- */
+
+.trust {
+  position: relative;
+  z-index: 1;
+  background: var(--deep-2);
+  border-top: 1px solid var(--line);
+  text-align: center;
+  padding: 44px 24px 52px;
+  margin-top: auto;
+}
+.trust-badge { width: 132px; height: auto; margin: 0 auto 22px; display: block; }
+.trust h2 {
+  font-size: clamp(20px, 5.2vw, 25px);
+  line-height: 1.32;
+  font-weight: 700;
+  margin: 0 auto;
+  max-width: 460px;
+}
+.trust p {
+  color: var(--ink-muted);
+  font-size: clamp(15px, 4vw, 17px);
+  line-height: 1.55;
+  margin: 14px auto 0;
+  max-width: 460px;
+}
+.trust strong { color: var(--gold); }
+
+/* --- result -------------------------------------------------------------- */
+
+.result-eyebrow {
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 18px;
+}
+.result-range {
+  font-size: clamp(38px, 11vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 12px 0 0;
+  line-height: 1.05;
+}
+.result-note {
+  color: var(--ink-muted);
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 14px 0 0;
+}
+
+.summary {
+  margin-top: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  font-size: 15px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.summary-row:last-child { border-bottom: none; }
+.summary-row dt { color: var(--ink-muted); margin: 0; }
+.summary-row dd { margin: 0; font-weight: 700; text-align: right; }
+
+.btn-call {
+  display: block;
+  margin-top: 26px;
+  background: var(--gold);
+  color: var(--gold-ink);
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--radius);
+  padding: 19px;
+  font-size: 19px;
+  font-weight: 700;
+  box-shadow: 0 0 26px rgba(232, 182, 71, 0.28);
+}
+.btn-call:hover { background: var(--gold-hi); }
+
+.disclaimer {
+  color: var(--ink-faint);
+  font-size: 13px;
+  line-height: 1.55;
+  margin-top: 20px;
+}
+
+/* --- a11y ---------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 3px solid var(--gold-hi);
+  outline-offset: 2px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+@media (min-width: 700px) {
+  .wrap { padding-top: 34px; }
+  .opt-grid { gap: 18px; }
+}
