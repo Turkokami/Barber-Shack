@@ -33,8 +33,15 @@ Two things are **not** owner-confirmed. Fix them before this quotes a real custo
 | 1 | **Every pricing number is a draft.** `RATE_PER_SQFT`, `MIN_JOB`, and all six multiplier tables are placeholders calibrated to typical PNW roof-cleaning rates — they are *not* King of Kings' rates. | `config.js` → `PRICING` | The tool quotes dollar figures to customers. Wrong rates mean either lost margin or a quote you can't honour. |
 | 2 | **Phone number and trust claims** come from public directory listings (Yelp, Nextdoor, BBB), not from the owner. | `config.js` → `BUSINESS`, `TRUST` | Publishing a wrong number silently kills every lead. |
 
-Item 1 is what `PRICING-QUESTIONNAIRE.md` in this folder is for — hand it to the
-owner, and his answers drop straight into `config.js` → `PRICING`.
+Item 1 is what the pricing questionnaire is for — hand it to the owner, and his
+answers drop straight into `config.js` → `PRICING`. Two copies of it live here:
+
+- `PRICING-QUESTIONNAIRE.md` — the plain-text version, with the mapping from each
+  question to its config key.
+- `pricing-intake.html` — the same questions as a fillable page. Autosaves to the
+  browser as he types and has a "Copy answers" button that hands back a plain-text
+  summary. Static and self-contained: no capabilities declared, so it can be shared
+  with someone outside the org.
 | 3 | ~~Brand palette~~ — **resolved.** Using the real logo, with black and gold sampled directly from it. | — | — |
 
 There is no warranty claim anywhere in this tool. Hydra Clean's version leans on

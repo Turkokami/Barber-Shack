@@ -1,0 +1,970 @@
+<title>King of Kings Pricing Intake</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root {
+    --ground:    #fbfaf8;
+    --surface:   #f2efe9;
+    --surface-2: #e9e5dc;
+    --ink:       #17150f;
+    --ink-2:     #5c574c;
+    --ink-3:     #8a8377;
+    --rule:      #ddd8cd;
+    --rule-firm: #c3bcac;
+    --gold:      #9a6c12;   /* text-safe gold on light ground */
+    --gold-fill: #f0a848;   /* brand amber, for solid fills only */
+    --ink-on-gold: #2b1500;
+    --black:     #0b0a09;
+    --focus:     #9a6c12;
+
+    --wrap: 47rem;
+    --step--1: 0.82rem;
+    --step-0:  1.0rem;
+    --step-1:  1.16rem;
+    --step-2:  1.5rem;
+    --step-3:  2.1rem;
+    --step-4:  2.9rem;
+
+    --display: "Oswald", "Haettenschweiler", "Arial Narrow", sans-serif;
+    --body: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:    #0b0a09;
+      --surface:   #171512;
+      --surface-2: #221e19;
+      --ink:       #ffffff;
+      --ink-2:     #b6ada0;
+      --ink-3:     #8b8276;
+      --rule:      rgba(240, 168, 72, 0.18);
+      --rule-firm: rgba(240, 168, 72, 0.42);
+      --gold:      #f0a848;
+      --gold-fill: #f0a848;
+      --black:     #000000;
+      --focus:     #f0a848;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:    #0b0a09;
+    --surface:   #171512;
+    --surface-2: #221e19;
+    --ink:       #ffffff;
+    --ink-2:     #b6ada0;
+    --ink-3:     #8b8276;
+    --rule:      rgba(240, 168, 72, 0.18);
+    --rule-firm: rgba(240, 168, 72, 0.42);
+    --gold:      #f0a848;
+    --gold-fill: #f0a848;
+    --black:     #000000;
+    --focus:     #f0a848;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: var(--step-0);
+    line-height: 1.6;
+    margin: 0;
+    padding-bottom: 6rem;
+  }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 1.25rem; }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    background: var(--black);
+    color: #fff;
+    padding: 2.5rem 1.25rem 2.25rem;
+    text-align: center;
+    border-bottom: 3px solid var(--gold-fill);
+  }
+  .crown { width: 66px; height: auto; display: block; margin: 0 auto 1rem; }
+  .masthead h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: var(--step-4);
+    line-height: 1.02;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin: 0;
+    text-wrap: balance;
+    color: #fff;
+  }
+  .masthead .kicker {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-fill);
+    margin: 0 0 0.6rem;
+  }
+  .masthead .standfirst {
+    color: #cfc7ba;
+    max-width: 34rem;
+    margin: 1rem auto 0;
+    font-size: var(--step-1);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+    margin-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    color: #9b9284;
+  }
+  .meta b { color: var(--gold-fill); font-weight: 600; }
+
+  /* ---------- how to answer ---------- */
+
+  .howto {
+    background: var(--surface);
+    border-left: 3px solid var(--gold-fill);
+    padding: 1.1rem 1.25rem;
+    margin: 2.25rem 0 0;
+    font-size: var(--step-0);
+  }
+  .howto p { margin: 0 0 0.6rem; }
+  .howto p:last-child { margin-bottom: 0; }
+  .howto strong { color: var(--gold); }
+
+  /* ---------- sections ---------- */
+
+  section { margin-top: 2.75rem; }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    border-bottom: 2px solid var(--rule-firm);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .sec-num {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    flex: none;
+  }
+  .sec-head h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: var(--step-2);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0;
+    line-height: 1.15;
+  }
+  .why {
+    color: var(--ink-2);
+    font-size: var(--step--1);
+    font-style: italic;
+    margin: 0.6rem 0 1.1rem;
+  }
+
+  .anchor { border-color: var(--gold-fill); }
+
+  /* ---------- fields ---------- */
+
+  .rows { display: flex; flex-direction: column; gap: 0.15rem; }
+
+  .row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .row:last-child { border-bottom: none; }
+  .row .label { flex: 1 1 auto; min-width: 0; }
+  .row .label small {
+    display: block;
+    color: var(--ink-3);
+    font-size: var(--step--1);
+    line-height: 1.4;
+  }
+
+  input[type="text"] {
+    font-family: var(--mono);
+    font-size: var(--step-0);
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid var(--rule-firm);
+    padding: 0.25rem 0.4rem;
+    width: 100%;
+    border-radius: 0;
+  }
+  input[type="text"]:focus {
+    outline: none;
+    border-bottom-color: var(--focus);
+    background: color-mix(in srgb, var(--gold-fill) 10%, transparent);
+  }
+  input::placeholder { color: var(--ink-3); opacity: 1; }
+
+  .money { flex: 0 0 8.5rem; display: flex; align-items: baseline; gap: 0.2rem; }
+  .money .sym { font-family: var(--mono); color: var(--ink-3); }
+  .short { flex: 0 0 10rem; }
+  .wide  { flex: 1 1 14rem; }
+
+  /* price table for the anchor section */
+
+  .price-table { display: flex; flex-direction: column; gap: 0; margin-top: 0.5rem; }
+  .price-table .prow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 0.9rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface);
+  }
+  .price-table .prow:nth-child(even) { background: var(--surface-2); }
+  .price-table .size {
+    font-family: var(--mono);
+    font-size: var(--step-0);
+    font-variant-numeric: tabular-nums;
+    flex: 1 1 auto;
+  }
+  .price-table .money { flex: 0 0 9rem; }
+
+  .job-card {
+    background: var(--surface);
+    border: 1px solid var(--rule-firm);
+    padding: 1rem 1.1rem;
+    margin: 0.5rem 0 1.25rem;
+  }
+  .job-card h3 {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 0.6rem;
+    font-weight: 600;
+  }
+  .job-card ul { margin: 0; padding-left: 1.1rem; color: var(--ink-2); }
+  .job-card li { margin-bottom: 0.15rem; }
+  .job-card b { color: var(--ink); font-weight: 600; }
+
+  /* choice chips */
+
+  .choices { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.2rem; }
+  .choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border: 1.5px solid var(--rule-firm);
+    background: var(--ground);
+    color: var(--ink-2);
+    font-size: var(--step--1);
+    cursor: pointer;
+    user-select: none;
+  }
+  .choice input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .choice:hover { border-color: var(--gold); color: var(--ink); }
+  .choice:has(input:checked) {
+    background: var(--gold-fill);
+    border-color: var(--gold-fill);
+    color: var(--ink-on-gold);
+    font-weight: 700;
+  }
+  .choice:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  .adjust { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.55rem; }
+  .adjust .lead { font-size: var(--step--1); color: var(--ink-3); font-family: var(--mono); }
+
+  .qblock { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
+  .qblock:last-child { border-bottom: none; }
+  .qblock > .q { font-weight: 600; }
+
+  /* ---------- footer bar ---------- */
+
+  .actionbar {
+    position: sticky;
+    bottom: 0;
+    background: var(--black);
+    border-top: 2px solid var(--gold-fill);
+    padding: 0.85rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    z-index: 10;
+  }
+  .counter {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    color: #cfc7ba;
+    font-variant-numeric: tabular-nums;
+  }
+  .counter b { color: var(--gold-fill); }
+  .counter small { display: block; color: #857d70; font-size: 0.72rem; }
+
+  .btn {
+    font-family: var(--body);
+    font-size: var(--step-0);
+    font-weight: 700;
+    padding: 0.7rem 1.4rem;
+    border: 2px solid var(--gold-fill);
+    background: var(--gold-fill);
+    color: var(--ink-on-gold);
+    cursor: pointer;
+  }
+  .btn.ghost { background: transparent; color: var(--gold-fill); }
+  .btn:hover { background: #f8c169; border-color: #f8c169; color: var(--ink-on-gold); }
+
+  /* ---------- export panel ---------- */
+
+  .export { margin-top: 2.5rem; }
+  .export[hidden] { display: none; }
+  .export textarea {
+    width: 100%;
+    min-height: 22rem;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    line-height: 1.55;
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--rule-firm);
+    padding: 1rem;
+    border-radius: 0;
+  }
+  .export textarea:focus { outline: 2px solid var(--focus); }
+  .toast {
+    font-family: var(--mono);
+    font-size: var(--step--1);
+    color: var(--gold);
+    min-height: 1.4em;
+    margin: 0.5rem 0 0;
+  }
+
+  .signoff {
+    margin-top: 3rem;
+    padding: 1.25rem;
+    background: var(--surface);
+    border-top: 3px solid var(--gold-fill);
+    color: var(--ink-2);
+    font-size: var(--step--1);
+  }
+  .signoff b { color: var(--ink); }
+
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  @media (max-width: 34rem) {
+    .row { flex-wrap: wrap; gap: 0.4rem; }
+    .money, .short { flex: 0 0 7rem; }
+    .price-table .prow { flex-wrap: wrap; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  @media print {
+    .actionbar, .export, .howto { display: none; }
+    body { background: #fff; color: #000; padding-bottom: 0; }
+    .masthead { background: #fff; color: #000; border-bottom: 2px solid #000; }
+    .masthead h1, .masthead .kicker { color: #000; }
+    section { break-inside: avoid; }
+  }
+</style>
+
+<header class="masthead">
+  <svg class="crown" viewBox="0 0 120 96" role="img" aria-label="King of Kings">
+    <path d="M18 62 L28 86 L39 46 L52 82 L60 38 L68 82 L81 46 L92 86 L102 62"
+          fill="none" stroke="#f0a848" stroke-width="6"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="18" cy="62" r="6.5" fill="#f0a848"/>
+    <circle cx="39" cy="46" r="7" fill="#f0a848"/>
+    <circle cx="60" cy="38" r="8.5" fill="#f0a848"/>
+    <circle cx="81" cy="46" r="7" fill="#f0a848"/>
+    <circle cx="102" cy="62" r="6.5" fill="#f0a848"/>
+    <path d="M20 88 Q60 96 100 88" fill="none" stroke="#f0a848" stroke-width="8" stroke-linecap="round"/>
+  </svg>
+  <p class="kicker">King of Kings Window Cleaning</p>
+  <h1>Roof Quote<br>Pricing Intake</h1>
+  <p class="standfirst">
+    Your instant quote tool is built and working — it just needs your real numbers.
+    Right now it runs on placeholders, and nothing goes live until you've replaced them.
+  </p>
+  <div class="meta">
+    <span>About <b>10 minutes</b></span>
+    <span><b>11</b> sections</span>
+    <span>Saves as you type</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="howto">
+    <p><strong>How to answer:</strong> everything is a dollar amount, a percentage, or "same".
+      Where you'd rather not put a price on the internet at all, tick <strong>Call instead</strong>
+      and the tool will take the customer's details and skip the number for that case.</p>
+    <p>One thing to keep in mind throughout: the tool asks the homeowner for their
+      <strong>home's square footage</strong> — living area, not roof area — because that's the only
+      number a homeowner actually knows. So price these the way you would over the phone:
+      "a house that size".</p>
+  </div>
+
+  <!-- 1 ------------------------------------------------------------------ -->
+  <section>
+    <div class="sec-head anchor">
+      <span class="sec-num">01</span>
+      <h2>Four anchor prices</h2>
+    </div>
+    <p class="why">These four set the whole scale — every other section is an adjustment away
+      from them. Worth taking the most care here.</p>
+
+    <div class="job-card">
+      <h3>All four assume the same job</h3>
+      <ul>
+        <li><b>Full roof cleaning &amp; moss treatment</b></li>
+        <li>Asphalt / composition roof</li>
+        <li>Single storey</li>
+        <li>Medium moss</li>
+        <li>Last cleaned about 2 years ago</li>
+      </ul>
+    </div>
+
+    <div class="price-table">
+      <div class="prow">
+        <span class="size">1,000 – 1,500 sq ft</span>
+        <span class="money"><span class="sym">$</span>
+          <input type="text" inputmode="decimal" data-label="Anchor price · 1,000–1,500 sq ft" placeholder="0"></span>
+      </div>
+      <div class="prow">
+        <span class="size">2,000 – 2,500 sq ft</span>
+        <span class="money"><span class="sym">$</span>
+          <input type="text" inputmode="decimal" data-label="Anchor price · 2,000–2,500 sq ft" placeholder="0"></span>
+      </div>
+      <div class="prow">
+        <span class="size">3,000 – 3,500 sq ft</span>
+        <span class="money"><span class="sym">$</span>
+          <input type="text" inputmode="decimal" data-label="Anchor price · 3,000–3,500 sq ft" placeholder="0"></span>
+      </div>
+      <div class="prow">
+        <span class="size">4,500 – 5,000 sq ft</span>
+        <span class="money"><span class="sym">$</span>
+          <input type="text" inputmode="decimal" data-label="Anchor price · 4,500–5,000 sq ft" placeholder="0"></span>
+      </div>
+    </div>
+    <p class="why">Four sizes rather than one, because it shows whether your pricing climbs in a
+      straight line with size or flattens out on the big homes. Those two produce noticeably
+      different quotes at the top end.</p>
+  </section>
+
+  <!-- 2 ------------------------------------------------------------------ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Roof material</h2></div>
+    <p class="why">Same job as section 1, different roof. Compared with asphalt / composition.</p>
+
+    <div class="qblock">
+      <div class="q">Tile</div>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="mat-tile" value="same" data-label="Tile roof"> Same price</label>
+        <label class="choice"><input type="radio" name="mat-tile" value="adjust" data-label="Tile roof"> Costs different</label>
+        <label class="choice"><input type="radio" name="mat-tile" value="call" data-label="Tile roof"> Call instead</label>
+        <label class="choice"><input type="radio" name="mat-tile" value="wont" data-label="Tile roof"> Won't clean</label>
+      </div>
+      <div class="adjust">
+        <span class="lead">if different:</span>
+        <span class="short"><input type="text" data-label="Tile roof adjustment" placeholder="+15% or +$150"></span>
+      </div>
+    </div>
+
+    <div class="qblock">
+      <div class="q">Cedar shake</div>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="mat-cedar" value="same" data-label="Cedar roof"> Same price</label>
+        <label class="choice"><input type="radio" name="mat-cedar" value="adjust" data-label="Cedar roof"> Costs different</label>
+        <label class="choice"><input type="radio" name="mat-cedar" value="call" data-label="Cedar roof"> Call instead</label>
+        <label class="choice"><input type="radio" name="mat-cedar" value="wont" data-label="Cedar roof"> Won't clean</label>
+      </div>
+      <div class="adjust">
+        <span class="lead">if different:</span>
+        <span class="short"><input type="text" data-label="Cedar roof adjustment" placeholder="+25% or +$250"></span>
+      </div>
+    </div>
+
+    <div class="qblock">
+      <div class="q">Metal</div>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="mat-metal" value="same" data-label="Metal roof"> Same price</label>
+        <label class="choice"><input type="radio" name="mat-metal" value="adjust" data-label="Metal roof"> Costs different</label>
+        <label class="choice"><input type="radio" name="mat-metal" value="call" data-label="Metal roof"> Call instead</label>
+        <label class="choice"><input type="radio" name="mat-metal" value="wont" data-label="Metal roof"> Won't clean</label>
+      </div>
+      <div class="adjust">
+        <span class="lead">if different:</span>
+        <span class="short"><input type="text" data-label="Metal roof adjustment" placeholder="−10% or −$75"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 ------------------------------------------------------------------ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Roof condition</h2></div>
+    <p class="why">Compared with medium moss — the condition the anchor prices assume.</p>
+
+    <div class="rows">
+      <div class="row">
+        <span class="label">Heavy moss</span>
+        <span class="wide"><input type="text" data-label="Heavy moss" placeholder="same, or +30% / +$300"></span>
+      </div>
+      <div class="row">
+        <span class="label">Light moss / just starting</span>
+        <span class="wide"><input type="text" data-label="Light moss" placeholder="same, or −15% / −$100"></span>
+      </div>
+      <div class="row">
+        <span class="label">Already clean — wants prevention only</span>
+        <span class="wide"><input type="text" data-label="Preventative only" placeholder="same, or −30%"></span>
+      </div>
+    </div>
+
+    <div class="qblock">
+      <div class="q">Is there a point where heavy moss stops being a price and becomes
+        "I need to look at it first"?</div>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="heavy-gate" value="no" data-label="Heavy moss needs an inspection first"> No</label>
+        <label class="choice"><input type="radio" name="heavy-gate" value="yes" data-label="Heavy moss needs an inspection first"> Yes</label>
+      </div>
+      <div class="adjust">
+        <span class="lead">if yes, when:</span>
+        <span class="wide"><input type="text" data-label="Heavy moss inspection threshold" placeholder="e.g. anything over 3,000 sq ft with heavy moss"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 ------------------------------------------------------------------ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>How tall the home is</h2></div>
+    <p class="why">Compared with a single storey.</p>
+    <div class="rows">
+      <div class="row">
+        <span class="label">2 storey</span>
+        <span class="wide"><input type="text" data-label="2 storey" placeholder="same, or +15% / +$125"></span>
+      </div>
+      <div class="row">
+        <span class="label">3 storey</span>
+        <span class="wide"><input type="text" data-label="3 storey" placeholder="same, or +30%"></span>
+      </div>
+      <div class="row">
+        <span class="label">4 storey</span>
+        <span class="wide"><input type="text" data-label="4 storey" placeholder="+45%, or write CALL"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 ------------------------------------------------------------------ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">05</span><h2>Time since the last cleaning</h2></div>
+    <p class="why">The tool asks this. It may not change your price at all — plenty of shops let
+      roof condition cover it entirely.</p>
+
+    <div class="choices">
+      <label class="choice"><input type="radio" name="lastclean" value="no-effect" data-label="Does time since last cleaning change the price?"> Doesn't change my price</label>
+      <label class="choice"><input type="radio" name="lastclean" value="affects" data-label="Does time since last cleaning change the price?"> It does change it</label>
+    </div>
+
+    <div class="rows" style="margin-top:0.9rem">
+      <div class="row">
+        <span class="label">1 year ago <small>compared with 2 years ago</small></span>
+        <span class="wide"><input type="text" data-label="Cleaned 1 year ago" placeholder="same, or −10%"></span>
+      </div>
+      <div class="row">
+        <span class="label">3 or more years ago</span>
+        <span class="wide"><input type="text" data-label="Cleaned 3+ years ago" placeholder="same, or +10%"></span>
+      </div>
+      <div class="row">
+        <span class="label">Not sure</span>
+        <span class="wide"><input type="text" data-label="Not sure when last cleaned" placeholder="same, or +5%"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 ------------------------------------------------------------------ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">06</span><h2>Debris removal only</h2></div>
+    <p class="why">The second option customers can pick: blow-off and debris clearing,
+      no moss treatment.</p>
+
+    <div class="choices">
+      <label class="choice"><input type="radio" name="debris-mode" value="percent" data-label="How debris-only is priced"> A % of the full clean</label>
+      <label class="choice"><input type="radio" name="debris-mode" value="flat" data-label="How debris-only is priced"> One flat price</label>
+      <label class="choice"><input type="radio" name="debris-mode" value="bysize" data-label="How debris-only is priced"> Priced by size</label>
+    </div>
+
+    <div class="rows" style="margin-top:0.9rem">
+      <div class="row">
+        <span class="label">If a percentage — what percent of the full clean?</span>
+        <span class="short"><input type="text" inputmode="decimal" data-label="Debris-only percentage" placeholder="55%"></span>
+      </div>
+      <div class="row">
+        <span class="label">If one flat price — how much?</span>
+        <span class="money"><span class="sym">$</span>
+          <input type="text" inputmode="decimal" data-label="Debris-only flat price" placeholder="0"></span>
+      </div>
+    </div>
+
+    <p class="why">If it's priced by size, give me the same four homes from section 1:</p>
+    <div class="price-table">
+      <div class="prow"><span class="size">1,000 – 1,500 sq ft</span>
+        <span class="money"><span class="sym">$</span><input type="text" inputmode="decimal" data-label="Debris-only · 1,000–1,500 sq ft" placeholder="0"></span></div>
+      <div class="prow"><span class="size">2,000 – 2,500 sq ft</span>
+        <span class="money"><span class="sym">$</span><input type="text" inputmode="decimal" data-label="Debris-only · 2,000–2,500 sq ft" placeholder="0"></span></div>
+      <div class="prow"><span class="size">3,000 – 3,500 sq ft</span>
+        <span class="money"><span class="sym">$</span><input type="text" inputmode="decimal" data-label="Debris-only · 3,000–3,500 sq ft" placeholder="0"></span></div>
+      <div class="prow"><span class="size">4,500 – 5,000 sq ft</span>
+        <span class="money"><span class="sym">$</span><input type="text" inputmode="decimal" data-label="Debris-only · 4,500–5,000 sq ft" placeholder="0"></span></div>
+    </div>
+  </section>
+
+  <!-- 7 ------------------------------------------------------------------ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">07</span><h2>Your minimum</h2></div>
+    <div class="rows">
+      <div class="row">
+        <span class="label">Smallest total you'll take a roof job for</span>
+        <span class="money"><span class="sym">$</span>
+          <input type="text" inputmode="decimal" data-label="Minimum job price" placeholder="0"></span>
+      </div>
+    </div>
+    <div class="qblock">
+      <div class="q">When the math lands under that, what should the tool do?</div>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="min-behaviour" value="show-min" data-label="Below the minimum, the tool should"> Show the minimum</label>
+        <label class="choice"><input type="radio" name="min-behaviour" value="call" data-label="Below the minimum, the tool should"> Say "call for a quote"</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 ------------------------------------------------------------------ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">08</span><h2>How the price should look</h2></div>
+
+    <div class="qblock">
+      <div class="q">A range, or a single number?</div>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="shape" value="range" data-label="Price display"> A range — $800 – $1,000</label>
+        <label class="choice"><input type="radio" name="shape" value="single" data-label="Price display"> One number — $900</label>
+      </div>
+      <p class="why">A range usually converts better — it reads as honest and leaves you room on
+        inspection. But it's your call, and the tool does either.</p>
+    </div>
+
+    <div class="qblock">
+      <div class="q">If a range, how wide?</div>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="spread" value="10" data-label="Range width"> ±10%</label>
+        <label class="choice"><input type="radio" name="spread" value="15" data-label="Range width"> ±15%</label>
+        <label class="choice"><input type="radio" name="spread" value="20" data-label="Range width"> ±20%</label>
+      </div>
+    </div>
+
+    <div class="qblock">
+      <div class="q">Round prices to the nearest…</div>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="round" value="25" data-label="Rounding"> $25</label>
+        <label class="choice"><input type="radio" name="round" value="50" data-label="Rounding"> $50</label>
+        <label class="choice"><input type="radio" name="round" value="100" data-label="Rounding"> $100</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 ------------------------------------------------------------------ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">09</span><h2>When should it not show a price?</h2></div>
+    <p class="why">Tick anything where you'd rather the tool take the lead and have you call,
+      instead of putting a number on screen.</p>
+    <div class="choices">
+      <label class="choice"><input type="checkbox" data-label="No price shown for" value="4-storey homes"> 4-storey homes</label>
+      <label class="choice"><input type="checkbox" data-label="No price shown for" value="Cedar roofs"> Cedar roofs</label>
+      <label class="choice"><input type="checkbox" data-label="No price shown for" value="Tile roofs"> Tile roofs</label>
+      <label class="choice"><input type="checkbox" data-label="No price shown for" value="Metal roofs"> Metal roofs</label>
+      <label class="choice"><input type="checkbox" data-label="No price shown for" value="Heavy moss"> Heavy moss</label>
+      <label class="choice"><input type="checkbox" data-label="No price shown for" value="Homes over 5,000 sq ft"> Over 5,000 sq ft</label>
+      <label class="choice"><input type="checkbox" data-label="No price shown for" value="Commercial buildings"> Commercial buildings</label>
+    </div>
+    <div class="adjust">
+      <span class="lead">anything else:</span>
+      <span class="wide"><input type="text" data-label="Other no-price cases" placeholder="…"></span>
+    </div>
+  </section>
+
+  <!-- 10 ----------------------------------------------------------------- -->
+  <section>
+    <div class="sec-head"><span class="sec-num">10</span><h2>Add-ons</h2></div>
+    <p class="why">Not in the tool today — worth capturing while you're thinking about it.</p>
+    <div class="rows">
+      <div class="row">
+        <span class="label">Gutter cleaning added to a roof clean</span>
+        <span class="wide"><input type="text" data-label="Gutter cleaning add-on" placeholder="$150 or +20%"></span>
+      </div>
+      <div class="row">
+        <span class="label">Window cleaning bundled with a roof clean <small>any discount?</small></span>
+        <span class="wide"><input type="text" data-label="Window cleaning bundle" placeholder="10% off both"></span>
+      </div>
+      <div class="row">
+        <span class="label">Re-treat or guarantee period <small>if you offer one</small></span>
+        <span class="wide"><input type="text" data-label="Re-treat / guarantee" placeholder="none, or 2 years"></span>
+      </div>
+      <div class="row">
+        <span class="label">Travel charge beyond a certain distance</span>
+        <span class="wide"><input type="text" data-label="Travel charge" placeholder="none, or beyond 25 mi: $50"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 ----------------------------------------------------------------- -->
+  <section>
+    <div class="sec-head"><span class="sec-num">11</span><h2>Confirm your details</h2></div>
+    <p class="why">These came from your Yelp, Nextdoor and BBB listings — not from you.
+      Please correct anything wrong. A wrong phone number silently kills every lead the
+      tool generates.</p>
+
+    <div class="rows">
+      <div class="row">
+        <span class="label">Business name <small>King of Kings Window Cleaning LLC</small></span>
+        <span class="wide"><input type="text" data-label="Business name" placeholder="correct, or fix it here"></span>
+      </div>
+      <div class="row">
+        <span class="label">Phone <small>(360) 303-6806</small></span>
+        <span class="wide"><input type="text" data-label="Phone" placeholder="correct, or fix it here"></span>
+      </div>
+      <div class="row">
+        <span class="label">Service area <small>Bellingham · Whatcom &amp; Skagit County</small></span>
+        <span class="wide"><input type="text" data-label="Service area" placeholder="correct, or fix it here"></span>
+      </div>
+      <div class="row">
+        <span class="label">Insurance wording <small>"Licensed, bonded and insured — backed by a $1,000,000 policy"</small></span>
+        <span class="wide"><input type="text" data-label="Insurance wording" placeholder="correct, or fix it here"></span>
+      </div>
+      <div class="row">
+        <span class="label">Awards <small>"Nextdoor Neighborhood Fave 2024 &amp; 2025"</small></span>
+        <span class="wide"><input type="text" data-label="Awards" placeholder="correct, or fix it here"></span>
+      </div>
+      <div class="row">
+        <span class="label">Where should new leads go? <small>email and/or a number for texts</small></span>
+        <span class="wide"><input type="text" data-label="Send leads to" placeholder="you@example.com / (360) …"></span>
+      </div>
+    </div>
+
+    <div class="qblock">
+      <div class="q">Is there a warranty or guarantee you want featured?</div>
+      <p class="why">The tool deliberately claims none right now — we won't publish one without
+        your wording.</p>
+      <div class="choices">
+        <label class="choice"><input type="radio" name="warranty" value="no" data-label="Feature a warranty?"> No</label>
+        <label class="choice"><input type="radio" name="warranty" value="yes" data-label="Feature a warranty?"> Yes</label>
+      </div>
+      <div class="adjust">
+        <span class="lead">if yes, exact wording:</span>
+        <span class="wide"><input type="text" data-label="Warranty wording" placeholder="…"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- export ------------------------------------------------------------- -->
+  <div class="export" id="export" hidden>
+    <div class="sec-head"><span class="sec-num">→</span><h2>Your answers</h2></div>
+    <p class="why">Copy this and send it back. If the copy button doesn't work on your phone,
+      tap in the box, select all, and copy by hand.</p>
+    <textarea id="out" readonly aria-label="Your answers as text"></textarea>
+    <p class="toast" id="toast" role="status"></p>
+  </div>
+
+  <div class="signoff">
+    <b>What happens next.</b> Your numbers go straight into the quote tool, then I'll run a dozen
+    realistic jobs through it and send back the prices it produces — so you can check the output
+    against what you'd actually charge before a single customer sees it.
+  </div>
+</div>
+
+<div class="actionbar">
+  <span class="counter" id="counter">
+    <b>0</b> of 0 answered
+    <small>Saved on this device as you type</small>
+  </span>
+  <span style="display:flex;gap:0.6rem;flex-wrap:wrap">
+    <button class="btn ghost" id="show">Show my answers</button>
+    <button class="btn" id="copy">Copy answers</button>
+  </span>
+</div>
+
+<script>
+  (function () {
+    "use strict";
+
+    var KEY = "kok-pricing-intake-v1";
+    var fields = Array.prototype.slice.call(
+      document.querySelectorAll("input[data-label]")
+    );
+
+    /* ---- persistence: a convenience for whoever is filling this in, so a
+       half-finished form survives a closed tab. Wrapped because storage
+       throws outright in some embedded contexts. ---- */
+
+    function key(el, i) { return (el.name || el.dataset.label) + "|" + el.type + "|" + i; }
+
+    function save() {
+      try {
+        var data = {};
+        fields.forEach(function (el, i) {
+          data[key(el, i)] = el.type === "text" ? el.value : el.checked;
+        });
+        localStorage.setItem(KEY, JSON.stringify(data));
+      } catch (e) { /* private window, blocked storage — form still works */ }
+    }
+
+    function load() {
+      try {
+        var raw = localStorage.getItem(KEY);
+        if (!raw) return;
+        var data = JSON.parse(raw);
+        fields.forEach(function (el, i) {
+          var v = data[key(el, i)];
+          if (v === undefined) return;
+          if (el.type === "text") el.value = v; else el.checked = !!v;
+        });
+      } catch (e) { /* ignore corrupt or unreadable state */ }
+    }
+
+    /* ---- progress ---- */
+
+    function answered() {
+      var seen = {};
+      var n = 0;
+      fields.forEach(function (el) {
+        if (el.type === "text") { if (el.value.trim()) n++; return; }
+        if (!el.checked) return;
+        if (el.type === "checkbox") { n++; return; }
+        if (!seen[el.name]) { seen[el.name] = 1; n++; }   // one per radio group
+      });
+      return n;
+    }
+
+    function total() {
+      var groups = {};
+      var n = 0;
+      fields.forEach(function (el) {
+        if (el.type === "radio") { groups[el.name] = 1; return; }
+        if (el.type === "checkbox") return;               // optional, not counted
+        n++;
+      });
+      return n + Object.keys(groups).length;
+    }
+
+    var TOTAL = total();
+    var counter = document.getElementById("counter");
+
+    function refresh() {
+      counter.innerHTML =
+        "<b>" + answered() + "</b> of " + TOTAL + " answered" +
+        "<small>Saved on this device as you type</small>";
+    }
+
+    /* ---- export ---- */
+
+    function buildText() {
+      var lines = [
+        "KING OF KINGS — ROOF QUOTE PRICING INTAKE",
+        "Completed " + new Date().toLocaleDateString("en-US", {
+          year: "numeric", month: "long", day: "numeric"
+        }),
+        ""
+      ];
+
+      var checkboxes = {};
+
+      document.querySelectorAll("section").forEach(function (sec) {
+        var head = sec.querySelector(".sec-head h2");
+        var num = sec.querySelector(".sec-num");
+        var block = [];
+
+        sec.querySelectorAll("input[data-label]").forEach(function (el) {
+          var label = el.dataset.label;
+          if (el.type === "text") {
+            if (el.value.trim()) block.push("  " + label + ": " + el.value.trim());
+          } else if (el.type === "checkbox") {
+            if (el.checked) {
+              checkboxes[label] = checkboxes[label] || [];
+              checkboxes[label].push(el.value);
+            }
+          } else if (el.checked) {
+            var text = el.parentNode.textContent.trim();
+            block.push("  " + label + ": " + text);
+          }
+        });
+
+        Object.keys(checkboxes).forEach(function (label) {
+          block.push("  " + label + ": " + checkboxes[label].join(", "));
+          delete checkboxes[label];
+        });
+
+        if (block.length) {
+          lines.push((num ? num.textContent + ". " : "") + head.textContent);
+          lines.push.apply(lines, block);
+          lines.push("");
+        }
+      });
+
+      if (lines.length <= 3) lines.push("(nothing filled in yet)");
+      return lines.join("\n");
+    }
+
+    var out = document.getElementById("out");
+    var panel = document.getElementById("export");
+    var toast = document.getElementById("toast");
+
+    function reveal() {
+      out.value = buildText();
+      panel.hidden = false;
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    document.getElementById("show").addEventListener("click", function () {
+      reveal();
+      toast.textContent = "";
+    });
+
+    document.getElementById("copy").addEventListener("click", function () {
+      var text = buildText();
+      out.value = text;
+      panel.hidden = false;
+
+      function fallback() {
+        out.focus();
+        out.select();
+        toast.textContent = "Couldn't copy automatically — your answers are selected above, copy them from there.";
+        panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      // Clipboard access is often blocked inside an embedded frame; the
+      // selected-textarea fallback always works.
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          toast.textContent = "Copied — paste it into a text or an email.";
+          panel.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, fallback);
+      } else {
+        fallback();
+      }
+    });
+
+    fields.forEach(function (el) {
+      el.addEventListener("input", function () { save(); refresh(); });
+      el.addEventListener("change", function () { save(); refresh(); });
+    });
+
+    load();
+    refresh();
+  })();
+</script>
