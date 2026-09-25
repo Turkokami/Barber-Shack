@@ -1,0 +1,13 @@
+# Raspberry Pi 5, Raspberry Pi OS 64-bit (Bookworm or newer)
+adafruit-blinka>=8.0
+adafruit-circuitpython-tca9548a
+adafruit-circuitpython-bme680
+adafruit-circuitpython-sht4x
+adafruit-circuitpython-ads1x15
+adafruit-circuitpython-busdevice
+gpiozero>=2.0
+lgpio
+numpy
+pandas
+scikit-learn
+joblib

@@ -1,0 +1,43 @@
+id,phase,subsystem,part,qty,approx_unit_usd,url
+1,0,sensing,Adafruit BME688 STEMMA QT,2,20,https://www.adafruit.com/product/5046
+2,0,sensing,Adafruit SGP41 VOC+NOx STEMMA QT,1,20,https://www.adafruit.com/product/6455
+3,0,sensing,Figaro TGS2602 (sulfur/VOC/odor),1,15,https://octopart.com/tgs2602-figaro-103246580
+4,0,sensing,Figaro TGS2620 (solvent/alcohol),1,15,https://octopart.com/search?q=TGS2620
+5,0,sensing,Adafruit SHT45 STEMMA QT,1,13,https://www.adafruit.com/product/5665
+6,0,sensing,Adafruit ADS1115 16-bit ADC,1,15,https://www.adafruit.com/product/1085
+7,0,sensing,TCA9548A 8ch I2C mux STEMMA QT,1,12,https://www.adafruit.com/product/4704
+8,0,sensing,STEMMA QT cable 100mm,6,1,https://www.adafruit.com/product/4210
+9,0,sensing,(opt) Bosch BME688 Development Kit,1,87,https://www.sparkfun.com/bosch-bme688-development-kit.html
+10,3,sensing,(opt) ION Science MiniPID 2 PPB,1,quote,https://www.ionscience.com/products/minipid-2-pid-ppb/
+11,0,pneumatics,Air pump 4.5V 2.5 LPM,2,8,https://www.adafruit.com/product/4699
+12,0,pneumatics,3-way mini solenoid air valve 12V,1,15,https://www.amazon.com/s?k=12V+3+way+mini+solenoid+valve+air
+13,0,pneumatics,PTFE tubing 1/8 ID x 1/4 OD 3m,1,20,https://www.mcmaster.com/ptfe-tubing/
+14,0,pneumatics,Silicone tubing 1/8 ID,1,8,https://www.mcmaster.com/silicone-tubing/
+15,0,pneumatics,Inline activated carbon filter,2,8,https://www.amazon.com/s?k=inline+activated+carbon+air+filter+barb
+16,0,pneumatics,PTFE inline filter 1 micron,3,5,https://www.amazon.com/s?k=PTFE+inline+filter+1+micron+barb
+17,0,pneumatics,6061 aluminium block 60x40x20 + PTFE sheet gasket,1,15,https://www.mcmaster.com/aluminum/
+18,0,pneumatics,1/8 barbed fittings/tees pack,1,10,https://www.mcmaster.com/barbed-tube-fittings/
+19,1,pneumatics,Quick-disconnect coupling 1/8,1,8,https://www.mcmaster.com/quick-disconnect-tube-couplings/
+20,0,pneumatics,Stainless tube 1/4 OD 150mm (snout),1,10,https://www.mcmaster.com/stainless-steel-tubing/
+21,0,compute,Raspberry Pi 5 8GB,1,80,https://www.raspberrypi.com/products/raspberry-pi-5/
+22,0,compute,Raspberry Pi 27W USB-C PSU,1,12,https://www.raspberrypi.com/products/27w-power-supply/
+23,0,compute,Raspberry Pi Active Cooler,1,5,https://www.raspberrypi.com/products/active-cooler/
+24,0,compute,microSD 64GB A2,1,12,https://www.raspberrypi.com/products/sd-cards/
+25,2,compute,Raspberry Pi AI HAT+ 26 TOPS,1,110,https://www.raspberrypi.com/products/ai-hat/
+26,2,compute,Raspberry Pi Camera Module 3,1,25,https://www.raspberrypi.com/products/camera-module-3/
+27,0,power,Pololu D36V50F5 5V 5.5A buck,1,25,https://www.pololu.com/product/4091
+28,0,power,IRLB8721 logic-level MOSFET,4,2,https://www.adafruit.com/product/355
+29,0,power,1N5819 diodes + resistor kit,1,10,https://www.taydaelectronics.com/1n5819-schottky-barrier-diode-1a-40v.html
+30,1,power,12V 6Ah Li-ion pack (TalentCell or similar),1,40,https://www.amazon.com/s?k=TalentCell+12V+lithium+battery
+31,1,power,Inline fuse holder + 5A fuse,1,5,
+32,0,control,Active piezo buzzer 5V,1,1,https://www.adafruit.com/product/1536
+33,1,control,Momentary push button,1,1,https://www.adafruit.com/product/1009
+34,0,control,Adafruit Perma-Proto HAT,1,10,https://www.adafruit.com/product/2310
+35,1,enclosure,Vented enclosure ~200x120x75mm,1,25,https://www.amazon.com/s?k=aluminum+project+enclosure+200x120
+36,0,training,Live bed bug training vials,1,100,https://bedbugtrainingaids.com/
+37,0,training,Pure-odor bed bug aid (SOKKS or ScentLogix),1,60,https://www.rayallen.com/sokks-bed-bug-scent-detection-training-aid/
+38,0,training,trans-2-Hexenal 98% (Sigma 132659),1,50,https://www.sigmaaldrich.com/US/en/product/aldrich/132659
+39,0,training,trans-2-Octenal,1,55,https://www.sigmaaldrich.com/US/en/search/trans-2-octenal?focus=products&type=product_name
+40,3,pneumatics,Tenax TA thermal desorption tubes (10 pk),1,varies,https://www.sigmaaldrich.com/US/en/product/supelco/29741u
+41,2,robot,Unitree Go2 Pro (recommended),1,2800,https://blog.robozaps.com/b/unitree-go2-review
+42,2,robot,(alt) Unitree Go2 EDU,1,11190,https://robostore.com/products/go2-edu-40-tops-computing-quadruped-robot-dog
