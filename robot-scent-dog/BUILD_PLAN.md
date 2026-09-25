@@ -17,6 +17,7 @@
 | **Dimethyl disulfide / dimethyl trisulfide** | Aggregation pheromone (feces and harborages) | Sulfur compounds; MOS sensors respond to them very strongly | TGS2602, BME688 |
 | 2-hexanone | Aggregation pheromone | Extra dimension for the classifier | MOS, PID |
 | Histamine | Feces, harborages (not volatile) | Not detectable by air; visual/swab only | (camera: fecal spots) |
+| Refuge volatiles: benzaldehyde, hexanal, octanal, nonanal, decanal, (E)-2-nonenal, 1-octen-3-ol, 2-decanone, 3-carene, (3E,5E)-octadien-2-one and more | Papers that bed bugs have lived on (18 compounds the antenna responds to, found by GC-EAG) | These are what a real harborage smells like, beyond the pheromones. **But** nonanal, decanal and hexanal are also big parts of *human skin odor*, so a bed smells of them anyway | MOS array (as a pattern), PID |
 
 Sources: [Volatile Organic Compounds: A Promising Tool for Bed Bug Detection (IJERPH 2023, review)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10048870/),
 [Heat exposure causes alarm-pheromone emission (Sci. Reports 2024)](https://www.nature.com/articles/s41598-024-57925-y),
@@ -47,7 +48,17 @@ Aggregation pheromone composition: Gries et al., *Angewandte Chemie* 2015, "Bed 
    zones (bed legs, box-spring base, baseboards, couch base, luggage), and a detachable **sniff wand**
    on a 1.5 m tube lets a handler check seams and headboards with the same nose.
 
-### 1.3 Technology options considered
+### 1.3 More research (sources you sent) and what changes because of it
+
+| Source | Key point | What it changes in this plan |
+|---|---|---|
+| [Knudsen & Ignell 2024, *Semiochemicals modulating bed bug behaviour*, Curr. Opin. Insect Sci.](https://pubmed.ncbi.nlm.nih.gov/38821142/) ([ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S221457452400049X)) | Bed bugs are drawn by host odors and heat plus an aggregation pheromone. They have **no sex pheromone**. Nymphs and adults give off the **alarm pheromone** to fend off unwanted mating. Their sense of smell uses **relatively few odorant receptors** | The target list is short and stable, which is good for a small sensor array. The alarm pheromone is released when bugs are disturbed, so the plan adds a **"disturb then sniff"** step: a short puff or vibration at the spot before sniffing (see Phase 3) |
+| [Liu & Liu 2016, *Single Sensillum Recording of bed bug olfactory neurons*, JoVE 53337](https://www.jove.com/v/53337/using-single-sensillum-recording-to-detect-olfactory-neuron-responses), with [Liu et al. 2015, *Human odorant reception in the bed bug*, Sci. Rep.](https://www.nature.com/articles/srep15558) and [Liu et al. 2017, *Molecular basis of olfactory chemoreception in the bed bug*](https://www.nature.com/articles/srep45531) | Bed bug antennae have 6 functional types of smell sensor. **Aldehydes and ketones** trigger the strongest responses, carboxylic acids trigger almost none. Their odorant receptors have been expressed and tested in lab cells | 1) This confirms aldehydes and ketones as the chemical family to tune for: it favours BME688 heater profiles and the PID. 2) It opens a long-term **biosensor** route (Phase 5). 3) Recording from antennae (SSR/EAG) is how you'd prove which compounds actually matter |
+| [Brezolin et al. 2018, *Tools for detecting insect semiochemicals: a review*, Anal. Bioanal. Chem.](https://pubmed.ncbi.nlm.nih.gov/29926152/) ([free PDF](https://www.alice.cnptia.embrapa.br/bitstream/doc/1094178/1/Brezolin2018ArticleToolsForDetectingInsectSemioch.pdf)) | Compares the options: GC with FID/ECD/PID/MS detectors, e-noses, quartz-crystal (QCM), surface-acoustic-wave (SAW), cantilever sensors, and biosensors built on **odorant-binding proteins (OBPs)**, e.g. [an OBP impedance sensor on interdigitated electrodes](https://pubmed.ncbi.nlm.nih.gov/25453737/) | GC-MS stays the lab "ground truth" (the Phase 0 validation now includes it). OBP and QCM sensors are the next-generation, high-selectivity sensors to try in Phase 5 |
+| [Weeks et al. 2020, *Semiochemicals from bed bug refuge substrate*, Sci. Rep.](https://www.nature.com/articles/s41598-020-61368-6) | 18 compounds from harborage paper that bed bug antennae respond to (the table in 1.1) | Adds a harborage class to training: **old harborage paper/fabric**, not just live bugs. Adds **"human-slept bedding"** as a required negative, because bedding shares nonanal and decanal |
+| [908 Devices VipIR](https://908devices.com/products/vipir/) | A handheld **FTIR + Raman** analyzer for identifying bulk solids and liquids (drugs, explosives, hazmat). About $100k+ list price ([source](https://finance.yahoo.com/healthcare/articles/908-devices-eyes-growth-handheld-070158198.html)) | **Not a fit.** It identifies a sample you put on it, not trace vapor in air, and it costs 25 times the whole robot. For ground truth, use **Tenax tubes sent to a TD-GC-MS lab** (typically a few hundred dollars per sample). If you need a portable mass spec later, 908's own **MX908** (a handheld mass spec that does trace vapor) is the closer match; ask them for a quote |
+
+### 1.4 Technology options considered
 
 | Subsystem | Options | Pick | Why |
 |---|---|---|---|
@@ -107,6 +118,7 @@ Detailed drawings are in [SCHEMATICS.md](SCHEMATICS.md).
 | 2: Robot integration | 8–13 | Mount the nose on the Go2, set up ROS 2 bridge, stations, SIT alert | Robot + ~$250 | Robot finishes an autonomous room search and alerts on hidden aids |
 | 3: Sensitivity upgrades | 14–18 | Tenax preconcentrator, MiniPID, heater-profile tuning, visual YOLO check | ~$300–1,500 | Detects a **single live-bug vial** at 30 cm; beats the Cooper 2014 field benchmark |
 | 4: Field pilot | 19–24 | Pest-control partner homes, compare against human and dog inspections | Labor | Published accuracy numbers; decide on a product path |
+| 5: Next-gen sensor R&D (optional, in parallel) | 24+ | Biology-based selectivity: OBP/OR biosensor or an insect-antenna sensor | University partner | A sensor channel selective for (E)-2-hexenal/(E)-2-octenal over green-leaf volatiles |
 
 ### Phase 0: Bench e-nose (weeks 1–4)
 
@@ -135,7 +147,13 @@ Detailed drawings are in [SCHEMATICS.md](SCHEMATICS.md).
 | `bedbug_live` | Live-bug training vials | 40+ |
 | `bedbug_pseudo` | Pheromone pseudo-scent, or a lab mix of (E)-2-hexenal:(E)-2-octenal 70:30 at 1 ppm, 100 ppb and 10 ppb | 40+ |
 | `blank` | Clean vial / room air | 60+ |
-| `confounder_*` | Cut grass, apple, olive oil, cooking oil, cleaners, perfume, dirty laundry, dog, human sweat, stink bug (if available), cockroach aid | 10+ each |
+| `bedbug_harborage` | Paper or fabric strips bed bugs have lived on for 1+ week, sealed in vials (live-bug vendors can supply these, or put a strip in with your own vials) | 30+ |
+| `confounder_*` | **Bedding a person has slept on for 3+ nights (required)**, cut grass, apple, olive oil, cooking oil, cleaners, perfume, dirty laundry, dog, human sweat, stink bug (if available), cockroach aid | 10+ each |
+
+**Ground truth (new):** for 10 sessions of each positive class, draw the same air through a Tenax TA tube
+(200 mL/min × 10 min) and send the tubes to a thermal-desorption GC-MS lab. This confirms the target
+compounds really reached the snout, and at what concentration, so a miss can be blamed on the sensor
+and not on the sample.
 
 **Train:** `python firmware/train_classifier.py data/*.csv`. It does grouped cross-validation (by session,
 so the model can't cheat by memorising one session) and saves `model.joblib`.
@@ -175,10 +193,31 @@ sniff, add more negative data, add the MiniPID, add the preconcentrator.
   eggs, and negatives such as lint, seeds and ink dots). Compile for the Hailo-8 with the Hailo Dataflow
   Compiler. Run it only at positive stations to save power.
 
+- **"Disturb then sniff"** (from Knudsen & Ignell 2024 and the heat-exposure study): bed bugs release alarm
+  pheromone when disturbed. Add a small vibration motor or a 1 s air puff at the station before the SNIFF
+  phase, then compare the sniff with and without it. That tests whether nudging a harborage raises the signal.
+
 ### Phase 4: Field pilot (weeks 19–24)
 - Partner with a licensed pest-control operator. Run the robot **alongside** their normal inspection
   (visual and/or dog). Confirm every result with a visual find or monitors (for example interceptor cups over 2 weeks).
 - Report sensitivity, specificity, time per room, and the cases where it failed.
+
+### Phase 5: Next-gen sensor R&D (optional, runs alongside, best with a university partner)
+MOS sensors see broad chemical families. Biology gets its selectivity from **receptors**. Three routes,
+from most to least practical:
+1. **OBP impedance biosensor:** coat interdigitated electrodes with an insect odorant-binding protein that
+   binds (E)-2-alkenals and read the impedance change (method in Brezolin 2018 and the
+   [OBP-on-IDE sensor](https://pubmed.ncbi.nlm.nih.gov/25453737/)). It reads out through an impedance chip
+   (e.g. AD5933) on the same I2C bus, so it's a drop-in channel for the array.
+2. **Coated QCM/SAW:** a quartz crystal microbalance coated with a polymer that attracts aldehydes. It's
+   the same idea as the [oscillator-based trans-2-hexenal sensor array](https://www.sciencedirect.com/science/article/abs/pii/S0925400520315008).
+3. **Cell-based OR sensor or antenna sensor:** express the bed bug odorant receptors (identified by
+   [Liu et al. 2017](https://www.nature.com/articles/srep45531)) in cells, or record from an excised insect antenna
+   (EAG). That's the method the SSR protocol in JoVE 53337 builds on. It's the most sensitive, but it's a
+   research project in its own right: live tissue, a short shelf life, and it needs lab skills.
+
+Use the lab **SSR/EAG** method (JoVE 53337) as a screening tool: it shows which compounds bed bugs themselves
+respond to, and that helps decide which compounds to calibrate the sensors against.
 
 ---
 
@@ -331,3 +370,9 @@ Code in [`firmware/`](firmware/):
 - [Raspberry Pi AI HAT+ docs](https://www.raspberrypi.com/documentation/accessories/ai-hat-plus.html)
 - [Unitree Go2 SDK guide](https://support.unitree.com/home/en/developer) · [unitree_sdk2_python](https://github.com/unitreerobotics/unitree_sdk2_python) · [go2_ros2_sdk](https://github.com/abizovnuralem/go2_ros2_sdk)
 - [Unitree Go2 EDU buying guide](https://botinfo.ai/articles/unitree-go2-edu)
+- [Knudsen & Ignell 2024: Semiochemicals modulating bed bug behaviour](https://pubmed.ncbi.nlm.nih.gov/38821142/)
+- [Liu & Liu 2016: Single sensillum recording in bed bugs (JoVE 53337)](https://www.jove.com/v/53337/using-single-sensillum-recording-to-detect-olfactory-neuron-responses)
+- [Liu et al. 2015: Human odorant reception in the bed bug](https://www.nature.com/articles/srep15558) · [Liu et al. 2017: bed bug odorant receptors](https://www.nature.com/articles/srep45531)
+- [Brezolin et al. 2018: Tools for detecting insect semiochemicals](https://pubmed.ncbi.nlm.nih.gov/29926152/)
+- [Weeks et al. 2020: semiochemicals from bed bug refuge substrate](https://www.nature.com/articles/s41598-020-61368-6)
+- [908 Devices VipIR](https://908devices.com/products/vipir/) (evaluated, not recommended)
