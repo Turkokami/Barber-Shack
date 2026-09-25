@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robo-K9 Hub</title>
+<style>
+  :root { --bg:#f5f7fa; --card:#fff; --ink:#1c2430; --muted:#5b6675; --rule:#d5dbe3; --accent:#1f5f8b;
+          --ok:#1d7a46; --warn:#a86400; --bad:#b3261e; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#12161c; --card:#1b2129; --ink:#e6eaf0; --muted:#98a2b0; --rule:#2c3440; --accent:#6cb2e6;
+            --ok:#5cc58b; --warn:#e2a54a; --bad:#f07c74; } }
+  * { box-sizing:border-box; }
+  body { margin:0; font:14px/1.45 system-ui, sans-serif; background:var(--bg); color:var(--ink); }
+  header { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;
+           padding:12px 16px; border-bottom:1px solid var(--rule); background:var(--card); }
+  h1 { font-size:18px; margin:0; } h2 { font-size:15px; margin:0 0 8px; }
+  main { display:grid; gap:16px; padding:16px; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); }
+  section { background:var(--card); border:1px solid var(--rule); border-radius:8px; padding:12px; overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { text-align:left; padding:5px 6px; border-bottom:1px solid var(--rule); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; }
+  .pill { display:inline-block; padding:1px 7px; border-radius:10px; font-size:12px; border:1px solid currentColor; }
+  .idle,.done,.CLEAR { color:var(--ok); } .busy,.running,.queued { color:var(--accent); }
+  .offline,.failed,.cancelled,.stopped { color:var(--muted); } .error,.ACTIVE { color:var(--bad); } .SUSPECT { color:var(--warn); }
+  button { font:inherit; padding:6px 12px; border-radius:6px; border:1px solid var(--rule); background:var(--card); color:var(--ink); cursor:pointer; }
+  button.stop { background:var(--bad); color:#fff; border-color:var(--bad); font-weight:700; }
+  input, select { font:inherit; padding:5px 7px; border:1px solid var(--rule); border-radius:6px; background:var(--bg); color:var(--ink); }
+  form { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+  .muted { color:var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Robo-K9 Hub</h1>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <input id="key" type="password" placeholder="Hub key" size="12">
+    <span id="status" class="muted"></span>
+    <button class="stop" onclick="stopAll()">STOP ALL UNITS</button>
+  </div>
+</header>
+<main>
+  <section>
+    <h2>Units</h2>
+    <table><thead><tr><th>Unit</th><th>State</th><th>Battery</th><th>Task</th><th>Last seen</th><th></th></tr></thead>
+    <tbody id="units"></tbody></table>
+  </section>
+
+  <section>
+    <h2>Assign a duty</h2>
+    <form onsubmit="addTask(event)">
+      <select id="kind">
+        <option value="patrol">patrol: search a room</option>
+        <option value="recheck">recheck: follow-up search</option>
+        <option value="confirm">confirm: second opinion</option>
+        <option value="calibrate">calibrate: reference vial</option>
+      </select>
+      <input id="site" placeholder="Site (e.g. Hotel 12)" required>
+      <input id="room" placeholder="Room (e.g. 204)">
+      <select id="prio"><option value="3">Normal</option><option value="1">Urgent</option><option value="5">Low</option></select>
+      <select id="target"><option value="">Any capable unit</option></select>
+      <button type="submit">Queue task</button>
+    </form>
+    <p class="muted">Any alert automatically creates an urgent <b>confirm</b> task for a different unit or a wand handler.</p>
+  </section>
+
+  <section>
+    <h2>Tasks</h2>
+    <table><thead><tr><th>Task</th><th>Kind</th><th>Site / room</th><th>Status</th><th>Unit</th><th></th></tr></thead>
+    <tbody id="tasks"></tbody></table>
+  </section>
+
+  <section>
+    <h2>Alerts</h2>
+    <table><thead><tr><th>When</th><th>Site / room</th><th>Unit</th><th>P(bed bug)</th><th>Station</th><th>Confirmation</th></tr></thead>
+    <tbody id="alerts"></tbody></table>
+  </section>
+
+  <section>
+    <h2>Site report</h2>
+    <form onsubmit="loadReport(event)"><input id="rsite" placeholder="Site" required><button>Build report</button>
+      <button type="button" onclick="downloadReport()">Download JSON</button></form>
+    <table><thead><tr><th>Room</th><th>Verdict</th><th>Searches</th><th>Sniffs</th><th>Alerts</th><th>Confirmed</th><th>Max P</th></tr></thead>
+    <tbody id="report"></tbody></table>
+  </section>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+try { $("key").value = localStorage.getItem("hubKey") || ""; } catch (e) {}
+$("key").addEventListener("change", () => { try { localStorage.setItem("hubKey", $("key").value); } catch (e) {} refresh(); });
+
+async function api(path, opts = {}) {
+  const r = await fetch(path, { ...opts, headers: { "Content-Type": "application/json", "X-Hub-Key": $("key").value } });
+  if (!r.ok) throw new Error(r.status + " " + (await r.text()));
+  return r.json();
+}
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+const ago = t => t ? Math.round(Date.now() / 1000 - t) + " s ago" : "";
+const pill = s => `<span class="pill ${esc(String(s).split(" ")[0])}">${esc(s)}</span>`;
+
+async function refresh() {
+  try {
+    const [units, tasks, alerts] = await Promise.all([api("/api/units"), api("/api/tasks?limit=50"), api("/api/alerts")]);
+    $("units").innerHTML = units.map(u => `<tr><td><b>${esc(u.name)}</b><br><span class="muted">${esc(u.robot_model)}</span></td>
+      <td>${pill(u.state)}</td><td>${u.battery == null ? "" : Math.round(u.battery) + "%"}</td>
+      <td>${esc(u.current_task)}</td><td>${ago(u.last_seen)}</td>
+      <td><button onclick="cmd('${esc(u.unit_id)}','sit')">Sit</button> <button onclick="cmd('${esc(u.unit_id)}','return_home')">Home</button></td></tr>`).join("");
+    const sel = $("target"), cur = sel.value;
+    sel.innerHTML = `<option value="">Any capable unit</option>` + units.map(u => `<option value="${esc(u.unit_id)}">${esc(u.name)}</option>`).join("");
+    sel.value = cur;
+    $("tasks").innerHTML = tasks.map(t => `<tr><td>${esc(t.task_id)}</td><td>${esc(t.kind)}</td>
+      <td>${esc(t.site)} / ${esc(t.room)}</td><td>${pill(t.status)}</td><td>${esc(t.assigned_unit)}</td>
+      <td>${["queued","running"].includes(t.status) ? `<button onclick="cancelTask('${esc(t.task_id)}')">Cancel</button>` : ""}</td></tr>`).join("");
+    $("alerts").innerHTML = alerts.map(a => {
+      const c = a.confirmations[0];
+      const conf = !c ? "" : c.status !== "done" ? pill(c.status) : (c.summary && c.summary.confirmed ? pill("ACTIVE confirmed") : pill("CLEAR not confirmed"));
+      return `<tr><td>${new Date(a.ts * 1000).toLocaleString()}</td><td>${esc(a.site)} / ${esc(a.room)}</td><td>${esc(a.unit_id)}</td>
+        <td>${(+a.data.p_bedbug || 0).toFixed(2)}</td><td>${esc(a.data.station)}</td><td>${conf}</td></tr>`; }).join("");
+    $("status").textContent = "Updated " + new Date().toLocaleTimeString();
+  } catch (e) { $("status").textContent = e.message; }
+}
+async function addTask(e) {
+  e.preventDefault();
+  await api("/api/tasks", { method: "POST", body: JSON.stringify({ kind: $("kind").value, site: $("site").value,
+    room: $("room").value, priority: +$("prio").value, target_unit: $("target").value || null }) });
+  refresh();
+}
+async function cancelTask(id) { await api(`/api/tasks/${id}/cancel`, { method: "POST" }); refresh(); }
+async function cmd(id, type) { await api(`/api/units/${id}/command`, { method: "POST", body: JSON.stringify({ type }) }); }
+async function stopAll() { if (confirm("Send STOP to every unit?")) { await api("/api/stop-all", { method: "POST" }); refresh(); } }
+let lastReport = null;
+async function loadReport(e) {
+  e && e.preventDefault();
+  lastReport = await api("/api/reports/" + encodeURIComponent($("rsite").value));
+  $("report").innerHTML = lastReport.rooms.map(r => `<tr><td>${esc(r.room)}</td><td>${pill(r.verdict)}</td><td>${r.searches}</td>
+    <td>${r.sniffs}</td><td>${r.alerts}</td><td>${r.confirmed}</td><td>${r.max_p_bedbug.toFixed(2)}</td></tr>`).join("");
+}
+function downloadReport() {
+  if (!lastReport) return;
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(lastReport, null, 2)], { type: "application/json" }));
+  a.download = `robo-k9-report-${lastReport.site}.json`; a.click();
+}
+refresh(); setInterval(refresh, 3000);
+</script>
+</body>
+</html>

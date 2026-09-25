@@ -181,7 +181,9 @@ sniff, add more negative data, add the MiniPID, add the preconcentrator.
    plays a sound.
 4. **Station generator:** load the saved map, take the occupied-cell edges (walls, furniture), offset them
    35 cm, and resample every 40 cm into a list of waypoints.
-5. **Test:** 10 runs in the mock room with hidden aids at random locations. Measure detection, false alerts and search time.
+5. **Hub + agent:** run the hub and `firmware/agent.py` on each unit so duties, results and reports go through
+   one place. Link-up schematics for both Go2 models are in [INTEGRATION.md](INTEGRATION.md).
+6. **Test:** 10 runs in the mock room with hidden aids at random locations. Measure detection, false alerts and search time.
 
 ### Phase 3: Sensitivity upgrades (weeks 14–18)
 - **Tenax TA preconcentrator** (SCHEMATICS §2b): a stainless tube packed with Tenax TA, wrapped in a

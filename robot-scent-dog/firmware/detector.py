@@ -21,6 +21,25 @@ from sniff_logger import run_sniff
 CONSECUTIVE_TO_ALERT = 2
 
 
+class NoseScorer:
+    """Real nose + trained model: .sniff() runs one full cycle and returns P(bed bug)."""
+
+    def __init__(self, model_path="model.joblib", nose=None):
+        bundle = joblib.load(model_path)
+        self.model, self.cols, self.threshold = bundle["model"], bundle["features"], bundle["threshold"]
+        self.nose = nose or Nose()
+        self.nose.set_pump(1.0)
+        self.nose.condition()
+        self._n = 0
+
+    def sniff(self) -> float:
+        rows = []
+        run_sniff(self.nose, rows.append, sniff_id=f"live-{self._n:05d}")
+        self._n += 1
+        feats = pd.DataFrame([sniff_features(pd.DataFrame(rows))]).reindex(columns=self.cols, fill_value=0.0)
+        return float(self.model.predict_proba(feats)[0, 1])
+
+
 class RosBridge:
     def __init__(self):
         import rclpy
@@ -44,25 +63,16 @@ def main():
     ap.add_argument("--ros", action="store_true")
     args = ap.parse_args()
 
-    bundle = joblib.load(args.model)
-    model, cols, thr = bundle["model"], bundle["features"], bundle["threshold"]
+    scorer = NoseScorer(args.model)
+    nose, thr = scorer.nose, scorer.threshold
     ros = RosBridge() if args.ros else None
-
-    nose = Nose()
-    nose.set_pump(1.0)
-    nose.condition()
     hits = 0
-    n = 0
     try:
         while True:
             if args.wand:
                 print("Press the wand button to sniff...")
                 nose.button.wait_for_press()
-            rows = []
-            run_sniff(nose, rows.append, sniff_id=f"live-{n:05d}")
-            n += 1
-            feats = pd.DataFrame([sniff_features(pd.DataFrame(rows))]).reindex(columns=cols, fill_value=0.0)
-            p = float(model.predict_proba(feats)[0, 1])
+            p = scorer.sniff()
             # In wand mode each press is a separate spot, so one hit is enough to alert.
             hits = hits + 1 if p > thr else 0
             alert = hits >= (1 if args.wand else CONSECUTIVE_TO_ALERT)

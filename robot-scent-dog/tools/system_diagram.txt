@@ -1,0 +1,21 @@
+┌──────────────────────── Unitree Go2 ─────────────────────────┐
+│ 4D LiDAR ──► slam_toolbox + Nav2 ──► sniff-station waypoints │
+│ Sport-mode API: walk, stop, pitch nose-down, SIT (alert)     │
+└──────────────────────────────────────────────────────────────┘
+                 ▲  Wi-Fi WebRTC (Air/Pro) or Ethernet DDS (EDU)
+                 │  /nose/p_bedbug, /nose/alert → mission node
+┌───────────────── Nose payload (back mount) ──────────────────┐
+│ Raspberry Pi 5 + AI HAT+ (Hailo-8)                           │
+│   ├─ I2C via TCA9548A ──► sensor chamber                     │
+│   ├─ GPIO + MOSFETs ────► 3-way valve V1, pump P1            │
+│   └─ CSI ───────────────► Camera Module 3 (YOLO check)       │
+│                                                              │
+│ Sensor chamber: 2x BME688, SGP41, SHT45,                     │
+│                 TGS2602, TGS2620, optional MiniPID           │
+│                                                              │
+│ Snout ─► PTFE 1µm filter ─► V1 ─► chamber ─► pump ─► exhaust │
+│ Carbon filter (clean air) ───┘                               │
+└──────────────────────────────────────────────────────────────┘
+   ▲ quick-disconnect at the snout port
+   │
+Sniff wand: 1.5 m PTFE tube + handle + trigger button

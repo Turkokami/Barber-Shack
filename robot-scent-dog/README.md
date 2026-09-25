@@ -7,8 +7,11 @@ spots, and **sits** when it smells bed bugs, the way a trained detection dog ale
 |---|---|
 | [BUILD_PLAN.md](BUILD_PLAN.md) | Research summary, architecture, phased plan with go/no-go gates, full BOM with purchase links, budget, timeline, validation protocol, safety |
 | [SCHEMATICS.md](SCHEMATICS.md) | System block diagram, airflow (pneumatic) schematic, electrical schematic, Pi 5 pin map, I2C address map, power budget, snout/chamber mechanical drawing |
+| [INTEGRATION.md](INTEGRATION.md) | **Link-up with an existing robot dog** (Go2 Pro over Wi-Fi, Go2 EDU over Ethernet with dock power), and the **Hub**: duty assignment, data collection, alerts, auto-confirmation and site reports for a team of units |
 | [BOM.csv](BOM.csv) | Machine-readable bill of materials (import into a spreadsheet to order) |
-| [firmware/](firmware/) | Raspberry Pi 5 code: sniff-cycle controller + data logger, classifier training, live detector |
+| [firmware/](firmware/) | Raspberry Pi 5 code: sniff-cycle controller + data logger, classifier training, live detector, robot adapters, unit agent |
+| [hub/](hub/) | Hub server + web dashboard (FastAPI + SQLite) with tests |
+| [Robo-K9_Build_Plan.pdf](Robo-K9_Build_Plan.pdf) | Everything above in one PDF for review |
 
 ## One-paragraph summary
 
@@ -23,6 +26,13 @@ classifier. The nose rides on a Unitree Go2, which maps the room with its built-
 Nav2), stops at waypoints along the bed, baseboards and furniture, and sniffs. When the classifier
 fires, the robot **sits**, beeps, and drops a pin on the map. A camera plus Hailo AI accelerator
 adds a second, visual check (bugs, shed skins, fecal spots).
+
+## Working as one team
+
+Each robot dog plus its nose is one **unit**, and a handler with the sniff wand is a unit too. A **hub**
+on the site network hands out duties (patrol, recheck, confirm, calibrate) and collects every sniff and
+alert. When a dog alerts, the hub automatically sends a *different* unit or a wand handler to confirm,
+then rolls it all up into a room-by-room report. See [INTEGRATION.md](INTEGRATION.md).
 
 ## The most important rule in this plan
 

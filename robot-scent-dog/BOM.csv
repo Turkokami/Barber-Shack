@@ -41,3 +41,7 @@ id,phase,subsystem,part,qty,approx_unit_usd,url
 40,3,pneumatics,Tenax TA thermal desorption tubes (10 pk),1,varies,https://www.sigmaaldrich.com/US/en/product/supelco/29741u
 41,2,robot,Unitree Go2 Pro (recommended),1,2800,https://blog.robozaps.com/b/unitree-go2-review
 42,2,robot,(alt) Unitree Go2 EDU,1,11190,https://robostore.com/products/go2-edu-40-tops-computing-quadruped-robot-dog
+43,2,integration,Travel router GL.iNet GL-MT3000 (team network),1,90,https://www.gl-inet.com/products/gl-mt3000/
+44,2,integration,Hub computer (any laptop or Raspberry Pi 5 4GB),1,0-120,https://www.raspberrypi.com/products/raspberry-pi-5/
+45,2,integration,Cat6 patch 0.3m (Go2 EDU only),1,5,
+46,2,integration,Fused DC lead to EDU dock connector (EDU only),1,10,
