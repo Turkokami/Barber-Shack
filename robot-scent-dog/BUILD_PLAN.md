@@ -76,7 +76,7 @@ Aggregation pheromone composition: Gries et al., *Angewandte Chemie* 2015, "Bed 
 ```
  ┌──────────────── ROBOT (Unitree Go2) ────────────────┐
  │  LiDAR ─► SLAM / Nav2 ─► waypoint "sniff stations"  │
- │  Sport-mode API: walk, stop, lower body, SIT (alert)│
+ │  Sport-mode API: walk, stop, pitch, SIT (alert)     │
  └───────────────▲─────────────────────────────────────┘
                  │ Wi-Fi WebRTC (Air/Pro) or Ethernet DDS (EDU)
  ┌───────────────┴──────── NOSE PAYLOAD (back mount) ───────────────┐

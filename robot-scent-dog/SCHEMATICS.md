@@ -35,17 +35,21 @@ flowchart LR
 ### 2a. Base system (Phases 0–2)
 
 ```
-                       ┌──────────── sample path (PTFE only) ────────────┐
-                       │                                                  │
- SNOUT  ──►  [QD]  ──► [F1 PTFE 1µm] ──►  NC ┐                            │
- (stainless 1/4" tube,                        │                           │
-  intake 2–8 cm from surface)            ┌────┴────┐                      │
-                                         │  V1     │ COM ──► [ SENSOR  ] ──► [PUMP P1] ──► EXHAUST
- ROOM AIR ──► [F2 carbon] ──► [F2 carbon]►  NO     │         [ CHAMBER ]      (downstream,   (points to rear,
-             (2 in series = clean purge)  │ 3-way  │                           silicone OK)   away from snout)
-                                         └─────────┘
- V1 de-energized (default) : NO→COM  = CLEAN AIR  (purge / baseline, fail-safe)
- V1 energized              : NC→COM  = SAMPLE     (sniff)
+ SAMPLE PATH (PTFE / stainless / glass / aluminium only)
+ ───────────────────────────────────────────────────────
+ SNOUT ──► [QD] ──► [F1 PTFE 1µm] ──────────► NC ─┐
+ stainless 1/4" tube,                             │
+ intake 2–8 cm from surface                  ┌────┴────┐
+                                             │   V1    │
+                                             │  3-way  ├─ COM ──► [SENSOR CHAMBER] ──► [PUMP P1] ──► EXHAUST
+                                             │  valve  │                               downstream,     to the rear,
+                                             └────┬────┘                               silicone OK     away from snout
+                                                  │
+ ROOM AIR ──► [F2 carbon] ──► [F2 carbon] ──► NO ─┘
+              2 in series = clean purge air
+
+ V1 de-energized (default) : NO → COM = CLEAN AIR  (purge / baseline, fail-safe)
+ V1 energized              : NC → COM = SAMPLE     (sniff)
 ```
 
 **Sniff cycle** (set in `firmware/sniff_logger.py`):
@@ -107,23 +111,24 @@ flowchart LR
 
 ```
             +V_LOAD (5 V for P1/Q4, 12 V for V1/H1)
-               │
-          ┌────┴────┐
-          │  LOAD   │      D1 1N5819 across the load:
-          │ (pump / │◄───  cathode to +V_LOAD, anode to drain
-          │  valve) │      (skip the diode on the resistive heater H1)
-          └────┬────┘
-               │ Drain
- GPIO ──[100 Ω]──┤ Gate   IRLB8721
-               │         (TO-220, G-D-S left to right)
-        [10 kΩ]│ Source
-               │   │
-              GND GND
+                 │
+            ┌────┴────┐
+            │  LOAD   │     D1 1N5819 across the load:
+            │ (pump / │     cathode to +V_LOAD, anode to drain
+            │  valve) │     (skip the diode on the resistive heater H1)
+            └────┬────┘
+                 │ Drain
+ GPIO ──[100 Ω]──┤ Gate     IRLB8721 (TO-220, pins G-D-S left to right)
+            │    │ Source
+         [10 kΩ] │
+            │    │
+           GND  GND
 
  Q1: GPIO18 (pin 12, PWM)  → P1 pump            5 V, ~0.5 A
  Q2: GPIO23 (pin 16)       → V1 3-way valve     12 V, ~0.2 A
  Q3: GPIO24 (pin 18, PWM)  → H1 Tenax heater    12 V, ~1 A   (Phase 3)
  Q4: GPIO25 (pin 22)       → Buzzer (active)    5 V, ~30 mA
+ The 10 kΩ pull-down runs from gate to GND so the load stays off while the Pi boots.
 ```
 
 ### 3c. Figaro TGS2602 / TGS2620 circuit (x2, the same)
@@ -209,15 +214,15 @@ A 12 V 6 Ah pack (72 Wh) gives about **5–6 hours**, which is longer than the G
 ### 5a. Sensor chamber (6061 aluminium, #17)
 
 ```
- TOP VIEW (lid off)                                  SECTION A-A
- ┌────────────────── 60 ──────────────────┐          ┌──────────────── lid: 3 mm Al plate ─────────────┐
- │  ○ M3                              M3 ○ │          │  [BME A] [BME B] [SGP41] [SHT45]  (boards face  │
- │   ┌──────────── 40 × 20 ───────────┐   │ 40       │   ▼▼▼     ▼▼▼     ▼▼▼     ▼▼▼      down, over    │
- │ ◄─┤   cavity 8 mm deep (~6.4 mL)   ├─► │          │  ═══ 1 mm PTFE gasket, windows under each ═══   │
- │ IN└────────────────────────────────┘OUT│          │  ┌──── cavity 8 mm ────────────────────────┐    │
- │  ○ M3   ◎TGS2602   ◎TGS2620       M3 ○ │          │ ─┘ IN 1/8" barb                  OUT barb └─   │
- └────────────────────────────────────────┘          └────────── 20 mm block ───────────────────────────┘
-  ◎ = 9.5 mm holes in the lid for the TO-5 cans, sealed with Viton O-rings (the sensing face points into the cavity)
+ TOP VIEW (lid off)                                SECTION A-A
+ ┌──────────────── 60 mm ─────────────────┐       ┌────────────── lid: 3 mm Al plate ──────────────┐
+ │ ○ M3                              M3 ○ │       │ [BME A] [BME B] [SGP41] [SHT45]  boards face   │
+ │   ┌─────────── 40 × 20 ──────────┐     │       │   ▼▼▼     ▼▼▼     ▼▼▼     ▼▼▼    down          │
+ │IN─┤  cavity 8 mm deep (~6.4 mL)  ├─OUT │ 40 mm │ ══ 1 mm PTFE gasket, window under each ══      │
+ │   └──────────────────────────────┘     │       │ ┌────────────── cavity 8 mm ─────────────┐     │
+ │ ○ M3   ◎TGS2602   ◎TGS2620        M3 ○ │       │─┘ IN 1/8" barb                OUT barb  └──    │
+ └────────────────────────────────────────┘       └───────────────── 20 mm block ──────────────────┘
+  ◎ = 9.5 mm holes in the lid for the TO-5 cans, sealed with Viton O-rings (sensing face into the cavity)
   Inlet and outlet at opposite ends so the flow sweeps past every sensor. 1/8" NPT tapped, PP or SS barbs.
   At ~1 L/min through 6.4 mL the air is fully replaced in about 0.4 s.
 ```
