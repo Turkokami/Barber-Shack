@@ -6,7 +6,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SERVICES, getService, SERVICE_IMAGE } from "@/content/services";
-import { BUSINESS as B, NAP } from "@/content/business";
+import { BUSINESS as B, NAP, tuesdayRate } from "@/content/business";
 import { ROUTES, abs } from "@/lib/routes";
 import { pageGraph, serviceNode } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -92,11 +92,11 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
               ${svc.price}
             </span>
           </div>
-          {svc.tuesdayPrice && (
+          {svc.tuesdayRate && (
             <div className="board-row">
               <span className="text-signal">Tuesdays</span>
               <span className="dots" aria-hidden />
-              <span className="font-semibold text-signal">${svc.tuesdayPrice}</span>
+              <span className="font-semibold text-signal">${tuesdayRate()}</span>
             </div>
           )}
           <div className="board-row">
@@ -126,10 +126,10 @@ export default async function ServicePage({ params }: { params: Promise<{ servic
       </section>
 
       {/* Block 6 — the community frame. Not decoration; it is the reason for the price. */}
-      {svc.tuesdayPrice && (
+      {svc.tuesdayRate && (
         <CommunityNote>
-          This cut is $12 on Tuesdays, for everybody, all day. The program exists for single
-          parents, people on
+          This cut is ${tuesdayRate()} on Tuesdays, for everybody, all day. The program exists for
+          single parents, people on
           Social Security or state assistance, and anyone getting ready to go back to work — but
           nobody is asked to qualify, and there is no separate line.
         </CommunityNote>

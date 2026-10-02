@@ -9,6 +9,7 @@
 
 export type CommunityProgram = {
   slug: string;
+  /** May carry a {rate} token — call fillRate() when rendering. */
   name: string;
   /** AEO answer — 40–60 words, plain, no marketing register */
   answer: string;
@@ -16,19 +17,22 @@ export type CommunityProgram = {
   who: string;
   body: string;
   cadence: "annual" | "seasonal" | "ongoing" | "one-time";
+  /** A dated notice shown above the body — e.g. an announced price change. */
+  announcement?: { heading: string; body: string[]; signoff?: string };
   partners: string[];
   faqs: { q: string; a: string }[];
 };
 
 export const PROGRAMS: CommunityProgram[] = [
   {
-    slug: "12-dollar-tuesdays",
-    name: "$12 Tuesdays",
+    // Renamed and moved from /community/12-dollar-tuesdays when Jared announced the
+    // November 2026 rate change. next.config.ts 301s the old URL here.
+    slug: "17-dollar-tuesdays",
+    name: "${rate} Tuesdays",
     answer:
-      "Every Tuesday, standard haircuts at Barber Shack are $12. The program exists for people who " +
-      "need " +
-      "the break — single parents, folks on Social Security or state assistance, and job seekers " +
-      "getting ready to go back to work. No proof required, no questions asked. Walk in.",
+      "Every Tuesday, standard haircuts at Barber Shack are ${rate}. The program exists for people " +
+      "who need the break — single parents, folks on Social Security or state assistance, and job " +
+      "seekers getting ready to go back to work. No proof required, no questions asked. Walk in.",
     who:
       "Single parents, people on Social Security or state assistance, and job seekers " +
       "re-entering the workforce.",
@@ -37,10 +41,35 @@ export const PROGRAMS: CommunityProgram[] = [
       "between anyone and feeling good about themselves — so every Tuesday the price comes down " +
       "and stays down, for everybody, all day. No qualifying, no paperwork, no separate line.",
     cadence: "ongoing",
+    // Jared's announcement, 2 October 2026, published in his own words.
+    announcement: {
+      heading: "A note on the Tuesday price, from Jared",
+      body: [
+        "To our wonderful Barber Shack family and Bellingham community: since day one, our heart " +
+          "has been centered around serving you and keeping quality haircuts accessible for " +
+          "everyone. Our Tuesday discount days were built on the belief that everyone in our " +
+          "neighborhood deserves to look and feel their best, regardless of their budget.",
+        "As we all know, life has gotten a lot more expensive recently. From rising costs in " +
+          "groceries and housing to gasoline and everyday utilities, we are all feeling the " +
+          "squeeze — and small businesses like ours are navigating these same increased overhead " +
+          "costs.",
+        "In order to continue taking care of our shop team while keeping our doors open for the " +
+          "long haul, we will be adjusting our Tuesday haircut price from $12 to $17, effective " +
+          "November 1st.",
+        "We want to remain completely transparent with you. Even with this change, $17 remains " +
+          "well below the average cost of a haircut in our area, because giving back to our " +
+          "community is still core to who we are. You will always get the same high-caliber " +
+          "precision cuts, straight razor work, and welcoming environment every single time you " +
+          "walk through our doors.",
+        "Thank you so much for your understanding, your constant support, and for letting us be " +
+          "your family barbershop. Everyone is welcome, and everyone is respected.",
+      ],
+      signoff: "— Jared & The Barber Shack Crew",
+    },
     partners: [],
     faqs: [
-      { q: "Do I need to prove I qualify?", a: "No. $12 Tuesdays is open to everyone, all day, every Tuesday. Nobody is asked to explain themselves." },
-      { q: "Which haircuts are $12 on Tuesday?", a: "Our standard haircuts — the price board marks the Tuesday rate on every service it covers. Skin fades and flat tops are not included; those stay at their regular price." },
+      { q: "Do I need to prove I qualify?", a: "No. The Tuesday rate is open to everyone, all day, every Tuesday. Nobody is asked to explain themselves." },
+      { q: "Which haircuts are ${rate} on Tuesday?", a: "Our standard haircuts — the price board marks the Tuesday rate on every service it covers. Skin fades and flat tops are not included; those stay at their regular price." },
     ],
   },
   {
@@ -151,8 +180,8 @@ export const getProgram = (slug: string) => PROGRAMS.find((p) => p.slug === slug
 
 /** A real photo to pair with a community program page, where one fits honestly. */
 export const PROGRAM_IMAGE: Record<string, { src: string; alt: string }> = {
-  "12-dollar-tuesdays": { src: "/images/tuesday-neon.webp", alt: "A neon Barber Shack sign reading Changes happen here on Tuesdays." },
-  "autism-walk": { src: "/images/community-autism.webp", alt: "Barber Shack at the local Autism Walk with a banner reading Empowering everyone to shine, Home of the $12 Tuesday." },
+  "17-dollar-tuesdays": { src: "/images/tuesday-neon.webp", alt: "A neon Barber Shack sign reading Changes happen here on Tuesdays." },
+  "autism-walk": { src: "/images/community-autism.webp", alt: "Barber Shack at the local Autism Walk with a banner reading Empowering everyone to shine." },
   "rainbow-bridge": { src: "/images/community-rainbow-bridge.webp", alt: "The Rainbow Bridge on Northwest Avenue in Bellingham, its railings painted in rainbow colors and decorated with children's handprints." },
   "back-to-school": { src: "/images/cut-kids2.webp", alt: "A young client's finished back-to-school cut at Barber Shack." },
   "community-art-wall": { src: "/images/family-artwall.webp", alt: "A client and his son in front of the Barber Shack community art wall." },

@@ -56,6 +56,27 @@ route uses, the way the home page and Bellingham hub do.
 `participation` flag to `false`. Silence is not consent. No price, face, licence
 number or booking link renders for a resident until the operator agrees in writing.
 
+**The Tuesday rate is never a literal.** It lives in `TUESDAY` / `tuesdayRate()`
+in `content/business.ts`, with both the current rate and the announced next one
+plus the changeover date. It was $12; Jared announced on 2 Oct 2026 that it
+becomes **$17 on 1 November 2026**.
+
+- Never write a Tuesday price as a string. Content strings carry a `{rate}`
+  token (`"haircuts are ${rate}"`) and the template calls `fillRate()`.
+- Service rows carry `tuesdayRate: true` — participation only, never the number.
+- Call `tuesdayRate()` **at render time**. A value assigned to a module-level
+  const freezes at module load and would keep serving the old price after the
+  changeover.
+- Static `export const metadata` is module-level, so descriptions there are
+  written price-free rather than tokenised.
+- `export const revalidate` in the root layout exists so the dated change takes
+  effect without a deploy. Do not remove it without replacing the mechanism.
+- Once the change is well past, collapse `TUESDAY` to a single current value.
+
+**Skin fades and flat tops are NOT covered by the Tuesday rate** (owner
+correction, Oct 2026). Never write "every haircut is $X on Tuesdays" — the
+honest phrasing is "our standard haircuts".
+
 **Founding dates.** The business was founded in **Lake Stevens in 2011**; the
 Bellingham shop opened in **Birchwood in June 2014**. These are two different
 facts. "On Cedarwood since 2011" was wrong and was live for a while — use

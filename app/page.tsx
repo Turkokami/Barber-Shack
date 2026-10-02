@@ -5,7 +5,7 @@
  * does charity. Jared's words lead the page; the services follow.
  */
 import type { Metadata } from "next";
-import { BUSINESS as B, NAP } from "@/content/business";
+import { BUSINESS as B, NAP, fillRate, tuesdayRate } from "@/content/business";
 import { SERVICES } from "@/content/services";
 import { PROGRAMS } from "@/content/community";
 import { DEPARTMENTS } from "@/content/departments";
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 const ANSWER =
   "Barber Shack is a community barbershop at 2500 Cedarwood Ave in Bellingham. Open seven days " +
   "a week, walk-ins welcome, wheelchair accessible. Every Tuesday, our standard haircuts are " +
-  "$12 — for everyone, all day, no qualifying required.";
+  "${rate} — for everyone, all day, no qualifying required.";
 
 export default function Home() {
   const crumbs = [{ name: "Home", item: abs(ROUTES.home) }];
@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <>
       <JsonLd graph={pageGraph({
-        url: abs(ROUTES.home), name: B.name, description: ANSWER, crumbs,
+        url: abs(ROUTES.home), name: B.name, description: fillRate(ANSWER), crumbs,
       })} />
 
       <section className="pt-10 pb-6">
@@ -69,12 +69,12 @@ export default function Home() {
       />
 
       <TrustStrip />
-      <AnswerBox>{ANSWER}</AnswerBox>
+      <AnswerBox>{fillRate(ANSWER)}</AnswerBox>
 
       <PriceTable
         caption="On the board"
         rows={SERVICES.map((s) => ({
-          name: s.name, price: s.price, tuesdayPrice: s.tuesdayPrice,
+          name: s.name, price: s.price, tuesdayRate: s.tuesdayRate,
           href: ROUTES.service(s.slug),
         }))}
       />
@@ -103,7 +103,7 @@ export default function Home() {
           Here&apos;s the honest version: the haircut is almost the excuse. What we&apos;re really
           after is a place in this town where anybody can walk in, take a seat, and leave feeling a
           little better than they came in — whoever you are, whatever your week looks like. That&apos;s
-          why a Tuesday haircut is $12 for everyone, why the door&apos;s open on Sundays, why there&apos;s
+          why a Tuesday haircut is ${tuesdayRate()} for everyone, why the door&apos;s open on Sundays, why there&apos;s
           local art on the wall and a booth at the Autism Walk every year. Look good, feel good, leave
           confident — that&apos;s the whole idea.
         </p>
@@ -123,9 +123,9 @@ export default function Home() {
           {PROGRAMS.map((p) => (
             <li key={p.slug} className="border-l-2 border-steel pl-4 py-1">
               {isProgramPublishable(p) ? (
-                <a href={ROUTES.program(p.slug)} className="display text-lg underline underline-offset-4">{p.name}</a>
+                <a href={ROUTES.program(p.slug)} className="display text-lg underline underline-offset-4">{fillRate(p.name)}</a>
               ) : (
-                <span className="display text-lg">{p.name}</span>
+                <span className="display text-lg">{fillRate(p.name)}</span>
               )}
               <p className="text-sm text-ink/75 mt-1">{p.who}</p>
             </li>

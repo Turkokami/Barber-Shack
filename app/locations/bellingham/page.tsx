@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import { NEIGHBORHOODS } from "@/content/neighborhoods";
 import { SERVICES } from "@/content/services";
 import { INTENTS } from "@/content/intents";
-import { BUSINESS as B, NAP } from "@/content/business";
+import { BUSINESS as B, NAP, fillRate, tuesdayRate } from "@/content/business";
 import { isPublishable, isIntentPublishable } from "@/lib/publishable";
 import { ROUTES, abs } from "@/lib/routes";
 import { pageGraph } from "@/lib/schema";
@@ -23,14 +23,14 @@ import Photo from "@/components/Photo";
 export const metadata: Metadata = {
   title: `Barbershop in ${NAP.cityState}`,
   description:
-    "Barber Shack is a community barbershop at 2500 Cedarwood Ave in Bellingham, serving every neighborhood in town. Open seven days, walk-ins welcome, $12 Tuesdays.",
+    "Barber Shack is a community barbershop at 2500 Cedarwood Ave in Bellingham, serving every neighborhood in town. Open seven days, walk-ins welcome, reduced Tuesday pricing.",
   alternates: { canonical: abs(ROUTES.bellingham) },
 };
 
 const ANSWER =
   "Barber Shack is a community barbershop at 2500 Cedarwood Ave in Bellingham, in the Birchwood " +
   "neighborhood. It serves the whole city — walk in any day of the week, including Sunday, and " +
-  "every Tuesday our standard haircuts are $12 for everyone.";
+  "every Tuesday our standard haircuts are ${rate} for everyone.";
 
 const FAQS = [
   { q: "Where in Bellingham is Barber Shack?", a: "At 2500 Cedarwood Ave, in the Birchwood neighborhood of northwest Bellingham." },
@@ -49,12 +49,12 @@ export default function BellinghamCity() {
 
   return (
     <>
-      <JsonLd graph={pageGraph({ url, name: `Barbershop in ${NAP.cityState}`, description: ANSWER, faqs: FAQS, crumbs })} />
+      <JsonLd graph={pageGraph({ url, name: `Barbershop in ${NAP.cityState}`, description: fillRate(ANSWER), faqs: FAQS, crumbs })} />
       <Breadcrumbs crumbs={crumbs} />
 
       <h1 className="text-4xl md:text-5xl mt-2 mb-4">Barbershop in {NAP.cityState}</h1>
       <TrustStrip />
-      <AnswerBox>{ANSWER}</AnswerBox>
+      <AnswerBox>{fillRate(ANSWER)}</AnswerBox>
 
       <Photo
         className="my-8"
@@ -73,7 +73,7 @@ export default function BellinghamCity() {
         </p>
         <p className="mb-4">
           Whatever part of town you are coming from, the deal is the same: no appointment needed,
-          honest prices posted on the board, and $12 standard haircuts for everyone every Tuesday,
+          honest prices posted on the board, and ${tuesdayRate()} standard haircuts for everyone every Tuesday,
           all day, with no qualifying and no separate line.
         </p>
       </section>

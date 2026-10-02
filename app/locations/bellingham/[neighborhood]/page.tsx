@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import { NEIGHBORHOODS, NEIGHBORHOOD_IMAGES, getNeighborhood } from "@/content/neighborhoods";
 import { getService } from "@/content/services";
 import { isPublishable } from "@/lib/publishable";
-import { BUSINESS as B } from "@/content/business";
+import { BUSINESS as B, tuesdayName, tuesdayRate } from "@/content/business";
 import { ROUTES, abs } from "@/lib/routes";
 import { pageGraph, neighborhoodNode } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -31,7 +31,7 @@ export async function generateMetadata(
   if (!n || !isPublishable(n)) return {};
   return {
     title: `Barbershop near ${n.name}, ${B.city}`,
-    description: `Walk-in haircuts ${n.driveTimeMin} minutes from ${n.name}. Open seven days, $12 Tuesdays.`,
+    description: `Walk-in haircuts ${n.driveTimeMin} minutes from ${n.name}. Open seven days, ${tuesdayName()}.`,
     alternates: { canonical: abs(ROUTES.neighborhood(n.slug)) },
   };
 }
@@ -53,7 +53,7 @@ export default async function NeighborhoodPage(
 
   const answer =
     `Barber Shack is about ${n.driveTimeMin} minutes from ${n.name}. Walk in any day of the ` +
-    `week, including Sunday — no appointment needed. On Tuesdays our standard haircuts are $12.`;
+    `week, including Sunday — no appointment needed. On Tuesdays our standard haircuts are $${tuesdayRate()}.`;
 
   const graph = pageGraph({
     url,

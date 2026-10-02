@@ -2,7 +2,7 @@
  * INTENT PAGES (Template T3). One template, N data rows. Rule 1.
  *
  * These target a specific search intent and answer it directly. Every fact here
- * is confirmed (hours, walk-in policy, address, the $12 Tuesday program) — nothing
+ * is confirmed (hours, walk-in policy, address, the Tuesday access program) — nothing
  * is invented. isIntentPublishable() gates the route: a body under 400 unique words,
  * or one carrying a placeholder, produces no page and no sitemap entry.
  *
@@ -32,11 +32,11 @@ export const INTENTS: Intent[] = [
     h1: "Walk-In Barber in Bellingham",
     title: "Walk-In Barber in Bellingham, WA — No Appointment Needed",
     description:
-      "Walk in for a haircut at Barber Shack in Bellingham any day of the week, including Sunday. No appointment, no account. $12 Tuesdays for everyone.",
+      "Walk in for a haircut at Barber Shack in Bellingham any day of the week, including Sunday. No appointment, no account. ${rate} Tuesdays for everyone.",
     answer:
       "Barber Shack is a walk-in barbershop at 2500 Cedarwood Ave in Bellingham. No appointment " +
       "and no account needed — walk in during opening hours any day of the week, including Sunday, " +
-      "put your name down, and take a seat. On Tuesdays our standard haircuts are $12.",
+      "put your name down, and take a seat. On Tuesdays our standard haircuts are ${rate}.",
     body:
       "Barber Shack is a walk-in barbershop first. You do not need an appointment, an account, or " +
       "a phone call ahead. Walk in during opening hours, give your name at the front, and take a " +
@@ -57,12 +57,12 @@ export const INTENTS: Intent[] = [
       "Barber Shack started out in Lake Stevens in 2011 and opened here in June 2014. Walking in " +
       "has been the point of the place from the beginning — no membership, no app, no minimum " +
       "spend, and no sense that you need an appointment to deserve a good haircut.\n\n" +
-      "Every Tuesday, our standard haircuts are $12. That is not a loss-leader or a coupon — it " +
+      "Every Tuesday, our standard haircuts are ${rate}. That is not a loss-leader or a coupon — it " +
       "is an access program that exists for single parents, people on Social Security or state " +
       "assistance, and " +
       "anyone getting ready to go back to work. It runs all day, for everyone, and nobody is asked " +
       "to prove they qualify. There is no separate line and no paperwork. You walk in on a Tuesday, " +
-      "you pay $12, you leave with a sharp cut.\n\n" +
+      "you pay ${rate}, you leave with a sharp cut.\n\n" +
       "If you would rather lock in a set time or a specific barber, you can book ahead on Vagaro — " +
       "but booking is an option, never a requirement, and a walk-in is never turned away in favor " +
       "of an app-only queue. The shop is at 2500 Cedarwood Avenue in Bellingham, it is wheelchair " +
@@ -104,11 +104,11 @@ export const INTENTS: Intent[] = [
       "scissor cuts, flat tops, beard trims, straight-razor shaves, and kids' cuts are all " +
       "available, at the prices posted on the board. Any of the barbers on that day can take you, " +
       "and a walk-in is treated the same as a booked appointment.\n\n" +
-      "One honest note on price: the $12 rate is a Tuesday program, not a Sunday one, so a Sunday " +
+      "One honest note on price: the reduced rate is a Tuesday program, not a Sunday one, so a Sunday " +
       "cut is at the regular posted price. What Sunday gives you is availability — the ability to " +
-      "actually get a good haircut on the day you have time for it. If a $12 cut is what you are " +
-      "after, come back on a Tuesday, when our standard haircuts are $12 for everyone, all day, " +
-      "with no qualifying and no separate line.\n\n" +
+      "actually get a good haircut on the day you have time for it. If the Tuesday rate is what you " +
+      "are after, come back on a Tuesday, when our standard haircuts are ${rate} for everyone, all " +
+      "day, with no qualifying and no separate line.\n\n" +
       "There is more going on here than haircuts, and Sunday is no exception. Local art hangs on " +
       "the wall, the shop keeps a booth at the Autism Walk every year, and Barber Shack was the " +
       "driving force behind the Rainbow Bridge on Northwest Avenue. Come in for a cut on a Sunday " +
@@ -123,7 +123,7 @@ export const INTENTS: Intent[] = [
     faqs: [
       { q: "Is Barber Shack open on Sunday?", a: "Yes. Sunday hours are ten in the morning to four in the afternoon, walk-ins welcome." },
       { q: "Do I need an appointment for a Sunday haircut?", a: "No. Walk in during Sunday hours and take the next available chair. Booking ahead is optional." },
-      { q: "Is the $12 price available on Sunday?", a: "The $12 rate is the Tuesday program. Sunday cuts are at the regular posted price." },
+      { q: "Is the Tuesday price available on Sunday?", a: "No — the reduced rate is the Tuesday program. Sunday cuts are at the regular posted price." },
     ],
   },
 ];

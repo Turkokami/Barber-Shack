@@ -3,12 +3,13 @@
  * Fixed block order: AnswerBox → the specific answer → proof → booking →
  * related services → FaqBlock → CtaBar. One view, N thin route files. Rule 1.
  */
-import { BUSINESS as B } from "@/content/business";
+import { BUSINESS as B, tuesdayRate } from "@/content/business";
 import { getService } from "@/content/services";
 import type { Intent } from "@/content/intents";
 import { abs, ROUTES } from "@/lib/routes";
 import { pageGraph } from "@/lib/schema";
 import { cleanFaqs } from "@/lib/publishable";
+import { fillRate } from "@/content/business";
 import JsonLd from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import AnswerBox from "@/components/AnswerBox";
@@ -25,16 +26,18 @@ export default function IntentView({ intent }: { intent: Intent }) {
     { name: "Home", item: abs(ROUTES.home) },
     { name: intent.h1, item: url },
   ];
-  const faqs = cleanFaqs(intent.faqs);
+  // Rate tokens resolve per render — see tuesdayRate() in content/business.ts.
+  const answer = fillRate(intent.answer);
+  const faqs = cleanFaqs(intent.faqs).map((f) => ({ q: fillRate(f.q), a: fillRate(f.a) }));
 
   return (
     <>
-      <JsonLd graph={pageGraph({ url, name: intent.title, description: intent.answer, faqs, crumbs })} />
+      <JsonLd graph={pageGraph({ url, name: intent.title, description: answer, faqs, crumbs })} />
       <Breadcrumbs crumbs={crumbs} />
 
       <h1 className="text-4xl md:text-5xl mt-2 mb-4">{intent.h1}</h1>
       <TrustStrip />
-      <AnswerBox>{intent.answer}</AnswerBox>
+      <AnswerBox>{answer}</AnswerBox>
 
       {intent.image && (
         <Photo
@@ -46,13 +49,13 @@ export default function IntentView({ intent }: { intent: Intent }) {
       )}
 
       <section className="my-10 max-w-2xl">
-        {intent.body.split("\n\n").map((p, i) => (
+        {fillRate(intent.body).split("\n\n").map((p, i) => (
           <p key={i} className="mb-4">{p}</p>
         ))}
       </section>
 
       <CommunityNote>
-        Our standard haircuts are $12 on Tuesdays, all day. The program exists for single parents,
+        Our standard haircuts are ${tuesdayRate()} on Tuesdays, all day. The program exists for single parents,
         people on Social Security or state assistance, and anyone getting ready to go back to work —
         but nobody is asked to qualify, and there is no separate line.
       </CommunityNote>

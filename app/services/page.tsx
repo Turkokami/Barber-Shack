@@ -4,7 +4,7 @@
  */
 import type { Metadata } from "next";
 import { SERVICES } from "@/content/services";
-import { BUSINESS as B, NAP } from "@/content/business";
+import { BUSINESS as B, NAP, fillRate } from "@/content/business";
 import { ROUTES, abs } from "@/lib/routes";
 import { pageGraph } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -20,18 +20,18 @@ import Photo from "@/components/Photo";
 export const metadata: Metadata = {
   title: `Barbershop Services in ${NAP.cityState}`,
   description:
-    "Clipper cuts, skin fades, kids' cuts, beard trims, and straight-razor shaves at Barber Shack in Bellingham. Open seven days, walk-ins welcome, $12 Tuesdays.",
+    "Clipper cuts, skin fades, kids' cuts, beard trims, and straight-razor shaves at Barber Shack in Bellingham. Open seven days, walk-ins welcome, reduced Tuesday pricing.",
   alternates: { canonical: abs(ROUTES.services) },
 };
 
 const ANSWER =
   "Barber Shack offers clipper cuts, long cuts, skin fades, flat tops, kids' cuts, beard trims, " +
   "and hot-towel straight-razor shaves at 2500 Cedarwood Ave in Bellingham. Walk in any day, " +
-  "including Sunday. Every Tuesday, our standard haircuts are $12 for everyone.";
+  "including Sunday. Every Tuesday, our standard haircuts are ${rate} for everyone.";
 
 const FAQS = [
   { q: "Do I need an appointment?", a: "No. Walk-ins are welcome every day we are open, including Sunday. You can also book ahead on Vagaro." },
-  { q: "Which services are $12 on Tuesdays?", a: "Our standard haircuts — the price board marks the Tuesday rate on every service it covers. Skin fades and flat tops are not included; those stay at their regular price." },
+  { q: "Which services are discounted on Tuesdays?", a: "Our standard haircuts — the price board marks the Tuesday rate on every service it covers. Skin fades and flat tops are not included; those stay at their regular price." },
 ];
 
 export default function ServicesHub() {
@@ -43,12 +43,12 @@ export default function ServicesHub() {
 
   return (
     <>
-      <JsonLd graph={pageGraph({ url, name: `Barbershop Services in ${NAP.cityState}`, description: ANSWER, faqs: FAQS, crumbs })} />
+      <JsonLd graph={pageGraph({ url, name: `Barbershop Services in ${NAP.cityState}`, description: fillRate(ANSWER), faqs: FAQS, crumbs })} />
       <Breadcrumbs crumbs={crumbs} />
 
       <h1 className="text-4xl md:text-5xl mt-2 mb-4">Services in {NAP.cityState}</h1>
       <TrustStrip />
-      <AnswerBox>{ANSWER}</AnswerBox>
+      <AnswerBox>{fillRate(ANSWER)}</AnswerBox>
 
       <Photo
         className="my-8"
@@ -61,7 +61,7 @@ export default function ServicesHub() {
       <PriceTable
         caption="On the board"
         rows={SERVICES.map((s) => ({
-          name: s.name, price: s.price, tuesdayPrice: s.tuesdayPrice, href: ROUTES.service(s.slug),
+          name: s.name, price: s.price, tuesdayRate: s.tuesdayRate, href: ROUTES.service(s.slug),
         }))}
       />
 

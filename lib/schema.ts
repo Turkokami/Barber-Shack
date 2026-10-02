@@ -8,7 +8,7 @@
  * or `employee`. See Amendment C: modelling them as departments or staff would be
  * inaccurate structured data, and for licensed trades would misstate liability.
  */
-import { BUSINESS as B, NAP, isResolved } from "@/content/business";
+import { BUSINESS as B, NAP, isResolved, tuesdayRate, tuesdayName } from "@/content/business";
 import { SPECIALISTS } from "@/content/specialists";
 import { RESIDENTS, mayPublish } from "@/content/departments";
 import type { Department } from "@/content/departments";
@@ -165,7 +165,7 @@ export function pageGraph(opts: {
 
 /**
  * Service + Offer. THE highest-leverage node in this build.
- * The $12 Tuesday rate is currently invisible at the moment of decision.
+ * The Tuesday rate is currently invisible at the moment of decision.
  * This is what makes it machine-readable to Google and to answer engines.
  */
 export function serviceNode(svc: Service, url: string) {
@@ -182,12 +182,12 @@ export function serviceNode(svc: Service, url: string) {
       price: svc.price,
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
-      ...(svc.tuesdayPrice && {
+      ...(svc.tuesdayRate && {
         priceSpecification: {
           "@type": "UnitPriceSpecification",
-          price: svc.tuesdayPrice,
+          price: tuesdayRate(),
           priceCurrency: "USD",
-          name: "$12 Tuesdays",
+          name: tuesdayName(),
           description:
             "Tuesday access rate, available to everyone all day, no qualifying required.",
         },

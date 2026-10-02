@@ -13,7 +13,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DEPARTMENTS, getDepartment, DEPARTMENT_IMAGE } from "@/content/departments";
 import { isDepartmentPublishable, cleanFaqs } from "@/lib/publishable";
-import { BUSINESS as B, NAP } from "@/content/business";
+import { BUSINESS as B, NAP, fillRate } from "@/content/business";
 import { ROUTES, abs } from "@/lib/routes";
 import { pageGraph } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -40,7 +40,7 @@ export async function generateMetadata(
   if (!d || !isDepartmentPublishable(d)) return {};
   return {
     title: `${d.name} in ${NAP.cityState}`,
-    description: d.answer.slice(0, 155),
+    description: fillRate(d.answer).slice(0, 155),
     alternates: { canonical: abs(ROUTES.department(d.slug)) },
   };
 }
@@ -53,7 +53,7 @@ export default async function DepartmentPage(
   if (!d || !d.overview || !isDepartmentPublishable(d)) notFound();
 
   const { intro, sections } = d.overview;
-  const faqs = cleanFaqs(d.faqs ?? []);
+  const faqs = cleanFaqs(d.faqs ?? []).map((f) => ({ q: fillRate(f.q), a: fillRate(f.a) }));
   const photo = DEPARTMENT_IMAGE[d.slug];
   const cta = d.cta ?? (d.entity === "resident" ? { kind: "studio" as const } : { kind: "services" as const });
   const url = abs(ROUTES.department(d.slug));
@@ -64,24 +64,24 @@ export default async function DepartmentPage(
 
   return (
     <>
-      <JsonLd graph={pageGraph({ url, name: `${d.name} in ${NAP.cityState}`, description: d.answer, faqs, crumbs })} />
+      <JsonLd graph={pageGraph({ url, name: `${d.name} in ${NAP.cityState}`, description: fillRate(d.answer), faqs, crumbs })} />
       <Breadcrumbs crumbs={crumbs} />
 
       {cta.kind === "coming-soon" && <p className="eyebrow mb-2">Coming soon</p>}
       <h1 className="text-4xl md:text-5xl mt-2 mb-4">{d.name}</h1>
       <TrustStrip />
-      <AnswerBox>{d.answer}</AnswerBox>
+      <AnswerBox>{fillRate(d.answer)}</AnswerBox>
 
       {photo && (
         <Photo className="my-8" ratio="aspect-[16/10]" src={photo.src} alt={photo.alt} caption={photo.caption} />
       )}
 
-      <p className="text-lg leading-relaxed max-w-2xl">{intro}</p>
+      <p className="text-lg leading-relaxed max-w-2xl">{fillRate(intro)}</p>
 
       {sections.map((s) => (
         <section key={s.heading} className="my-10">
           <h2 className="text-2xl md:text-3xl mb-3">{s.heading}</h2>
-          {s.body && <p className="max-w-2xl">{s.body}</p>}
+          {s.body && <p className="max-w-2xl">{fillRate(s.body)}</p>}
           {s.items && (
             <ul className="mt-4 space-y-3 max-w-2xl">
               {s.items.map((it) => (

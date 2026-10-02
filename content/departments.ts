@@ -61,7 +61,7 @@ export type Department = {
    */
   participation: {
     listPrices: boolean;      // may we publish their price list + Offer schema?
-    tuesdayProgram: boolean;  // do they participate in $12 Tuesdays?
+    tuesdayProgram: boolean;  // do they participate in the Tuesday access rate?
     bioAndPhoto: boolean;     // may we publish their name, bio, photo?
     licenseDisplay: boolean;  // may we display their license number?
     bookingLink: boolean;     // may we link to their booking platform?
@@ -93,7 +93,7 @@ export const DEPARTMENTS: Department[] = [
     answer:
       "Barbering is the core trade at Barber Shack: precision haircuts, beard and facial-hair " +
       "design, and traditional hot-towel straight-razor shaves. We pair classic barbering with " +
-      "modern technique — walk-in led, open seven days a week including Sunday, with $12 haircuts " +
+      "modern technique — walk-in led, open seven days a week including Sunday, with ${rate} haircuts " +
       "for everyone every Tuesday.",
     rationale: "The core trade. Ten service spokes, walk-in led, open seven days.",
     services: ["mens-haircut", "kids-haircut", "fade", "buzz-cut", "beard-trim",
@@ -101,7 +101,7 @@ export const DEPARTMENTS: Department[] = [
     opportunity: "High volume, high competition. Wins on hours, price, and walk-in availability.",
     faqs: [
       { q: "Do I need an appointment for a haircut?", a: "No — walk-ins are welcome every day we're open, including Sunday. You can also book ahead if you'd rather lock in a time." },
-      { q: "Are haircuts really $12 on Tuesdays?", a: "Yes. Every Tuesday our standard haircuts are $12 for everyone, all day — no qualifying and no questions asked. Skin fades and flat tops are not included; those stay at their regular price." },
+      { q: "Are haircuts really discounted on Tuesdays?", a: "Yes. Every Tuesday our standard haircuts are ${rate} for everyone, all day — no qualifying and no questions asked. Skin fades and flat tops are not included; those stay at their regular price." },
     ],
     overview: {
       intro:

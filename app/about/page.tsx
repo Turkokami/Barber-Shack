@@ -5,7 +5,7 @@
  */
 import type { Metadata } from "next";
 import Image from "next/image";
-import { BUSINESS as B, NAP } from "@/content/business";
+import { BUSINESS as B, NAP, fillRate, tuesdayRate } from "@/content/business";
 import { OWNER } from "@/content/owner";
 import { ROUTES, abs, BRAND } from "@/lib/routes";
 import { pageGraph, ownerNode } from "@/lib/schema";
@@ -19,14 +19,14 @@ import Photo from "@/components/Photo";
 export const metadata: Metadata = {
   title: `About Barber Shack — ${NAP.cityState}`,
   description:
-    "Barber Shack is a community barbershop on Cedarwood Ave in Bellingham, owned by master barber and Washington State instructor Jared Jones-Valentine. Seven days a week, $12 Tuesdays, everyone welcome.",
+    "Barber Shack is a community barbershop on Cedarwood Ave in Bellingham, owned by master barber and Washington State instructor Jared Jones-Valentine. Seven days a week, reduced Tuesday pricing, everyone welcome.",
   alternates: { canonical: abs(ROUTES.about) },
 };
 
 const ANSWER =
   "Barber Shack is a community barbershop on Cedarwood Ave in Bellingham, owned by master barber " +
   "Jared Jones-Valentine. It is a community hub first and a barbershop second — open seven days a " +
-  "week, walk-ins welcome, and $12 standard haircuts for everyone on Tuesdays.";
+  "week, walk-ins welcome, and ${rate} standard haircuts for everyone on Tuesdays.";
 
 export default function AboutPage() {
   const url = abs(ROUTES.about);
@@ -35,7 +35,7 @@ export default function AboutPage() {
     { name: "About", item: url },
   ];
 
-  const graph = pageGraph({ url, name: `About Barber Shack — ${NAP.cityState}`, description: ANSWER, crumbs });
+  const graph = pageGraph({ url, name: `About Barber Shack — ${NAP.cityState}`, description: fillRate(ANSWER), crumbs });
   (graph["@graph"] as Record<string, unknown>[]).push(ownerNode());
 
   return (
@@ -46,7 +46,7 @@ export default function AboutPage() {
       <h1 className="text-4xl md:text-5xl mt-2 mb-4">About Barber Shack</h1>
       <p className="eyebrow mb-4">{BRAND.tagline} · {BRAND.homeOfTuesday}</p>
       <TrustStrip />
-      <AnswerBox>{ANSWER}</AnswerBox>
+      <AnswerBox>{fillRate(ANSWER)}</AnswerBox>
 
       <Photo
         className="my-10 max-w-2xl"
@@ -65,7 +65,7 @@ export default function AboutPage() {
         </p>
         <p className="mb-4">
           In practice that means the door is open seven days a week, including Sunday, and walk-ins
-          are always welcome. It means that every Tuesday, our standard haircuts are $12 for everyone, all day,
+          are always welcome. It means that every Tuesday, our standard haircuts are ${tuesdayRate()} for everyone, all day,
           with no qualifying and no separate line — an access program for single parents, people on
           Social Security or state assistance, and anyone getting ready to go back to work. A sharp
           haircut changes how you walk into a room, and money should not stand between anyone and

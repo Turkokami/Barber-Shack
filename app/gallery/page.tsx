@@ -16,14 +16,14 @@ import CtaBar from "@/components/CtaBar";
 export const metadata: Metadata = {
   title: "Gallery — Barber Shack Bellingham",
   description:
-    "Cuts, fades, and shaves from the chair, plus a look inside Barber Shack in Bellingham — the shop floor, the barber pole, and the work behind the $12 Tuesday.",
+    "Cuts, fades, and shaves from the chair, plus a look inside Barber Shack in Bellingham — the shop floor, the barber pole, and the work behind the Tuesday programme.",
   alternates: { canonical: abs(ROUTES.gallery) },
 };
 
 const ANSWER =
   "Cuts, fades, and shaves from the chair at Barber Shack, plus a look inside the shop at 2500 " +
   "Cedarwood Ave in Bellingham — the floor, the barber pole, and the work behind the community " +
-  "programs and the $12 Tuesday.";
+  "programs and the Tuesday rate.";
 
 type Shot = { src: string; alt: string; ratio?: string };
 

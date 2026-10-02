@@ -88,6 +88,52 @@ export const BUSINESS = {
   ] as string[],
 } as const;
 
+/**
+ * THE TUESDAY ACCESS RATE — the one place this number lives.
+ *
+ * Jared announced on 2 Oct 2026 that the Tuesday rate moves from $12 to $17 on
+ * 1 November 2026, because overheads have risen and the shop needs to keep
+ * paying its team properly. The programme itself is unchanged: all day, every
+ * Tuesday, everyone, no qualifying.
+ *
+ * Both rates and the changeover date live here so the site is never quoting a
+ * price the chair is not charging (Hard Prohibition #9). `tuesdayRate()` must be
+ * called AT RENDER TIME, never assigned to a module-level const — a value frozen
+ * at module load would keep serving $12 after the first of November.
+ *
+ * When the change is well past, collapse this to a single `current` value.
+ */
+export const TUESDAY = {
+  current: "12",
+  next: "17",
+  /** Local midnight in Bellingham. DST ends at 2am that day, so this is PDT. */
+  effectiveFrom: "2026-11-01T00:00:00-07:00",
+  effectiveLabel: "November 1",
+} as const;
+
+/** The rate in force right now. Call this inside a component, not at module scope. */
+export function tuesdayRate(now: Date = new Date()): string {
+  return now >= new Date(TUESDAY.effectiveFrom) ? TUESDAY.next : TUESDAY.current;
+}
+
+/** True while the announced change is still in the future — drives the notice. */
+export function tuesdayChangePending(now: Date = new Date()): boolean {
+  return now < new Date(TUESDAY.effectiveFrom);
+}
+
+/**
+ * Fills the {rate} token in content strings with the rate in force.
+ * Lets copy in content/*.ts carry the price without freezing it: write
+ * "haircuts are ${rate}" in the data and call fillRate() at render.
+ */
+export const fillRate = (text: string, now: Date = new Date()): string =>
+  text.split("{rate}").join(tuesdayRate(now));
+
+/** Programme name, which carries the price: "$12 Tuesdays" today, "$17 Tuesdays" from November. */
+export function tuesdayName(now: Date = new Date()): string {
+  return `$${tuesdayRate(now)} Tuesdays`;
+}
+
 /** Build-time guard. Any unresolved placeholder reaching a rendered page fails the build. */
 export function requireResolved<T>(value: T, registryItem: string): T {
   if (value === PLACEHOLDER || (Array.isArray(value) && value.includes(PLACEHOLDER))) {

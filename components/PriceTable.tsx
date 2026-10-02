@@ -5,9 +5,13 @@
  * is what it is — and because the Tuesday rate is currently invisible at the
  * moment of decision. This component is the visual half of the Offer schema.
  */
-type Row = { name: string; price: string; tuesdayPrice?: string; href?: string };
+import { tuesdayRate, tuesdayName } from "@/content/business";
+
+type Row = { name: string; price: string; tuesdayRate?: boolean; href?: string };
 
 export default function PriceTable({ rows, caption }: { rows: Row[]; caption?: string }) {
+  // Resolved per render, never at module scope — see the note on tuesdayRate().
+  const rate = tuesdayRate();
   return (
     <section className="my-10">
       {caption && <p className="eyebrow mb-3">{caption}</p>}
@@ -19,8 +23,8 @@ export default function PriceTable({ rows, caption }: { rows: Row[]; caption?: s
             </span>
             <span className="dots" aria-hidden />
             <span className="whitespace-nowrap">
-              {r.tuesdayPrice && (
-                <span className="text-signal mr-3">Tue ${r.tuesdayPrice}</span>
+              {r.tuesdayRate && (
+                <span className="text-signal mr-3">Tue ${rate}</span>
               )}
               <span className="font-semibold">${r.price}</span>
             </span>
@@ -28,7 +32,7 @@ export default function PriceTable({ rows, caption }: { rows: Row[]; caption?: s
         ))}
       </div>
       <p className="mt-3 text-sm text-meta">
-        $12 Tuesdays applies to everyone, all day, no qualifying required.
+        {tuesdayName()} applies to everyone, all day, no qualifying required.
       </p>
     </section>
   );

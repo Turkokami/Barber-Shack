@@ -7,7 +7,7 @@
  * Drive times are written as approximate ("about X minutes") from the shop at
  * 2500 Cedarwood Ave in Birchwood — reconcile against live routing if precision
  * ever matters. Nothing about the business is invented; the hours, walk-in policy,
- * and $12 Tuesday program are all confirmed.
+ * and the Tuesday access program are all confirmed.
  */
 
 export type Neighborhood = {

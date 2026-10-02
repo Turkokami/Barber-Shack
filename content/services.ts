@@ -1,13 +1,15 @@
 /**
  * Service data drives /services/[service]. One template, N spokes. Rule 1.
  *
- * price: regular walk-in price. tuesdayPrice: the $12 Tuesday rate where it applies.
+ * price: regular walk-in price. tuesdayRate: marks the services the Tuesday access
+ * rate covers. The rate itself lives in content/business.ts, never here.
  * priceNote: qualifier shown next to the price (e.g. "up to") — keeps the board honest.
  *
  * Registry #8 — RESOLVED. Prices are the owner-confirmed menu effective September 1, 2026.
  * Hard Prohibition #9: no price on-site that does not match the price at the chair.
  *
- * PROVISIONAL: which services carry the $12 Tuesday rate is mapped here to the haircut
+ * Which services carry the Tuesday rate is owner-confirmed: the standard haircuts only.
+ * Skin fades and flat tops are NOT included (owner correction, Oct 2026). Mapped to the haircut
  * services only. This is registry #23 / #32 and must be confirmed by Jared before launch —
  * the program's credibility is that it is unconditional, so a wrong flag here is costly.
  *
@@ -21,7 +23,12 @@ export type Service = {
   /** AEO answer block — 40–60 words, direct, quotable. Master Plan Standard 03. */
   answer: string;
   price: string;
-  tuesdayPrice?: string;
+  /**
+   * Does this service carry the Tuesday access rate? The RATE ITSELF is not
+   * stored here — it lives in TUESDAY/tuesdayRate() in content/business.ts, so a
+   * price change is one edit rather than seventy. Rows record participation only.
+   */
+  tuesdayRate?: true;
   /** display qualifier for non-fixed prices, e.g. "up to" */
   priceNote?: string;
   durationMin: number;
@@ -39,9 +46,10 @@ export const SERVICES: Service[] = [
     serviceType: "Men's haircut",
     answer:
       "A clipper cut at Barber Shack is a clean, guarded all-over cut with a neckline and edge " +
-      "cleanup, about 25 minutes. Walk in any day of the week, including Sunday. On Tuesdays it is $12.",
+      "cleanup, about 25 minutes. Walk in any day of the week, including Sunday, and it is one of " +
+      "the cuts the Tuesday rate covers.",
     price: "29",
-    tuesdayPrice: "12",
+    tuesdayRate: true,
     durationMin: 25,
     includes: ["Guarded clipper cut", "Neckline and edge cleanup", "Hot towel finish"],
     whoItsFor: "Anyone who needs a clean, reliable cut without booking a week out.",
@@ -57,9 +65,10 @@ export const SERVICES: Service[] = [
     serviceType: "Haircut",
     answer:
       "A long haircut is scissor-led work for hair worn longer on top and through the sides, " +
-      "shaped and blended to grow out cleanly. Walk in any day, including Sunday. $12 on Tuesdays.",
+      "shaped and blended to grow out cleanly. Walk in any day, including Sunday. The Tuesday rate " +
+      "applies to this cut.",
     price: "30",
-    tuesdayPrice: "12",
+    tuesdayRate: true,
     durationMin: 35,
     includes: ["Scissor cut and shaping", "Blend through the sides", "Style finish"],
     whoItsFor: "Anyone wearing their hair longer who wants it shaped rather than clipped down.",
@@ -142,9 +151,10 @@ export const SERVICES: Service[] = [
     serviceType: "Children's haircut",
     answer:
       "A kids' cut at Barber Shack is unhurried and on the child's schedule — including first " +
-      "haircuts and kids who find the chair hard. Walk in any day, including Sunday. $12 on Tuesdays.",
+      "haircuts and kids who find the chair hard. Walk in any day, including Sunday. The Tuesday " +
+      "rate applies to this cut.",
     price: "25",
-    tuesdayPrice: "12",
+    tuesdayRate: true,
     durationMin: 20,
     includes: ["Cut to the child's comfort", "Neckline and edge cleanup"],
     whoItsFor: "Kids of any age, including first haircuts and kids who find the chair hard.",
@@ -186,9 +196,9 @@ export const SERVICES: Service[] = [
     serviceType: "Senior and military haircut",
     answer:
       "A senior and military cut — a clean, regulation-ready clipper cut at a reduced rate. Walk in " +
-      "any day, including Sunday. $12 on Tuesdays.",
+      "any day, including Sunday. The Tuesday rate applies to this cut.",
     price: "23",
-    tuesdayPrice: "12",
+    tuesdayRate: true,
     durationMin: 25,
     includes: ["Regulation clipper cut", "Neckline and edge cleanup"],
     whoItsFor: "Seniors and active or veteran service members.",
@@ -214,8 +224,8 @@ export const SERVICES: Service[] = [
 
 export const getService = (slug: string) => SERVICES.find((s) => s.slug === slug);
 
-/** Services that carry the $12 Tuesday rate — provisional, confirm registry #23/#32. */
-export const TUESDAY_SERVICES = SERVICES.filter((s) => s.tuesdayPrice);
+/** Services the Tuesday access rate covers. Owner-confirmed. */
+export const TUESDAY_SERVICES = SERVICES.filter((s) => s.tuesdayRate);
 
 /** A real photo to pair with a service page. Kept beside the data (Rule 2). */
 export const SERVICE_IMAGE: Record<string, { src: string; alt: string }> = {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Archivo, Karla, JetBrains_Mono } from "next/font/google";
-import { BUSINESS as B, NAP, isResolved } from "@/content/business";
+import { BUSINESS as B, NAP, isResolved, tuesdayName } from "@/content/business";
 import { ROUTES } from "@/lib/routes";
 import SiteNav from "@/components/SiteNav";
 import StickyCall from "@/components/StickyCall";
@@ -11,11 +11,19 @@ const display = Archivo({ subsets: ["latin"], weight: ["600", "700", "800"], var
 const body = Karla({ subsets: ["latin"], variable: "--font-karla" });
 const data = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "600"], variable: "--font-jbm" });
 
+/**
+ * Pages are statically generated, so a date-dependent value would otherwise be
+ * frozen at build time. Revalidating hourly means the Tuesday rate change on
+ * 1 November 2026 takes effect on its own, without anyone remembering to deploy.
+ * See TUESDAY / tuesdayRate() in content/business.ts.
+ */
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   metadataBase: new URL(B.url),
   title: { default: `${B.name} — Barbershop in ${NAP.cityState}`, template: `%s | ${B.name}` },
   description:
-    "Community barbershop in Bellingham. Open seven days, walk-ins welcome, $12 Tuesdays for anyone who needs the break.",
+    "Community barbershop in Bellingham. Open seven days, walk-ins welcome, and a reduced Tuesday rate for anyone who needs the break.",
   openGraph: {
     type: "website",
     siteName: B.name,
@@ -64,7 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {isResolved(B.email) ? ` · ${B.email}` : ""}
               </p>
               <p className="mt-4 text-chrome">
-                Open seven days · Walk-ins welcome · Wheelchair accessible · $12 Tuesdays
+                Open seven days · Walk-ins welcome · Wheelchair accessible · {tuesdayName()}
               </p>
               <p className="mt-2 text-xs text-chrome">
                 {B.legalName} · WA salon license #{B.shopLicense} · UBI {B.ubi}

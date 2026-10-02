@@ -28,7 +28,7 @@ export const ROUTES = {
 /** Confirmed brand copy taken from the shop's own signage and team banner. */
 export const BRAND = {
   tagline: "Empowering everyone to shine.",
-  homeOfTuesday: "Home of the $12 Tuesday",
+  homeOfTuesday: "Home of the Tuesday rate",
   promise: "Look Good. Feel Good. Leave Confident.",
   style: "Classic Cuts · Modern Style",
 } as const;

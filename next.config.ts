@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
       // Legacy Wix site had only Home, Blog, and Contact. /contact maps 1:1 and
       // "/" stays home, so only the blog needs a 301 (until a real blog ships).
       // This also catches the three old Wix demo blog posts.
+      // The Tuesday programme page moved when Jared announced the November 2026
+      // rate change: /community/12-dollar-tuesdays -> /community/17-dollar-tuesdays.
+      // The old URL was live and in the sitemap, so it keeps a permanent redirect.
+      { source: "/community/12-dollar-tuesdays", destination: "/community/17-dollar-tuesdays", permanent: true },
       { source: "/blog", destination: "/", permanent: true },
       { source: "/blog/:slug*", destination: "/", permanent: true },
     ];

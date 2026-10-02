@@ -5,7 +5,7 @@
  */
 import type { Metadata } from "next";
 import { SERVICES } from "@/content/services";
-import { BUSINESS as B, NAP } from "@/content/business";
+import { BUSINESS as B, NAP, fillRate, tuesdayRate, tuesdayName } from "@/content/business";
 import { ROUTES, abs } from "@/lib/routes";
 import { pageGraph } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
@@ -19,13 +19,13 @@ import Photo from "@/components/Photo";
 export const metadata: Metadata = {
   title: `Haircut Prices in ${NAP.cityState}`,
   description:
-    "Barber Shack's full, posted price list. Walk in any day, including Sunday. Every Tuesday, our standard haircuts are $12 for everyone — all day, no qualifying required.",
+    "Barber Shack's full, posted price list. Walk in any day, including Sunday. Every Tuesday our standard haircuts drop to the Tuesday rate for everyone — all day, no qualifying required.",
   alternates: { canonical: abs(ROUTES.pricing) },
 };
 
 const ANSWER =
   "Barber Shack keeps an honest, posted price list at 2500 Cedarwood Ave in Bellingham. Walk in " +
-  "any day, including Sunday. Every Tuesday, our standard haircuts are $12 for everyone — all " +
+  "any day, including Sunday. Every Tuesday, our standard haircuts are ${rate} for everyone — all " +
   "day, no " +
   "qualifying required.";
 
@@ -38,12 +38,12 @@ export default function PricingHub() {
 
   return (
     <>
-      <JsonLd graph={pageGraph({ url, name: `Haircut Prices in ${NAP.cityState}`, description: ANSWER, crumbs })} />
+      <JsonLd graph={pageGraph({ url, name: `Haircut Prices in ${NAP.cityState}`, description: fillRate(ANSWER), crumbs })} />
       <Breadcrumbs crumbs={crumbs} />
 
       <h1 className="text-4xl md:text-5xl mt-2 mb-4">Prices</h1>
       <TrustStrip />
-      <AnswerBox>{ANSWER}</AnswerBox>
+      <AnswerBox>{fillRate(ANSWER)}</AnswerBox>
 
       <Photo
         className="my-8"
@@ -57,7 +57,7 @@ export default function PricingHub() {
         caption="House prices — set by the shop"
         rows={SERVICES.map((s) => ({
           name: s.priceNote ? `${s.name} (${s.priceNote})` : s.name,
-          price: s.price, tuesdayPrice: s.tuesdayPrice, href: ROUTES.service(s.slug),
+          price: s.price, tuesdayRate: s.tuesdayRate, href: ROUTES.service(s.slug),
         }))}
       />
 
@@ -74,10 +74,10 @@ export default function PricingHub() {
       <section className="my-10">
         <p className="eyebrow mb-3">The Tuesday rate</p>
         <p className="max-w-2xl">
-          Every Tuesday, our standard haircuts are <strong>$12</strong> — for everyone, all day, with no
+          Every Tuesday, our standard haircuts are <strong>${tuesdayRate()}</strong> — for everyone, all day, with no
           qualifying and no separate line.{" "}
-          <a href={ROUTES.program("12-dollar-tuesdays")} className="underline underline-offset-4">
-            More about $12 Tuesdays →
+          <a href={ROUTES.program("17-dollar-tuesdays")} className="underline underline-offset-4">
+            More about {tuesdayName()} →
           </a>
         </p>
       </section>
