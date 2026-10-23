@@ -11,6 +11,7 @@ photography, and the 702-review corpus. Nothing else carries over.
 ## AGENT: START HERE
 
 1. Read `SPEC.md` in full before writing any code. It is the build contract.
+   Amendment D (security layer) and `security-kit/` are part of that contract.
 2. Run pre-flight (below) and report the output.
 3. Work ticket by ticket. Report PASS/FAIL against each acceptance criterion.
 4. Halt at the end of each phase and output the Phase Report from `SPEC.md`.

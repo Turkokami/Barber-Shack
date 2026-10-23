@@ -305,6 +305,54 @@ only one location.
 
 ---
 
+## AMENDMENT D — SECURITY LAYER, October 23 2026
+
+**This amendment adds a security layer to every phase. It does not override positioning or page
+inventory. It adds acceptance criteria. Where a security requirement and a feature conflict, the
+feature is scoped (allow-listed), never silently dropped. Escalate if they can't be reconciled.**
+
+### D.1 Why
+
+Automated attacks (PHP/WordPress probes, `/.env` and `/.git` scraping, form spam, credential
+stuffing) hit every public site daily, whatever its stack. This build has no PHP, so those probes
+can't execute here. But the site carries a booking embed, a public form, a public form key and the
+shop's reputation. A defaced or hijacked site costs more than any ranking gain.
+
+### D.2 The kit is part of this contract
+
+`security-kit/` in this repo is binding:
+
+- `01-MASTER-SECURITY-PROMPT.md`: applies in full.
+- `02-ADDON-nextjs-vercel.md`: applies in full (this stack).
+- `04-ADDON-backend-api-database.md`: applies the moment any login, database, API route,
+  webhook or payment is added.
+- `06-OWNER-ACCOUNT-CHECKLIST.md`: owner-side items, tracked in §11 (#34–#37).
+- `07-SECURITY-REPORT-TEMPLATE.md`: filled in at the end of Phase 1 (ticket 1.8) and again at Phase 5 (ticket 5.2).
+
+### D.3 What this build specifically needs
+
+| Surface | Requirement |
+|---|---|
+| Headers | HSTS, `nosniff`, Referrer-Policy, `frame-ancestors 'self'`, Permissions-Policy, `poweredByHeader: false`, all set in `next.config.ts` `headers()`. |
+| CSP | Shipped **Report-Only first**. Allow-list built from observed traffic: Vagaro (booking widget), Web3Forms (`connect-src`), any analytics. Enforced only after booking + contact pass end-to-end. |
+| JSON-LD | `components/JsonLd.tsx` escapes `<` as `<` in the serialized graph. Still the only emitter (§13.4). |
+| Scanner paths | `middleware.ts` returns 404 for `*.php`, `/wp-*`, `/xmlrpc*`, `/.env*`, `/.git*`, `/phpmyadmin*`, `/cgi-bin*`. Narrow matcher, `/_next/*` untouched. |
+| Contact form | Honeypot kept. `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` restricted to the production domain in Web3Forms. If spam crosses a threshold, add Turnstile/hCaptcha. Shop email never published. |
+| Secrets | None in git or its history. `.env.example` with names only. Vercel env vars marked Sensitive. |
+| Dependencies | `npm audit` shows zero high/critical. Lockfile committed. Dependabot on. `next` on a patched release. |
+| Vercel | Deployment Protection on previews. Firewall rate-limit rule on form paths. 2FA on every team member. |
+
+### D.4 Registry additions
+
+| # | Item | Blocks | Source |
+|---|---|---|---|
+| 34 | 2FA on email, registrar, Vercel, GitHub, Vagaro, GBP, Meta | 5.3 | Owner |
+| 35 | Registrar transfer lock + domain in the owner's name | 5.3 | Owner / registrar |
+| 36 | SPF, DKIM, DMARC on the domain email | 0.5, 5.3 | Registrar + mail host |
+| 37 | Web3Forms key domain-restricted | 2.7 | Owner (Web3Forms dashboard) |
+
+---
+
 ## 0. HOW TO USE THIS DOCUMENT
 
 > **Instructions to the executing agent.** This is a build contract. Work in ticket order. Each
@@ -320,6 +368,9 @@ only one location.
 
 **Governing rules.** All ten Global Build Rules and five Smart Build Standards from Master Plan v1
 apply. Where this document and the Master Plan conflict, the Master Plan wins.
+
+**Security layer.** Amendment D and `security-kit/` apply to every phase and every ticket. A ticket
+that passes its own criteria but opens a security hole is a FAIL.
 
 ---
 
@@ -651,6 +702,7 @@ StickyCall on mobile · booking one tap away · FaqBlock feeding exactly one FAQ
 | 1.5 | `sitemap.ts` + `robots.ts` | Sitemap generated from data files, gated by `isPublishable()`. |
 | 1.6 | `lib/publishable.ts` | Gate wired into `generateStaticParams()` **and** `sitemap.ts`. Verified: a sub-400-word row produces no route. |
 | 1.7 | Design pass | Brand direction locked. Not a template look. Mobile-first. LCP budget under 2.5s set as CI gate. |
+| 1.8 | Security baseline (Amendment D) | Headers + CSP Report-Only live, scanner-path middleware live, JSON-LD escaped, zero secrets in repo/history, `npm audit` zero high/critical, Dependabot on, `SECURITY.md` written. Security Report #1 filed. |
 
 ### PHASE 2 — Money pages *(16 routes)*
 
@@ -662,7 +714,7 @@ StickyCall on mobile · booking one tap away · FaqBlock feeding exactly one FAQ
 | 2.4 | Pricing hub | Full honest current price list. Every price also in `Offer` schema. `$12 Tuesdays` prominent. |
 | 2.5 | `/sensory-friendly-haircuts/` | Built per §3 handling note. **Owner written sign-off recorded before publish.** |
 | 2.6 | 3 intent pages | `12-dollar-tuesdays`, `walk-in-barber-bellingham`, `sunday-haircut-bellingham`. 400+ unique words each. |
-| 2.7 | Book / Contact | Booking embedded, map, all 7 days, domain email. |
+| 2.7 | Book / Contact | Booking embedded, map, all 7 days, domain email. Booking + form verified working under the CSP; form key domain-restricted (§11 #37). |
 
 ### PHASE 3 — Geographic surface *(30 routes)*
 
@@ -689,10 +741,10 @@ StickyCall on mobile · booking one tap away · FaqBlock feeding exactly one FAQ
 | # | Ticket | Acceptance |
 |---|---|---|
 | 5.1 | Redirect map | Every legacy Wix URL 301s in `next.config.ts` `redirects()`. Zero chains, zero 404s. |
-| 5.2 | Pre-launch gate | Every route passes §10. CWV green on mobile. Rich Results clean across all 7 templates. |
-| 5.3 | DNS cutover | Domain to Vercel. SSL verified. Old Wix instance unpublished, not merely hidden. |
+| 5.2 | Pre-launch gate | Every route passes §10. CWV green on mobile. Rich Results clean across all 7 templates. CSP switched from Report-Only to enforcing. securityheaders.com A or better, SSL Labs A. Security Report #2 filed. |
+| 5.3 | DNS cutover | Domain to Vercel. SSL verified. Old Wix instance unpublished, not merely hidden. §11 #34–#36 cleared (2FA, registrar lock, SPF/DKIM/DMARC). |
 | 5.4 | Post-launch | GSC property, sitemap submitted, GBP website URL updated, top 10 directories updated to the new URL structure. |
-| 5.5 | 48-hour watch | Crawl errors, redirect integrity, ranking movement for branded terms. Report. |
+| 5.5 | 48-hour watch | Crawl errors, redirect integrity, ranking movement for branded terms, CSP violation reports, form spam rate, Vercel Firewall events. Report. |
 
 ### PHASE 6 — Content & cadence *(52 routes)*
 
@@ -701,7 +753,7 @@ StickyCall on mobile · booking one tap away · FaqBlock feeding exactly one FAQ
 | 6.1 | 4 blog clusters | **Kids & first haircuts** (feeds sensory + kids') · **Style & maintenance** (fades, line-ups) · **Beards & shaving** · **Bellingham local** (feeds geo). Each post links up to exactly one service spoke. |
 | 6.2 | 12 launch posts | 3 per cluster. BlogPosting + FAQPage schema. |
 | 6.3 | Seasonal calendar | Back-to-school (Aug), holidays (Dec), graduation (May–Jun), summer buzz (Jun). |
-| 6.4 | Ongoing | 2 posts/month minimum · weekly `$12 Tuesdays` GBP post · quarterly schema revalidation · monthly review-count report against the 4.6 target. |
+| 6.4 | Ongoing | 2 posts/month minimum · weekly `$12 Tuesdays` GBP post · quarterly schema revalidation · quarterly security re-run of `security-kit/` + `npm audit` · monthly review-count report against the 4.6 target. |
 
 ---
 
@@ -722,6 +774,10 @@ character · every image has descriptive alt text
 **Performance & conversion** — mobile CWV green, LCP under 2.5s · `next/image`, WebP, lazy ·
 primary CTA above fold · StickyCall on mobile · booking one tap · TrustStrip near hero ·
 **all text is real HTML text** — nothing baked into images, canvas, or meaning-carrying SVG
+
+**Security** — security headers present on the route · no CSP violations in the console ·
+no user input rendered unescaped · no secret in the client bundle · every external link
+`rel="noopener noreferrer"` where it opens a new tab
 
 ---
 
@@ -744,6 +800,7 @@ Halt the affected ticket, log, continue the phase. Do not invent.
 | 11 | Booking platform | 2.1 | Decision gate |
 | 12 | Registered legal entity name | 1.2 | WA SOS |
 | 13 | Neighborhood `localContext` × 10 | 3.2 | Research + owner |
+| 34–37 | Security owner items | see Amendment D.4 | Owner |
 
 ---
 
@@ -761,6 +818,7 @@ Schema:         {n}/{n} templates validate clean
 CWV:            LCP {x}s mobile / target 2.5s
 Rule 5 gate:    {n} rows passed / {n} withheld
 Review count:   {n} of 78 toward 4.6 display
+Security:       audit {n} high/critical · headers {grade} · CSP {report-only|enforced} · owner items open [#]
 Gate:           CLEAR TO PROCEED / BLOCKED ON [x]
 ```
 
@@ -780,6 +838,10 @@ Gate:           CLEAR TO PROCEED / BLOCKED ON [x]
 10. No text baked into images, canvas, or meaning-carrying SVG.
 11. No route shipped without booking reachable in one tap.
 12. No published URL changed without a 301 in `next.config.ts`.
+13. No secret, API key or private email address in source, git history or the client bundle.
+14. No `dangerouslySetInnerHTML`, `eval` or `innerHTML` with unescaped input — `JsonLd.tsx` (escaped) is the only exception.
+15. No deploy with a known high/critical dependency vulnerability.
+16. No security protection that silently breaks booking, the contact form or one-tap calling.
 
 ---
 
