@@ -20,7 +20,8 @@ plus the add-on that matches its technology.
 4. **Paste `08-MASTER-FILE-AMENDMENT.md` into the project's master/spec file** so the
    security layer becomes part of the build contract (tickets, gates, phase reports).
    Barber Shack already has it as Amendment D in `SPEC.md`.
-5. **Work through `06-OWNER-ACCOUNT-CHECKLIST.md` once.** Most real break-ins
+5. **For extra, zero-speed-cost protection, see `09-EXTRA-PROTECTIONS.md`.**
+6. **Work through `06-OWNER-ACCOUNT-CHECKLIST.md` once.** Most real break-ins
    come through a stolen password on a hosting, domain or email account, not
    through the code. Code can't fix that part, only you can.
 
