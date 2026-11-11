@@ -91,47 +91,41 @@ export const BUSINESS = {
 /**
  * THE TUESDAY ACCESS RATE — the one place this number lives.
  *
- * Jared announced on 2 Oct 2026 that the Tuesday rate moves from $12 to $17 on
- * 1 November 2026, because overheads have risen and the shop needs to keep
- * paying its team properly. The programme itself is unchanged: all day, every
- * Tuesday, everyone, no qualifying.
+ * $17 since 1 November 2026. It was $12 before that. Jared announced the change
+ * on 2 October, and until it landed this file carried both rates with a
+ * changeover instant so the site flipped itself at midnight rather than relying
+ * on someone remembering to deploy. That machinery has been collapsed now the
+ * change is past; it is in git history if it is ever wanted again.
  *
- * Both rates and the changeover date live here so the site is never quoting a
- * price the chair is not charging (Hard Prohibition #9). `tuesdayRate()` must be
- * called AT RENDER TIME, never assigned to a module-level const — a value frozen
- * at module load would keep serving $12 after the first of November.
+ * The programme itself is unchanged: all day, every Tuesday, everyone, no
+ * qualifying. Standard haircuts only — skin fades and flat tops are not included.
  *
- * When the change is well past, collapse this to a single `current` value.
+ * Never write a Tuesday price as a literal anywhere else (Hard Prohibition #9 —
+ * no price on-site that does not match the chair). Content strings carry a
+ * {rate} token and templates call fillRate(); service rows carry
+ * `tuesdayRate: true` to mark participation, never the number.
  */
 export const TUESDAY = {
-  current: "12",
-  next: "17",
-  /** Local midnight in Bellingham. DST ends at 2am that day, so this is PDT. */
-  effectiveFrom: "2026-11-01T00:00:00-07:00",
-  effectiveLabel: "November 1",
+  current: "17",
+  /** When the current rate took effect. Kept for the record. */
+  since: "2026-11-01",
 } as const;
 
-/** The rate in force right now. Call this inside a component, not at module scope. */
-export function tuesdayRate(now: Date = new Date()): string {
-  return now >= new Date(TUESDAY.effectiveFrom) ? TUESDAY.next : TUESDAY.current;
-}
-
-/** True while the announced change is still in the future — drives the notice. */
-export function tuesdayChangePending(now: Date = new Date()): boolean {
-  return now < new Date(TUESDAY.effectiveFrom);
+/** The Tuesday access rate. */
+export function tuesdayRate(): string {
+  return TUESDAY.current;
 }
 
 /**
- * Fills the {rate} token in content strings with the rate in force.
- * Lets copy in content/*.ts carry the price without freezing it: write
- * "haircuts are ${rate}" in the data and call fillRate() at render.
+ * Fills the {rate} token in content strings with the Tuesday rate, so copy in
+ * content/*.ts can quote the price without repeating the literal.
  */
-export const fillRate = (text: string, now: Date = new Date()): string =>
-  text.split("{rate}").join(tuesdayRate(now));
+export const fillRate = (text: string): string =>
+  text.split("{rate}").join(tuesdayRate());
 
-/** Programme name, which carries the price: "$12 Tuesdays" today, "$17 Tuesdays" from November. */
-export function tuesdayName(now: Date = new Date()): string {
-  return `$${tuesdayRate(now)} Tuesdays`;
+/** Programme name, which carries the price: "$17 Tuesdays". */
+export function tuesdayName(): string {
+  return `$${TUESDAY.current} Tuesdays`;
 }
 
 /** Build-time guard. Any unresolved placeholder reaching a rendered page fails the build. */

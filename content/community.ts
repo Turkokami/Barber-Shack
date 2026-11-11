@@ -41,31 +41,11 @@ export const PROGRAMS: CommunityProgram[] = [
       "between anyone and feeling good about themselves — so every Tuesday the price comes down " +
       "and stays down, for everybody, all day. No qualifying, no paperwork, no separate line.",
     cadence: "ongoing",
-    // Jared's announcement, 2 October 2026, published in his own words.
-    announcement: {
-      heading: "A note on the Tuesday price, from Jared",
-      body: [
-        "To our wonderful Barber Shack family and Bellingham community: since day one, our heart " +
-          "has been centered around serving you and keeping quality haircuts accessible for " +
-          "everyone. Our Tuesday discount days were built on the belief that everyone in our " +
-          "neighborhood deserves to look and feel their best, regardless of their budget.",
-        "As we all know, life has gotten a lot more expensive recently. From rising costs in " +
-          "groceries and housing to gasoline and everyday utilities, we are all feeling the " +
-          "squeeze — and small businesses like ours are navigating these same increased overhead " +
-          "costs.",
-        "In order to continue taking care of our shop team while keeping our doors open for the " +
-          "long haul, we will be adjusting our Tuesday haircut price from $12 to $17, effective " +
-          "November 1st.",
-        "We want to remain completely transparent with you. Even with this change, $17 remains " +
-          "well below the average cost of a haircut in our area, because giving back to our " +
-          "community is still core to who we are. You will always get the same high-caliber " +
-          "precision cuts, straight razor work, and welcoming environment every single time you " +
-          "walk through our doors.",
-        "Thank you so much for your understanding, your constant support, and for letting us be " +
-          "your family barbershop. Everyone is welcome, and everyone is respected.",
-      ],
-      signoff: "— Jared & The Barber Shack Crew",
-    },
+    // Jared's 2 Oct 2026 announcement of the move from $12 to $17 lived here until
+    // the change landed on 1 November. Removed once it was past, because it was
+    // written in the future tense and would have read as wrong from the 2nd. His
+    // words are in git history; if a note about the change is wanted again, it
+    // should come from him rather than be reworded here.
     partners: [],
     faqs: [
       { q: "Do I need to prove I qualify?", a: "No. The Tuesday rate is open to everyone, all day, every Tuesday. Nobody is asked to explain themselves." },
