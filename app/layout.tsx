@@ -5,6 +5,7 @@ import { BUSINESS as B, NAP, isResolved, tuesdayName } from "@/content/business"
 import { ROUTES } from "@/lib/routes";
 import SiteNav from "@/components/SiteNav";
 import StickyCall from "@/components/StickyCall";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const display = Archivo({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-archivo" });
@@ -93,6 +94,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </footer>
 
         <StickyCall />
+        {/* Vercel Speed Insights (free tier): first-party page-speed readings, cookieless. */}
+        <SpeedInsights />
       </body>
     </html>
   );
